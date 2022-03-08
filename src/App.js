@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import logo from './logo.svg';
 
 const App = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
