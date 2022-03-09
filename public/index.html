@@ -22,9 +22,47 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
   <title>React App</title>
+
+  <script>
+
+
+    $(document).ready(function () {
+      $('.slide-nav').on('click', function (e) {
+        e.preventDefault();
+        // get current slide
+        var current = $('.flex--active').data('slide'),
+          // get button data-slide
+          next = $(this).data('slide');
+
+        $('.slide-nav').removeClass('active');
+        $(this).addClass('active');
+
+        if (current === next) {
+          return false;
+        } else {
+          $('.slider__warpper').find('.flex__container[data-slide=' + next + ']').addClass('flex--preStart');
+          $('.flex--active').addClass('animate--end');
+          setTimeout(function () {
+            $('.flex--preStart').removeClass('animate--start flex--preStart').addClass('flex--active');
+            $('.animate--end').addClass('animate--start').removeClass('animate--end flex--active');
+          }, 800);
+        }
+      });
+      initialSlide.addClass('active');
+      initalSelected.addClass('active');
+      TweenMax.to(initialSlide, 0.5, { autoAlpha: 1 });
+
+    });
+
+
+
+
+
+  </script>
+
 </head>
 
 <body>
@@ -54,6 +92,11 @@
     });
 
   }).call(this);
+
+
+
+
+
 </script>
 
 </html>
