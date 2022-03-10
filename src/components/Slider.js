@@ -94,6 +94,7 @@ function Slider() {
           <img
             className='pokemon__img'
             src='https://www.stylesnic.com/wp-content/uploads/2020/07/dark-blue-embroidered-sherwani.jpg'
+            alt='test'
           />
         </div>
         <div
@@ -116,6 +117,7 @@ function Slider() {
           <img
             className='pokemon__img'
             src='https://cdn0.weddingwire.in/article/3892/3_2/1280/jpg/72983-indian-family-photos-shyamal-bhumika-lead.webp'
+            alt='asas'
           />
         </div>
         <div
