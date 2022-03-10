@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-import First from './components/First';
 import Slider from './components/Slider';
-import Story from './components/Story';
 
 const App = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -9,7 +7,7 @@ const App = () => {
     const position = window.pageYOffset;
     setScrollPosition(position);
   };
-
+  console.log(scrollPosition);
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
 
