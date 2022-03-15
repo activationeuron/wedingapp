@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import Rsvp from './Rsvp';
 
 function Slider() {
   return (
@@ -125,14 +126,7 @@ function Slider() {
           className='flex__container flex--zekrom animate--start'
           data-slide='5'
         >
-          <div className='flex__item flex__item--left'>
-            <div className='flex__content'>
-              <p className='font-prim text-2xl'>You Are Invited</p>
-              <h1 className='font-head text-6xl'>RSVP</h1>
-            </div>
-            <p className='text__background'>Zekrom</p>
-          </div>
-          <div className='flex__item flex__item--right'></div>
+          <Rsvp />
         </div>
       </div>
 
