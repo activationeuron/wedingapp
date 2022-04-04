@@ -64,8 +64,8 @@ const App = () => {
             title='Mariam Hashmi'
             mainbg='#023436'
             secondarybg='#000'
-            image='https://scontent.fbom16-1.fna.fbcdn.net/v/t39.30808-6/273157112_3147806885465296_8193586718288628038_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=a26aad&_nc_ohc=D8KHnLAzA7IAX9u3M9p&_nc_ht=scontent.fbom16-1.fna&oh=00_AT9P1X39XrawKw2eeRZh-2CynkDipvfxacgOyIpmD8gSUg&oe=623DFAB8'
-            secImage='https://scontent.fbom16-1.fna.fbcdn.net/v/t39.30808-6/273157112_3147806885465296_8193586718288628038_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=a26aad&_nc_ohc=D8KHnLAzA7IAX9u3M9p&_nc_ht=scontent.fbom16-1.fna&oh=00_AT9P1X39XrawKw2eeRZh-2CynkDipvfxacgOyIpmD8gSUg&oe=623DFAB8'
+            image='https://i.pinimg.com/736x/b5/52/c8/b552c8fdb157c538c864172ff81bfd02.jpg'
+            secImage='https://i.pinimg.com/736x/b5/52/c8/b552c8fdb157c538c864172ff81bfd02.jpg'
             text='Mariam were fun, energetic and great teachers. They made difficult topics easier with interactive games and work sheets. '
           />
           <SlideFour
