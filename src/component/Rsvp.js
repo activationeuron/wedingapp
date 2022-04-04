@@ -101,16 +101,16 @@ function Rsvp({ title, mainbg }) {
               <div>
                 <div className='font-prim  '>
                   <div className='md:text-xl text-sm'>Host Info:</div>
-                  <div className='flex justify-between space-x-2 text-xl'>
+                  <div className='flex justify-between space-x-2 text-xl md:text-xl'>
                     <div> Reema Khan:</div> <div> 281-743-5161</div>
                   </div>
-                  <div className='flex flex-col justify-between space-x-2 text-xl'>
+                  <div className='flex  md:text-xl flex-col justify-between space-x-2 text-xl'>
                     <div> Mohsi Mohammed:</div> <div> 818-825-3595</div>
                   </div>
-                  <div className='flex justify-between space-x-2 text-xl'>
+                  <div className='flex md:text-xl justify-between space-x-2 text-xl'>
                     <div> Danyal Mohammed</div> <div> 714-614-8086</div>
                   </div>
-                  <div className='flex justify-between space-x-2 text-xl'>
+                  <div className='flex md:text-xl justify-between space-x-2 text-xl'>
                     <div> Email</div> <div> info@afaanwedsmariyam.com</div>
                   </div>
                 </div>
