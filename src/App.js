@@ -19,6 +19,12 @@ import 'react-phone-input-2/lib/style.css';
 // images
 import affanMain from './assets/haldi/affan.jpg';
 import mainbg from './assets/haldi/main.jpeg';
+
+// bride primary
+
+import brideMain from './assets/haldi/bridemain.jpg';
+import brideSec from './assets/haldi/bridesecodary.jpg';
+
 const App = () => {
   const [events, setEvents] = useState([]);
   const [phone, setPhone] = useState('');
@@ -64,9 +70,9 @@ const App = () => {
             title='Mariam Hashmi'
             mainbg='#023436'
             secondarybg='#000'
-            image='https://i.pinimg.com/736x/b5/52/c8/b552c8fdb157c538c864172ff81bfd02.jpg'
-            secImage='https://i.pinimg.com/736x/b5/52/c8/b552c8fdb157c538c864172ff81bfd02.jpg'
-            text='Mariam were fun, energetic and great teachers. They made difficult topics easier with interactive games and work sheets. '
+            image={brideMain}
+            secImage={brideSec}
+            text='Mariam Hashmi was born and raised in Chicago. She completed her bachelors in neuropsychology from Southern Illinois University and received her Master of Science at Palo Alto University. Mariam currently works at Northwestern University, and is a published scientific author. '
           />
           <SlideFour
             title='The Story'
@@ -113,6 +119,20 @@ const App = () => {
           ) : (
             ''
           )}
+
+          {events.includes('WEDDING') ? (
+            <SlideSeven
+              title='Wedding'
+              date='09-16-2022'
+              image='https://www.elegantweddinginvites.com/wedding-blog/wp-content/uploads/2015/08/rustic-barn-wedding-reception-ideas-with-floral-chandelier.jpg'
+              secImage='https://www.k4fashion.com/wp-content/uploads/2021/11/marathi-couple-portrait-photography-15.jpg'
+              address='Mount Prospect IL'
+              mainbg='#36ad78'
+            />
+          ) : (
+            ''
+          )}
+
           <Rsvp title='RSVP' mainbg='#251F47' />
         </div>
       ) : (

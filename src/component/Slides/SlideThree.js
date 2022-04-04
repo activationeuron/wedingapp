@@ -48,7 +48,11 @@ function Slide({
         style={{ overflow: 'hidden' }}
       >
         <FadeInWhenVisible>
-          <img src={image} alt='' className='object-cover h-screen' />
+          <img
+            src={image}
+            alt=''
+            className='object-cover h-screen object-center'
+          />
         </FadeInWhenVisible>
       </div>
 
@@ -59,7 +63,7 @@ function Slide({
         // className='absolute'
       />
       <img
-        className='md:block  pokemon__img  '
+        className='md:block  pokemon__img  object-cover '
         src={secImage}
         alt='tes'
         // className='absolute'
