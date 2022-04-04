@@ -22,9 +22,16 @@ function Slide({
       <div className='flex__item flex__item--left md:w-[65%] '>
         <div className='flex__content mx-10 '>
           <p className='font-prim text-2xl '>We Are Getting Married</p>
+          <h1 className='font-head lg:text-6xl text-xl block md:hidden'>
+            {title}
+          </h1>
+
           <SlideIn>
-            <h1 className='font-head lg:text-6xl text-xl'>{title}</h1>
+            <h1 className='font-head lg:text-6xl text-xl hidden md:block'>
+              {title}
+            </h1>
           </SlideIn>
+
           <SlideUp>
             <p className='lg:text-2xl font-prim py-10 text-sm '>{text}</p>
           </SlideUp>
