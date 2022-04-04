@@ -131,7 +131,10 @@ const phoneBox = (setPhone, getEvents) => {
             Affan & mariam Wedding
           </h1>
           <p className='text-2xl font-prim   text-white'>Enter Phone Number </p>
-          <form onSubmit={(e) => getEvents(e)} className='flex space-x-3'>
+          <form
+            onSubmit={(e) => getEvents(e)}
+            className='flex flex-col md:flex-row md:space-x-3 space-y-5 md:space-y-0 '
+          >
             <div>
               <PhoneInput
                 country={'us'}
@@ -139,7 +142,7 @@ const phoneBox = (setPhone, getEvents) => {
               />
             </div>
             <button
-              className='bg-pink-800 py-1  px-5 font-bold text-white uppercase rounded-sm shadow-md'
+              className='bg-pink-800 py-1 w-[300px] md:w-[100px]  px-5 font-bold text-white uppercase rounded-sm shadow-md'
               type='submit'
             >
               Submit
