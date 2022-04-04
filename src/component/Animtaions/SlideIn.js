@@ -7,7 +7,7 @@ export function SlideIn({ children }) {
       viewport={{ once: true }}
       transition={{ duration: 0.3 }}
       variants={{
-        visible: { x: 0 },
+        visible: { x: 0, opacity: 1 },
         hidden: { x: -300, scale: 1 },
       }}
     >

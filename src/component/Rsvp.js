@@ -38,10 +38,10 @@ function Rsvp({ title, mainbg }) {
 
   return (
     <div
-      className='flex__container flex--active '
+      className='flex__container flex--active relative z-10 '
       style={{ backgroundColor: mainbg }}
     >
-      <div className='flex__item flex__item--left'>
+      <div className='flex__item flex__item--left '>
         <div className='flex__content px-10'>
           {/* <p className='font-prim text-2xl'>We Are Getting Married</p> */}
           <h1 className='font-head text-6xl'>{title}</h1>
@@ -129,23 +129,7 @@ function Rsvp({ title, mainbg }) {
             </div>
           </div>
         </div>
-        {/* <p className='text__background'>{title}</p> */}
       </div>
-      <div
-        className='flex__item flex__item--right bg-black '
-        style={{ overflow: 'hidden' }}
-      >
-        <img
-          src='https://www.brides.com/thmb/dD21mxC_W5j9b1jGVgpNC5JgRbU=/750x0/filters:no_upscale():max_bytes(200000):strip_icc():format(webp)/ariel-and-alissa-wedding29-a1766c0c4c35406381bed3dee27d7e1a.jpeg'
-          alt=''
-          className='h-full object-cover object-center'
-        />
-      </div>
-      <img
-        className='pokemon__img'
-        src='https://images.unsplash.com/photo-1627205265923-190841d62452?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
-        alt='tes'
-      />
     </div>
   );
 }

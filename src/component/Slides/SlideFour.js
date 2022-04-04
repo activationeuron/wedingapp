@@ -9,24 +9,24 @@ function Slide({
   mainbg,
   text,
   date,
-  secImage,
   address,
+  secImage,
   image,
   ...pops
 }) {
   return (
     <div
-      className='flex__container flex--active'
+      className='flex__container flex--active relative'
       style={{ backgroundColor: mainbg }}
     >
-      <div className='flex__item flex__item--left'>
-        <div className='flex__content mx-10'>
-          <p className='font-prim text-2xl'>We Are Getting Married</p>
+      <div className='flex__item flex__item--left md:w-[65%] '>
+        <div className='flex__content mx-10 '>
+          <p className='font-prim text-2xl '>We Are Getting Married</p>
           <SlideIn>
             <h1 className='font-head lg:text-6xl text-xl'>{title}</h1>
           </SlideIn>
           <SlideUp>
-            <p className='lg:text-2xl font-prim py-10 text-sm'>{text}</p>
+            <p className='lg:text-2xl font-prim py-10 text-sm '>{text}</p>
           </SlideUp>
           <div className='text-2xl'>
             <span className='font-prim'>{date ? 'Date:' : ''}</span>
@@ -44,7 +44,19 @@ function Slide({
           <img src={image} alt='' className='object-cover h-screen' />
         </FadeInWhenVisible>
       </div>
-      <img className='pokemon__img' src={secImage} alt='tes' />
+
+      <img
+        className='md:hidden   absolute w-full h-full object-cover  -z-10 opacity-20 '
+        src={secImage}
+        alt='tes'
+        // className='absolute'
+      />
+      <img
+        className='md:block  pokemon__img  '
+        src={secImage}
+        alt='tes'
+        // className='absolute'
+      />
     </div>
   );
 }
