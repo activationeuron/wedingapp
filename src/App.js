@@ -18,7 +18,7 @@ import 'react-phone-input-2/lib/style.css';
 
 // images
 import affanMain from './assets/haldi/affan.jpg';
-
+import mainbg from './assets/haldi/main.jpeg';
 const App = () => {
   const [events, setEvents] = useState([]);
   const [phone, setPhone] = useState('');
@@ -48,8 +48,8 @@ const App = () => {
             title='Afaan & Mariam'
             mainbg='#8b1173'
             secondarybg='#000'
-            image='https://cdn0.weddingwire.in/article/9779/3_2/960/jpg/79779-maharashtrian-wedding-the-dawn-studio-lead-image.webp'
-            secImage='https://images.pexels.com/photos/1589216/pexels-photo-1589216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            image={mainbg}
+            secImage={mainbg}
             text='Afaan & Mariam were fun, energetic and great teachers. They made difficult topics easier with interactive games and work sheets. '
           />
           <Slidetwo
