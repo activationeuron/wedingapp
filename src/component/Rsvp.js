@@ -45,7 +45,7 @@ function Rsvp({ title, mainbg }) {
         <div className='flex__content px-10'>
           {/* <p className='font-prim text-2xl'>We Are Getting Married</p> */}
           <h1 className='font-head text-6xl'>{title}</h1>
-          <div className='relative z-10 flex flex-col w-96 my-10'>
+          <div className='relative z-10 flex flex-col w-80 lg:w-[35rem] my-10'>
             {!data ? (
               <form onSubmit={createRsvp}>
                 <input
@@ -97,33 +97,36 @@ function Rsvp({ title, mainbg }) {
               </div>
             )}
 
-            <div className='space-y-6 pt-10 '>
+            <div className=' w-80 lg:w-full space-y-6 pt-10 '>
               <div>
-                <div className='font-prim  '>
-                  <div className='md:text-xl text-sm'>Host Info:</div>
-                  <div className='flex justify-between space-x-2 text-xl md:text-xl'>
+                <div className='font-prim space-y-1'>
+                  <div className='text-base lg:text-lg  text-pink-600'>
+                    Host Info:
+                  </div>
+                  <div className='flex justify-between text-base lg:text-lg  '>
                     <div> Reema Khan:</div> <div> 281-743-5161</div>
                   </div>
-                  <div className='flex  md:text-xl flex-col justify-between space-x-2 text-xl'>
+                  <div className='flex justify-between text-base lg:text-lg'>
                     <div> Mohsi Mohammed:</div> <div> 818-825-3595</div>
                   </div>
-                  <div className='flex md:text-xl justify-between space-x-2 text-xl'>
+                  <div className='flex justify-between text-base lg:text-lg'>
                     <div> Danyal Mohammed</div> <div> 714-614-8086</div>
                   </div>
-                  <div className='flex md:text-xl justify-between space-x-2 text-xl'>
+                  <div className='flex justify-between text-base lg:text-lg'>
                     <div> Email</div> <div> info@afaanwedsmariyam.com</div>
                   </div>
                 </div>
               </div>
-              <div>
-                <div className='font-prim'>
-                  <div className='text-xl'>Event Panner Details:</div>
-                  <div className='flex justify-between space-x-2 text-xl'>
-                    <div> Vimal Patel</div> <div> 424-409-9020</div>
-                  </div>
-                  <div className='flex justify-between space-x-2 text-xl'>
-                    <div> Email</div> <div> info@afaanwedsmariyam.com</div>
-                  </div>
+
+              <div className='font-prim'>
+                <div className='text-base lg:text-lg  text-pink-600'>
+                  Event Panner Details:
+                </div>
+                <div className='flex justify-between space-x-2 '>
+                  <div> Vimal Patel</div> <div> 424-409-9020</div>
+                </div>
+                <div className='flex justify-between space-x-2 '>
+                  <div> Email</div> <div> info@afaanwedsmariyam.com</div>
                 </div>
               </div>
             </div>
