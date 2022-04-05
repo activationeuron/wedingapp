@@ -48,7 +48,7 @@ const App = () => {
 
   return (
     <>
-      {!show ? (
+      {show ? (
         <div className=''>
           <Slideone
             title='Afaan & Mariam'
