@@ -111,6 +111,7 @@ const App = () => {
             <SlideSeven
               title='Receptions'
               date='09-16-2022'
+              text='A wedding reception is a party usually held after the completion of a marriage ceremony as hospitality for those who have attended the wedding, hence the name reception'
               image='https://www.elegantweddinginvites.com/wedding-blog/wp-content/uploads/2015/08/rustic-barn-wedding-reception-ideas-with-floral-chandelier.jpg'
               secImage='https://www.k4fashion.com/wp-content/uploads/2021/11/marathi-couple-portrait-photography-15.jpg'
               address='Mount Prospect IL'
