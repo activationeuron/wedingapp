@@ -1,5 +1,6 @@
-import { motion, useAnimation } from 'framer-motion';
+import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
+import TextAnimation from 'react-text-animations';
 import { FadeInWhenVisible } from '../Animtaions/FadeInWhenVisable';
 import { SlideIn } from '../Animtaions/SlideIn';
 import { SlideUp } from '../Animtaions/SlideUp';
@@ -31,9 +32,31 @@ function Slide({
               {title}
             </h1>
           </SlideIn>
+          <div className='pt-5 w-72 text-sm sm:text-2xl md:w-96'>
+            <div className='font-head   text-pink-500 mb-2 '>
+              Fun Facts About Afan & Mariam
+            </div>
+
+            <TextAnimation.Slide
+              target='""'
+              animation={{
+                duration: 1000,
+                delay: 2000,
+                timingFunction: 'ease-out',
+              }}
+              text={[
+                'both have identical moles on their left palms',
+                'have the same half birthday: birthday ',
+                'both have a cat named Nala',
+                'both played professional sports',
+              ]}
+            >
+              They ""
+            </TextAnimation.Slide>
+          </div>
 
           <SlideUp>
-            <p className='lg:text-2xl font-prim py-10 text-sm '>{text}</p>
+            <p className='lg:text-2xl font-prim py-5 text-sm '>{text}</p>
           </SlideUp>
           <div className='text-2xl'>
             <span className='font-prim'>{date ? 'Date:' : ''}</span>
@@ -56,14 +79,19 @@ function Slide({
         className='md:hidden   absolute w-full h-full object-cover  -z-10 opacity-20 '
         src={secImage}
         alt='tes'
-        // className='absolute'
       />
-      <img
-        className='md:block  pokemon__img  '
-        src={secImage}
-        alt='tes'
-        // className='absolute'
-      />
+      <AnimatePresence>
+        <motion.img
+          whileInView='animate'
+          initial={{ x: 300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -300, opacity: 0 }}
+          className='md:block  pokemon__img  '
+          src={secImage}
+          alt='tes'
+          // className='absolute'
+        />
+      </AnimatePresence>
     </div>
   );
 }

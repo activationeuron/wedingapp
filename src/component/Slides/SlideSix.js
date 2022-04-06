@@ -1,4 +1,4 @@
-import { motion, useAnimation } from 'framer-motion';
+import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { FadeInWhenVisible } from '../Animtaions/FadeInWhenVisable';
 import { SlideIn } from '../Animtaions/SlideIn';
@@ -58,12 +58,18 @@ function Slide({
         alt='tes'
         // className='absolute'
       />
-      <img
-        className='md:block  pokemon__img  '
-        src={secImage}
-        alt='tes'
-        // className='absolute'
-      />
+      <AnimatePresence>
+        <motion.img
+          whileInView='animate'
+          initial={{ x: 300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -300, opacity: 0 }}
+          className='md:block  pokemon__img  '
+          src={secImage}
+          alt='tes'
+          // className='absolute'
+        />
+      </AnimatePresence>
     </div>
   );
 }
