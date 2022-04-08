@@ -10,11 +10,22 @@ function Slides({
   index,
   selectedSlide,
   bgColor,
+  last,
 }) {
+  const logout = () => {
+    localStorage.removeItem('phone_NO');
+    window.location.href = '/login';
+  };
+  const clickRsvp = () => {
+    window.location.href = '/rsvp';
+  };
   return (
     <AnimatePresence exitBeforeEnter>
       {selectedSlide === index && (
         <div className='slider__warpper'>
+          <div className='relative z-10 text-white pointer' onClick={logout}>
+            Logout
+          </div>
           <div
             className={
               [index === selectedSlide ? 'flex--active' : ''] +
@@ -23,7 +34,7 @@ function Slides({
             style={{ backgroundColor: bgColor }}
             data-slide='1'
           >
-            <div className='flex__item flex__item--left lg:w-[65%]'>
+            <div className='flex__item flex__item--left w-full lg:w-[65%]'>
               <div className='flex__content'>
                 <p className='text--sub'>{tagline}</p>
                 <motion.h1
@@ -32,14 +43,13 @@ function Slides({
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ ease: 'anticipate', duration: 0.5, delay: 0.5 }}
                 >
-                  {index}
                   {title}
                 </motion.h1>
                 <motion.p
                   initial={{ x: -1000, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ ease: 'easeInOut', duration: 0.5, delay: 0.4 }}
-                  className='text--normal'
+                  className='text--normal w-[33%] '
                 >
                   {text}
                 </motion.p>
@@ -53,7 +63,7 @@ function Slides({
                 {title}
               </motion.p>
             </div>
-            <div className='flex__item flex__item--right lg:w-[35%] hidden lg:flex'>
+            <div className='flex__item flex__item--right lg:w-[35%] hidden lg:flex '>
               <motion.img
                 initial={{ y: -1000, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -67,11 +77,21 @@ function Slides({
               initial={{ x: -1000, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ ease: 'backInOut', duration: 0.7 }}
-              className='pokemon__img'
+              className='pokemon__img '
               src={middleImage}
               alt='Powerkick'
             />
           </div>
+          {last - 1 === index && (
+            <div className='relative z-10  w-40    '>
+              <div
+                className='text-3xl text-white bg-yellow-900 px-4 py-1 cursor-pointer rounded-sm  text-center'
+                onClick={clickRsvp}
+              >
+                RSVP
+              </div>
+            </div>
+          )}
         </div>
       )}
     </AnimatePresence>

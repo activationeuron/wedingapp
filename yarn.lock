@@ -10860,6 +10860,11 @@
   optionalDependencies:
     "fsevents" "^2.3.2"
 
+"react-scroll-wheel-handler@^2.1.0":
+  "integrity" "sha512-pZPg+BJ7jlDNzQfQ2BFFhvBYkiNT8yDUKarLwzLcuEMgvqWlsJmickl2nBIAUn9iLzeZomaPY8AmVrra4SHuFg=="
+  "resolved" "https://registry.npmjs.org/react-scroll-wheel-handler/-/react-scroll-wheel-handler-2.1.0.tgz"
+  "version" "2.1.0"
+
 "react-table@^7.7.0":
   "integrity" "sha512-jBlj70iBwOTvvImsU9t01LjFjy4sXEtclBovl3mTiqjz23Reu0DKnRza4zlLtOPACx6j2/7MrQIthIK1Wi+LIA=="
   "resolved" "https://registry.npmjs.org/react-table/-/react-table-7.7.0.tgz"

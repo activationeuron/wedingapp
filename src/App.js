@@ -1,185 +1,170 @@
 import React, { useEffect, useState } from 'react';
-import { Stickyroll } from '@stickyroll/stickyroll';
-import Slide from './component/Slide';
-import Slideone from './component/Slides/SlideOne';
-import Slidetwo from './component/Slides/SlideTwo';
-import SlideThree from './component/Slides/SlideThree';
-import SlideFour from './component/Slides/SlideFour';
-import SlideFive from './component/Slides/SlideFive';
-import SlideSix from './component/Slides/SlideSix';
-import SlideSeven from './component/Slides/SlideSeven';
-import request from './utils/request';
-import { useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import ReactScrollWheelHandler from 'react-scroll-wheel-handler';
+import Slides from './component/Slides/Slide.js';
+import request from './utils/request.js';
 import Rsvp from './component/Rsvp';
-import main from './assets/sangeet/main.jpg';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+function Two() {
+  const slidesData = [
+    {
+      title: 'Affan & mariam',
+      tagline: 'We are getting married ',
+      text: 'Afaan & Mariam were fun, energetic and great teachers. They made difficult topics easier with interactive games and',
+      middleImage: '/images/home/one.jpg',
+      sideImage: '/images/home/one.jpg',
+      bgColor: '#282e2a',
+    },
+    {
+      title: 'Afaan Mohammed ',
+      tagline: 'The Groom',
+      text: 'affan details ',
+      middleImage: '/images/groom/one.jpg',
+      sideImage: '/images/groom/two.jpg',
+      bgColor: '#2c3f40',
+    },
+    {
+      title: 'Mariam Hashmi',
+      tagline: 'The Bride',
+      text: 'Mariam Hashmi was born and raised in Chicago. She completed her bachelors in neuropsychology from Southern Illinois University and received her Master of Science at Palo Alto University. Mariam currently works at Northwestern University, and is a published scientific author.',
+      middleImage: '/images/bride/one.jpg',
+      sideImage: '/images/bride/two.jpg',
+      bgColor: '#b80653',
+    },
+    {
+      title: 'Affan & Mariam story',
+      tagline: 'The Story',
+      text: 'Mariam Hashmi story',
+      middleImage: '/images/story/one.webp',
+      sideImage: '/images/story/two.webp',
+      bgColor: '#6e06b8',
+    },
+    {
+      title: 'Affan & Mariam Marriage',
+      tagline: 'The Marriage',
+      text: 'Grand Wedding...',
+      middleImage: '/images/m/one.webp',
+      sideImage: '/images/m/two.webp',
+      bgColor: '#b88806',
+      key: 'WEDDING',
+    },
+    {
+      title: 'Haldi',
+      tagline: 'Haldi',
+      text: 'The haldi ceremony marks the beginning of the wedding rituals and is one of the most important pre wedding rituals after Tilak. The ceremony is held on the morning of the wedding day at the residence of both groom and bride respectively.',
+      middleImage: '/images/haldi/one.webp',
+      sideImage: '/images/haldi/one.webp',
+      bgColor: '#56b806',
+      key: 'HALDI',
+    },
+    {
+      title: 'Sangeet',
+      tagline: 'Sangeet',
+      text: 'Sangeet, which literally translates to “music”, is an event held a few days before the wedding and is filled with dance, music, and vibrant colors. In the olden days, women of all ages gathered around and took turns singing songs and dancing.',
+      middleImage: '/images/s/one.jpg',
+      sideImage: '/images/s/two.jpg',
+      bgColor: '#0653b8',
+      key: 'SANGEET',
+    },
+    {
+      title: 'Reception',
+      tagline: 'The Reception',
+      text: 'The Reception details ',
+      middleImage: '/images/r/one.jpg',
+      sideImage: '/images/r/two.jpg',
+      bgColor: '#06b891',
+      key: 'RECEPTIONS',
+    },
+  ];
 
-// images
-import affanMain from './assets/haldi/affan.jpg';
-import mainbg from './assets/haldi/main.jpeg';
-
-// bride primary
-
-import brideMain from './assets/haldi/bridemain.jpg';
-import brideSec from './assets/haldi/bridesecodary.jpg';
-
-const App = () => {
-  const [events, setEvents] = useState([]);
-  const [phone, setPhone] = useState('');
-  const [show, setShow] = useState(false);
-
-  const getEvents = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await request.get(`/event/myevent/${phone}`);
-
-      if (response.data && response.data.success) {
-        setEvents(response.data.data.events);
-        setShow(true);
-        localStorage.setItem('phone_NO', phone);
-      }
-    } catch (error) {
-      alert('Invitation Not Found!');
+  const [selectedSlide, setSelectedSlide] = useState(0);
+  const [event, setEvent] = useState([]);
+  const [data, setData] = useState(slidesData);
+  const handleUp = () => {
+    if (selectedSlide > 0) {
+      setSelectedSlide(selectedSlide - 1);
     }
+    console.log('handle down' + selectedSlide);
   };
-  useEffect(() => {}, [events]);
+  const handleDown = () => {
+    if (selectedSlide < data.length - 1) {
+      setSelectedSlide(selectedSlide + 1);
+    }
+    console.log('handle Up' + selectedSlide);
+  };
+
+  const getData = async (phone) => {
+    const respone = await request.get(`/event/myevent/${phone}`);
+
+    setEvent(respone?.data?.data.events);
+  };
+  useEffect(() => {
+    const active = JSON.parse(localStorage.getItem('active'));
+    if (!active) {
+      window.location.href = '/login';
+    } else {
+      // const phone
+      const phone = JSON.parse(localStorage.getItem('phone_NO'));
+      getData(phone);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (event.length) {
+      console.log(event, 'event');
+      const presentData = [...slidesData.slice(0, 3)];
+      slidesData.map((data) => {
+        if (event.includes(data.key)) {
+          presentData.push(data);
+        }
+        setData(presentData);
+      });
+    }
+  }, [event]);
 
   return (
     <>
-      {show ? (
-        <div className=''>
-          <Slideone
-            title='Afaan & Mariam'
-            mainbg='#8b1173'
-            secondarybg='#000'
-            image={mainbg}
-            secImage={mainbg}
-            text='Afaan & Mariam were fun, energetic and great teachers. They made difficult topics easier with interactive games and work sheets. '
-          />
-          <Slidetwo
-            title='Afaan Mohammed'
-            mainbg='#614344'
-            secondarybg='#000'
-            image={affanMain}
-            secImage='https://scontent.fbom16-1.fna.fbcdn.net/v/t31.18172-8/1277524_10151676167758339_1597313588_o.jpg?_nc_cat=108&ccb=1-5&_nc_sid=de6eea&_nc_ohc=iAFxtS1eVosAX-h6zm0&tn=Pkbe7edGV4Dw2HzC&_nc_ht=scontent.fbom16-1.fna&oh=00_AT8Xy8Z9_iZ2uK-Tkg0WxsrRrVO4EA3rTxDqKYQpmadOgA&oe=62701952'
-            text='Afaan were fun, energetic and great teachers. They made difficult topics easier with interactive games and work sheets. '
-          />
-          <SlideThree
-            title='Mariam Hashmi'
-            mainbg='#023436'
-            secondarybg='#000'
-            image={brideMain}
-            secImage={brideSec}
-            text='Mariam Hashmi was born and raised in Chicago. She completed her bachelors in neuropsychology from Southern Illinois University and received her Master of Science at Palo Alto University. Mariam currently works at Northwestern University, and is a published scientific author. '
-          />
-          <SlideFour
-            title='The Story'
-            text='Mariam were fun, energetic and great teachers. They made difficult topics easier with interactive games and work sheets. '
-            secImage='https://keepinitfrugal.com/wp-content/uploads/2019/08/25-frugal-no-tech-date-night-ideas-for-couples-1.jpg'
-            image='https://images.pexels.com/photos/2055236/pexels-photo-2055236.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260'
-            mainbg='#162521'
-          />
-          {events.includes('HALDI') ? (
-            <SlideFive
-              title='Haldi'
-              mainbg='#503D3F'
-              image='https://www.brides.com/thmb/4S5aFa-lX0zK9mNUWY1hiAyvHy4=/750x0/filters:no_upscale():max_bytes(200000):strip_icc():format(webp)/234-d3d2dbc2c1bd4083a811448b4e966681.png'
-              date='09-03-2022'
-              address='2259 Camino Rey Fullerton CA 92833'
-              secImage='https://www.stonedsanta.in/wp-content/uploads/2018/07/1.jpg'
-              text='The Haldi ceremony is a ritual holy bath also known as pithi ceremony, which is one of the pre-wedding ceremonies in India.'
-            />
-          ) : (
-            ''
-          )}
-          {events.includes('SANGEET') ? (
-            <SlideSix
-              title='Sangeet'
-              text='In sangeet, family members on either side organise and song and dance party, and in the mehndi ceremony, they wear intricate designs made from henna paste on their hands and feet'
-              date='09-04-2022'
-              image='https://assets.vogue.in/photos/61935447f4644c073f462a41/master/w_1600,c_limit/257616096_642474753725288_3568332279694208332_n.jpg'
-              secImage='https://www.k4fashion.com/wp-content/uploads/2021/11/marathi-couple-portrait-photography-15.jpg'
-              address='Villa Contempo Estate'
-              mainbg='#B1CC74'
-            />
-          ) : (
-            ''
-          )}
-          {events.includes('RECEPTIONS') ? (
-            <SlideSeven
-              title='Receptions'
-              date='09-16-2022'
-              text='A wedding reception is a party usually held after the completion of a marriage ceremony as hospitality for those who have attended the wedding, hence the name reception'
-              image='https://www.elegantweddinginvites.com/wedding-blog/wp-content/uploads/2015/08/rustic-barn-wedding-reception-ideas-with-floral-chandelier.jpg'
-              secImage='https://www.k4fashion.com/wp-content/uploads/2021/11/marathi-couple-portrait-photography-15.jpg'
-              address='Mount Prospect IL'
-              mainbg='#5FAD41'
-            />
-          ) : (
-            ''
-          )}
-
-          {events.includes('WEDDING') ? (
-            <SlideSeven
-              title='Wedding'
-              date='09-16-2022'
-              image='https://www.elegantweddinginvites.com/wedding-blog/wp-content/uploads/2015/08/rustic-barn-wedding-reception-ideas-with-floral-chandelier.jpg'
-              secImage='https://www.k4fashion.com/wp-content/uploads/2021/11/marathi-couple-portrait-photography-15.jpg'
-              address='Mount Prospect IL'
-              mainbg='#36ad78'
-            />
-          ) : (
-            ''
-          )}
-
-          <Rsvp title='RSVP' mainbg='#251F47' />
-        </div>
-      ) : (
-        <>{phoneBox(setPhone, getEvents)}</>
+      {event && (
+        <>
+          <ReactScrollWheelHandler
+            upHandler={() => handleUp()}
+            downHandler={() => handleDown()}
+            wheelConfig={[100, 50, 0]}
+          >
+            <div className='relative z-10'>{event}</div>
+            {data.map((slide, index) => {
+              return (
+                <Slides
+                  key={index}
+                  index={index}
+                  title={slide.title}
+                  tagline={slide.tagline}
+                  text={slide.text}
+                  middleImage={slide.middleImage}
+                  sideImage={slide.sideImage}
+                  selectedSlide={selectedSlide}
+                  bgColor={slide.bgColor}
+                  last={data.length}
+                />
+              );
+            })}
+          </ReactScrollWheelHandler>
+          <div className='absolute right-1 top-1/2 z-10 space-y-2'>
+            {data.map((data, index) => {
+              return (
+                <div
+                  key={index}
+                  className={
+                    [selectedSlide === index ? 'bg-gray-900 ' : 'bg-gray-400'] +
+                    ' w-7 h-2'
+                  }
+                  onClick={() => setSelectedSlide(index)}
+                ></div>
+              );
+            })}
+          </div>
+        </>
       )}
     </>
   );
-};
-const phoneBox = (setPhone, getEvents) => {
-  return (
-    <div className='h-screen w-screen bg-slate-700 flex  justify-between items-center '>
-      <div>
-        <div className='flex flex-col  w-10/12 mx-10 space-y-5'>
-          <p className='font-prim text-2xl text-white'>You Are Invited to </p>
-          <h1 className='font-head text-6xl text-white leading-tight'>
-            Affan & mariam Wedding
-          </h1>
-          <p className='text-2xl font-prim   text-white'>Enter Phone Number </p>
-          <form
-            onSubmit={(e) => getEvents(e)}
-            className='flex flex-col md:flex-row md:space-x-3 space-y-5 md:space-y-0 '
-          >
-            <div>
-              <PhoneInput
-                country={'us'}
-                onChange={(phone) => setPhone(phone)}
-              />
-            </div>
-            <button
-              className='bg-pink-800 py-1 w-[300px] md:w-[100px]  px-5 font-bold text-white uppercase rounded-sm shadow-md'
-              type='submit'
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
-      <div className='w-1/3 bg-pink-600'>
-        <img
-          src={main}
-          alt=''
-          className='object-cover object-center h-screen w-full'
-        />
-      </div>
-    </div>
-  );
-};
+}
 
-export default App;
+export default Two;
