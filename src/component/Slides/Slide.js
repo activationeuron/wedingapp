@@ -38,7 +38,7 @@ function Slides({
               <div className='flex__content'>
                 <p className='text--sub'>{tagline}</p>
                 <motion.h1
-                  className='text--big lg:text-[100px] text-4xl '
+                  className='text--big lg:text-[72px] text-4xl '
                   initial={{ y: -1000, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ ease: 'anticipate', duration: 0.5, delay: 0.5 }}
