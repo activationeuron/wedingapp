@@ -129,7 +129,6 @@ function Two() {
             downHandler={() => handleDown()}
             wheelConfig={[100, 50, 0]}
           >
-            <div className='relative z-10'>{event}</div>
             {data.map((slide, index) => {
               return (
                 <Slides

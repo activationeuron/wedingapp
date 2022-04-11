@@ -52,6 +52,16 @@ function Slides({
                   className='text--normal w-[33%] '
                 >
                   {text}
+                  {last - 1 === index && (
+                    <div className='relative z-10  w-40  py-5'>
+                      <div
+                        className='text-3xl text-white bg-yellow-900 px-4 py-1 cursor-pointer rounded-sm  text-center'
+                        onClick={clickRsvp}
+                      >
+                        RSVP
+                      </div>
+                    </div>
+                  )}
                 </motion.p>
               </div>
               <motion.p
@@ -82,16 +92,6 @@ function Slides({
               alt='Powerkick'
             />
           </div>
-          {last - 1 === index && (
-            <div className='relative z-10  w-40    '>
-              <div
-                className='text-3xl text-white bg-yellow-900 px-4 py-1 cursor-pointer rounded-sm  text-center'
-                onClick={clickRsvp}
-              >
-                RSVP
-              </div>
-            </div>
-          )}
         </div>
       )}
     </AnimatePresence>

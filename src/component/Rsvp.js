@@ -59,6 +59,7 @@ function Rsvp({ title, mainbg }) {
                   className=' py-2 my-2 px-5 outline-none rounded-md bg-indigo-800 shadow-sm  text-white w-full'
                   value={phone}
                   required
+                  disabled
                   onChange={(e) => setPhone(e.target.value)}
                 />
                 <div className='relative z-10 flex space-x-3'>
