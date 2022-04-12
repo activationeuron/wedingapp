@@ -39,7 +39,7 @@ function Rsvp({ title, mainbg }) {
   return (
     <div className='flex__container flex--active relative z-10 bg-gray-700'>
       <div className='flex__item flex__item--left '>
-        <div className='flex__content px-10'>
+        <div className=' px-5 px-auto lg:px-10 mx-auto'>
           {/* <p className='font-prim text-2xl'>We Are Getting Married</p> */}
           <h1 className='font-head text-6xl'>Rsvp</h1>
           <div className='relative z-10 flex flex-col w-80 lg:w-[35rem] my-10'>
