@@ -3,21 +3,33 @@ import ReactScrollWheelHandler from 'react-scroll-wheel-handler';
 import Slides from './component/Slides/Slide.js';
 import request from './utils/request.js';
 import Rsvp from './component/Rsvp';
+import weddingmain from './assets/videowedding.mp4';
 function Two() {
   const slidesData = [
     {
-      title: 'Affan & mariam',
+      title: 'Afaan & mariam',
       tagline: 'We are getting married ',
       text: 'Afaan & Mariam were fun, energetic and great teachers. They made difficult topics easier with interactive games and',
-      middleImage: '/images/home/one.jpg',
       sideImage: '/images/home/one.jpg',
+      middleImage: [
+        '/images/home/one.jpg',
+        '/images/home/two.jpg',
+        '/images/home/three.jpg',
+        '/images/home/four.jpg',
+        '/images/home/five.jpg',
+      ],
       bgColor: '#282e2a',
+      video: weddingmain,
     },
     {
       title: 'Afaan Mohammed ',
       tagline: 'The Groom',
       text: 'affan details ',
-      middleImage: '/images/groom/one.jpg',
+      middleImage: [
+        '/images/groom/one.jpg',
+        '/images/groom/two.jpg',
+        '/images/groom/three.jpg',
+      ],
       sideImage: '/images/groom/two.jpg',
       bgColor: '#2c3f40',
     },
@@ -25,24 +37,30 @@ function Two() {
       title: 'Mariam Hashmi',
       tagline: 'The Bride',
       text: 'Mariam Hashmi was born and raised in Chicago. She completed her bachelors in neuropsychology from Southern Illinois University and received her Master of Science at Palo Alto University. Mariam currently works at Northwestern University, and is a published scientific author.',
-      middleImage: '/images/bride/one.jpg',
+      middleImage: [
+        '/images/bride/one.jpg',
+        '/images/bride/two.jpg',
+        '/images/bride/three.jpg',
+      ],
       sideImage: '/images/bride/two.jpg',
       bgColor: '#b80653',
     },
     {
-      title: 'Affan & Mariam story',
-      tagline: 'The Story',
+      title: 'Afaan & Mariam story',
+      tagline:
+        'TI first saw Afab in the Fall of 2008 when we started our undergrad. I was instantly attracted to her but was far too nervous to speak to her. I had told my friend I liked her and news had traveled fast and she soon found out. Her first reaction was "Who is Afan?" and she began searching for me in the class. ',
       text: 'Mariam Hashmi story',
-      middleImage: '/images/story/one.webp',
+      middleImage: ['/images/story/one.webp'],
       sideImage: '/images/story/two.webp',
       bgColor: '#6e06b8',
     },
+
     {
       title: 'Affan & Mariam Marriage',
       tagline: 'The Marriage',
-      text: 'Grand Wedding...',
-      middleImage: '/images/m/one.webp',
-      sideImage: '/images/m/two.webp',
+      text: 'GWishing you joy, love and happiness on your wedding day and as you begin your new life together.Wishing you joy, love and happiness on your wedding day and as you begin your new life together.',
+      middleImage: ['/images/m/one.png'],
+      sideImage: '/images/m/two.png',
       bgColor: '#b88806',
       key: 'WEDDING',
     },
@@ -50,7 +68,7 @@ function Two() {
       title: 'Haldi',
       tagline: 'Haldi',
       text: 'The haldi ceremony marks the beginning of the wedding rituals and is one of the most important pre wedding rituals after Tilak. The ceremony is held on the morning of the wedding day at the residence of both groom and bride respectively.',
-      middleImage: '/images/haldi/one.webp',
+      middleImage: ['/images/haldi/one.webp'],
       sideImage: '/images/haldi/one.webp',
       bgColor: '#56b806',
       key: 'HALDI',
@@ -59,7 +77,7 @@ function Two() {
       title: 'Sangeet',
       tagline: 'Sangeet',
       text: 'Sangeet, which literally translates to “music”, is an event held a few days before the wedding and is filled with dance, music, and vibrant colors. In the olden days, women of all ages gathered around and took turns singing songs and dancing.',
-      middleImage: '/images/s/one.jpg',
+      middleImage: ['/images/s/one.jpg'],
       sideImage: '/images/s/two.jpg',
       bgColor: '#0653b8',
       key: 'SANGEET',
@@ -68,7 +86,7 @@ function Two() {
       title: 'Reception',
       tagline: 'The Reception',
       text: 'The Reception details ',
-      middleImage: '/images/r/one.jpg',
+      middleImage: ['/images/r/one.jpg'],
       sideImage: '/images/r/two.jpg',
       bgColor: '#06b891',
       key: 'RECEPTIONS',
