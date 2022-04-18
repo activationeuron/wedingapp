@@ -81,8 +81,8 @@ function Slides({
                 />
               </video>
               <div className='flex__item flex__item--left pt-20 w-full lg:w-[65%] '>
-                <div className='flex__content'>
-                  <p className=' font-head'>{tagline}</p>
+                <div className='flex__content lg:pt-40'>
+                  <p className=' font-head lg:text-2xl'>{tagline}</p>
                   <motion.h1
                     className='text--big lg:text-[72px] text-4xl font-head'
                     initial={{ y: -1000, opacity: 0 }}
@@ -93,7 +93,7 @@ function Slides({
                       delay: 0.5,
                     }}
                   >
-                    <div className='font-head text-white'>{title}</div>
+                    <div className='font-head text-white lg:py-10'>{title}</div>
                   </motion.h1>
                   <motion.p
                     initial={{ x: -1000, opacity: 0 }}
