@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Sacramento&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 .ideal {
   background-repeat: no-repeat;
   background-position: 30%;
@@ -87,7 +89,6 @@
 body {
   position: relative;
   font-size: 100%;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   min-height: 100vh;
 }
@@ -127,7 +128,6 @@ body {
 }
 
 .text--big {
-  font-family: 'Poppins', sans-serif;
   font-weight: 700;
   margin-left: -8px;
 }
@@ -149,7 +149,11 @@ body {
   font-size: 170px;
   font-weight: 700;
 }
-
+img {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .flex__item {
   height: 100vh;
   color: #fff;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import request from '../utils/request';
-
+import image from '../assets/one.jpg';
 function Rsvp({ title, mainbg }) {
   const [name, setName] = useState();
   const [phone, setPhone] = useState(localStorage.getItem('phone_NO') || '');
@@ -37,7 +37,14 @@ function Rsvp({ title, mainbg }) {
   }, []);
 
   return (
-    <div className='flex__container flex--active relative z-10 bg-gray-700'>
+    <div className=' flex--active relative z-10 bg-gray-700 '>
+      <div>
+        <img
+          src={image}
+          className=' h-screen w-screen absolute top-0 object-cover brightness-50 '
+          alt='as'
+        />
+      </div>
       <div className='flex__item flex__item--left '>
         <div className=' px-5 px-auto lg:px-10 mx-auto'>
           {/* <p className='font-prim text-2xl'>We Are Getting Married</p> */}
@@ -48,7 +55,7 @@ function Rsvp({ title, mainbg }) {
                 <input
                   type='text'
                   placeholder='Enter Name'
-                  className=' py-2 px-5 outline-none rounded-md bg-indigo-800 shadow-sm  text-white w-full'
+                  className=' py-2 px-5 outline-none rounded-md bg-gray-600 shadow-sm  text-white w-full'
                   value={name}
                   required
                   onChange={(e) => setName(e.target.value)}
@@ -56,7 +63,7 @@ function Rsvp({ title, mainbg }) {
                 <input
                   type='text'
                   placeholder='Phone Number'
-                  className=' py-2 my-2 px-5 outline-none rounded-md bg-indigo-800 shadow-sm  text-white w-full'
+                  className=' py-2 my-2 px-5 outline-none rounded-md bg-gray-600 shadow-sm  text-white w-full'
                   value={phone}
                   required
                   disabled
@@ -68,7 +75,7 @@ function Rsvp({ title, mainbg }) {
                     placeholder='Adults'
                     value={adults}
                     required
-                    className='py-2 px-5 outline-none rounded-md bg-indigo-800 shadow-sm my-4 text-white w-2/3'
+                    className='py-2 px-5 outline-none rounded-md bg-gray-600 shadow-sm my-4 text-white w-2/3'
                     onChange={(e) => setAdults(e.target.value)}
                   />
                   <input
@@ -77,7 +84,7 @@ function Rsvp({ title, mainbg }) {
                     value={kids}
                     required
                     onChange={(e) => setKids(e.target.value)}
-                    className='py-2 px-5 outline-none rounded-md bg-indigo-800 shadow-sm my-4 text-white w-2/3'
+                    className='py-2 px-5 outline-none rounded-md bg-gray-600 shadow-sm my-4 text-white w-2/3'
                   />
                 </div>
                 <button
@@ -98,7 +105,7 @@ function Rsvp({ title, mainbg }) {
             <div className=' w-80 lg:w-full space-y-6 pt-10 '>
               <div>
                 <div className='font-prim space-y-1'>
-                  <div className='text-base lg:text-lg  text-pink-600'>
+                  <div className='text-base lg:text-lg  text-pink-500'>
                     Host Info:
                   </div>
                   <div className='flex justify-between text-base lg:text-lg  '>
@@ -117,7 +124,7 @@ function Rsvp({ title, mainbg }) {
               </div>
 
               <div className='font-prim'>
-                <div className='text-base lg:text-lg  text-pink-600'>
+                <div className='text-base lg:text-lg  text-pink-500'>
                   Event Panner Details:
                 </div>
                 <div className='flex justify-between space-x-2 '>

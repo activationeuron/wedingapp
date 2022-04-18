@@ -7,8 +7,7 @@ module.exports = {
       fontFamily: {
         sans: [...defaultTheme.fontFamily.sans],
         head: ['Pacifico'],
-        tan: ['Sacramento'],
-        prim: ['Philosopher'],
+        prim: ['El Messiri'],
       },
     },
   },

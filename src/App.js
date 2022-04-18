@@ -20,18 +20,21 @@ function Two() {
       ],
       bgColor: '#282e2a',
       video: weddingmain,
+      key: 'Afaan & mariam',
     },
     {
       title: 'Afaan Mohammed ',
       tagline: 'The Groom',
-      text: 'affan details ',
+      text: "rem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. ",
       middleImage: [
-        '/images/groom/one.jpg',
-        '/images/groom/two.jpg',
         '/images/groom/three.jpg',
+        '/images/groom/four.jpg',
+        '/images/groom/five.jpg',
+        '/images/groom/one.jpg',
       ],
       sideImage: '/images/groom/two.jpg',
       bgColor: '#2c3f40',
+      key: 'The Groom',
     },
     {
       title: 'Mariam Hashmi',
@@ -41,34 +44,57 @@ function Two() {
         '/images/bride/one.jpg',
         '/images/bride/two.jpg',
         '/images/bride/three.jpg',
+        '/images/bride/five.jpg',
+        '/images/bride/six.jpg',
       ],
       sideImage: '/images/bride/two.jpg',
       bgColor: '#b80653',
+      key: 'The Bride',
     },
     {
       title: 'Afaan & Mariam story',
-      tagline:
-        'TI first saw Afab in the Fall of 2008 when we started our undergrad. I was instantly attracted to her but was far too nervous to speak to her. I had told my friend I liked her and news had traveled fast and she soon found out. Her first reaction was "Who is Afan?" and she began searching for me in the class. ',
-      text: 'Mariam Hashmi story',
-      middleImage: ['/images/story/one.webp'],
+      tagline: 'Their sweet love story 💕❤️',
+      text: 'It was a crisp autumn morning; the leaves were just beginning to turn a burnt orange while the breeze still carried warm sun rays. Afaan could feel the adrenaline in the air as he boarded his flight for skydiving. Before he knew it, the plane was 14,000 feet in the air, the mere ground beneath them a dazzling map of ruby treetops and silver streams cutting through the land. The anticipation before the jump was electrifying. Afaan began to secure his parachute while scanning the passengers when a beautiful desi girl caught his eye. Before he could say hello, his name was called for the jump. \nChecking his straps one last time, he made his way to doors open to nothing but blue skies and chilled air. The rush of thrill raced through his veins as he jumped into nothingness flew through the sky with grace. He swirled and flipped a few thousand feet through the refreshing air… when all of a sudden he noticed that girl again. Yet she didn’t look thrilled, her eyes were in a state of panic, and that’s when he realized her parachute was stuck. Afaan flew through the sky and locked onto her backpack. She looked up at him with knowing eyes and relief. “Nice to meet you. I’m Afaan,” he yelled through the booming sound of rushing air. And well, the rest is history.',
+      middleImage: [
+        '/images/groom/five.jpg',
+        '/images/groom/one.jpg',
+        '/images/bride/one.jpg',
+        '/images/bride/two.jpg',
+        '/images/bride/five.jpg',
+        '/images/bride/six.jpg',
+        '/images/groom/five.jpg',
+        '/images/groom/one.jpg',
+      ],
       sideImage: '/images/story/two.webp',
       bgColor: '#6e06b8',
+      key: 'The Story',
+    },
+    {
+      title: 'Family',
+      // tagline: 'The ',
+      text: "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      middleImage: ['/images/f/seven.jpg', '/images/f/six.jpg'],
+      sideImage: '/images/m/two.png',
+      bgColor: '#b88806',
+      key: 'FAMILY',
+      key: 'Family',
     },
 
     {
       title: 'Affan & Mariam Marriage',
       tagline: 'The Marriage',
       text: 'GWishing you joy, love and happiness on your wedding day and as you begin your new life together.Wishing you joy, love and happiness on your wedding day and as you begin your new life together.',
-      middleImage: ['/images/m/one.png'],
+      middleImage: ['/images/m/one.png', '/images/m/two.jpg'],
       sideImage: '/images/m/two.png',
       bgColor: '#b88806',
       key: 'WEDDING',
+      key: 'The Wedding',
     },
     {
       title: 'Haldi',
       tagline: 'Haldi',
       text: 'The haldi ceremony marks the beginning of the wedding rituals and is one of the most important pre wedding rituals after Tilak. The ceremony is held on the morning of the wedding day at the residence of both groom and bride respectively.',
-      middleImage: ['/images/haldi/one.webp'],
+      middleImage: ['/images/haldi/three.webp', '/images/haldi/two.webp'],
       sideImage: '/images/haldi/one.webp',
       bgColor: '#56b806',
       key: 'HALDI',
@@ -128,7 +154,7 @@ function Two() {
   useEffect(() => {
     if (event.length) {
       console.log(event, 'event');
-      const presentData = [...slidesData.slice(0, 3)];
+      const presentData = [...slidesData.slice(0, 5)];
       slidesData.map((data) => {
         if (event.includes(data.key)) {
           presentData.push(data);
@@ -143,14 +169,14 @@ function Two() {
       {event && (
         <>
           <ReactScrollWheelHandler
-            upHandler={() => handleUp()}
-            downHandler={() => handleDown()}
-            wheelConfig={[100, 50, 0]}
+          // upHandler={() => handleUp()}
+          // downHandler={() => handleDown()}
+          // wheelConfig={[100, 50, 0]}
           >
             {data.map((slide, index) => {
               return (
                 <Slides
-                  key={index}
+                  sel={selectedSlide}
                   index={index}
                   title={slide.title}
                   tagline={slide.tagline}
@@ -164,7 +190,7 @@ function Two() {
               );
             })}
           </ReactScrollWheelHandler>
-          <div className='absolute right-1 top-1/2 z-10 space-y-2'>
+          <div className='absolute  right-1 top-1/2 z-10 space-y-2'>
             {data.map((data, index) => {
               return (
                 <div
@@ -177,6 +203,35 @@ function Two() {
                 ></div>
               );
             })}
+          </div>
+          <div className='absolute md:hidden bottom-10 z-10 flex   overflow-x-scroll justify-center'>
+            <div
+              id='scrollContainer'
+              class='flex flex-no-wrap overflow-x-scroll scrolling-touch items-start mb-8 w-screen space-x-6 '
+            >
+              {data.map((data, index) => {
+                return (
+                  <button
+                    key={index}
+                    // className={[
+                    //   selectedSlide === index ? 'bg-gray-900 ' : 'bg-gray-400',
+                    // ]}
+                    className={
+                      'flex-none text-white uppercase ' +
+                      [
+                        selectedSlide === index
+                          ? 'bg-pink-700 mx-2 px-2 rounded-full '
+                          : '',
+                      ] +
+                      ' '
+                    }
+                    onClick={() => setSelectedSlide(index)}
+                  >
+                    {data.key}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </>
       )}
