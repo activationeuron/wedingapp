@@ -37,25 +37,18 @@ function Rsvp({ title, mainbg }) {
   }, []);
 
   return (
-    <div className=' flex--active relative z-10 bg-gray-700 '>
-      <div>
-        <img
-          src={image}
-          className=' h-screen w-screen absolute top-0 object-cover brightness-50 '
-          alt='as'
-        />
-      </div>
+    <div className=' flex--active relative z-10  '>
       <div className='flex__item flex__item--left '>
         <div className=' px-5 px-auto lg:px-10 mx-auto'>
           {/* <p className='font-prim text-2xl'>We Are Getting Married</p> */}
-          <h1 className='font-head text-6xl'>Rsvp</h1>
+          <h1 className='font-head text-6xl text-purple-800'>Rsvp</h1>
           <div className='relative z-10 flex flex-col w-80 lg:w-[35rem] my-10'>
             {!data ? (
-              <form onSubmit={createRsvp}>
+              <form onSubmit={createRsvp} className='space-y-3'>
                 <input
                   type='text'
                   placeholder='Enter Name'
-                  className=' py-2 px-5 outline-none rounded-md bg-gray-600 shadow-sm  text-white w-full'
+                  className=' py-2 px-5 text-purple-800 w-full'
                   value={name}
                   required
                   onChange={(e) => setName(e.target.value)}
@@ -63,7 +56,7 @@ function Rsvp({ title, mainbg }) {
                 <input
                   type='text'
                   placeholder='Phone Number'
-                  className=' py-2 my-2 px-5 outline-none rounded-md bg-gray-600 shadow-sm  text-white w-full'
+                  className=' py-2 px-5 text-purple-800 w-full'
                   value={phone}
                   required
                   disabled
@@ -75,7 +68,7 @@ function Rsvp({ title, mainbg }) {
                     placeholder='Adults'
                     value={adults}
                     required
-                    className='py-2 px-5 outline-none rounded-md bg-gray-600 shadow-sm my-4 text-white w-2/3'
+                    className='py-2 px-5 text-purple-800 shadow-sm my-4  w-2/3'
                     onChange={(e) => setAdults(e.target.value)}
                   />
                   <input
@@ -84,11 +77,11 @@ function Rsvp({ title, mainbg }) {
                     value={kids}
                     required
                     onChange={(e) => setKids(e.target.value)}
-                    className='py-2 px-5 outline-none rounded-md bg-gray-600 shadow-sm my-4 text-white w-2/3'
+                    className='py-2 px-5 text-purple-800 shadow-sm my-4  w-2/3'
                   />
                 </div>
                 <button
-                  className='py-2 font-bold bg-pink-500 rounded-sm shadow-md uppercase w-full'
+                  className='py-2 font-bold bg-purple-800 rounded-sm shadow-md uppercase w-full'
                   type='submit'
                 >
                   Submit
@@ -105,32 +98,32 @@ function Rsvp({ title, mainbg }) {
             <div className=' w-80 lg:w-full space-y-6 pt-10 '>
               <div>
                 <div className='font-prim space-y-1'>
-                  <div className='text-base lg:text-lg  text-pink-500'>
+                  <div className='text-base lg:text-lg  text-gray-800'>
                     Host Info:
                   </div>
-                  <div className='flex justify-between text-base lg:text-lg  '>
+                  <div className='flex justify-between text-base text-purple-800 lg:text-lg  '>
                     <div> Reema Khan:</div> <div> 281-743-5161</div>
                   </div>
-                  <div className='flex justify-between text-base lg:text-lg'>
+                  <div className='flex justify-between text-base text-purple-800 lg:text-lg'>
                     <div> Mohsi Mohammed:</div> <div> 818-825-3595</div>
                   </div>
-                  <div className='flex justify-between text-base lg:text-lg'>
+                  <div className='flex justify-between text-base text-purple-800 lg:text-lg'>
                     <div> Danyal Mohammed</div> <div> 714-614-8086</div>
                   </div>
-                  <div className='flex justify-between text-base lg:text-lg'>
+                  <div className='flex justify-between text-base text-purple-800 lg:text-lg'>
                     <div> Email</div> <div> info@afaanwedsmariyam.com</div>
                   </div>
                 </div>
               </div>
 
               <div className='font-prim'>
-                <div className='text-base lg:text-lg  text-pink-500'>
+                <div className='text-base lg:text-lg  text-gray-800'>
                   Event Panner Details:
                 </div>
-                <div className='flex justify-between space-x-2 '>
+                <div className='flex justify-between space-x-2 text-purple-800 '>
                   <div> Vimal Patel</div> <div> 424-409-9020</div>
                 </div>
-                <div className='flex justify-between space-x-2 '>
+                <div className='flex justify-between space-x-2 text-purple-800 '>
                   <div> Email</div> <div> info@afaanwedsmariyam.com</div>
                 </div>
               </div>

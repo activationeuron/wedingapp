@@ -17,53 +17,33 @@ function Login() {
         setShow(true);
         localStorage.setItem('phone_NO', phone);
         localStorage.setItem('active', true);
-
-        window.location.href = '/';
       }
     } catch (error) {
       alert('Invitation Not Found!');
     }
   };
-  useEffect(() => {}, [events]);
+  useEffect(() => {
+    localStorage.setItem('events', JSON.stringify(events));
+  }, [events]);
   return (
-    <div>
-      <div className='h-screen w-screen bg-slate-700 flex  justify-between items-center '>
-        <div>
-          <div className='flex flex-col  w-10/12 mx-10 space-y-5'>
-            <p className='font-prim text-2xl text-white'>You Are Invited to </p>
-            <h1 className='font-head text-6xl text-white leading-tight'>
-              Affan & mariam Wedding
-            </h1>
-            <p className='text-2xl font-prim   text-white'>
-              Enter Phone Number{' '}
-            </p>
-            <form
-              onSubmit={(e) => getEvents(e)}
-              className='flex flex-col md:flex-row md:space-x-3 space-y-5 md:space-y-0 '
-            >
-              <div>
-                <PhoneInput
-                  country={'us'}
-                  onChange={(phone) => setPhone(phone)}
-                />
-              </div>
-              <button
-                className='bg-pink-800 py-1 w-[300px] md:w-[100px]  px-5 font-bold text-white uppercase rounded-sm shadow-md'
-                type='submit'
-              >
-                Submit
-              </button>
-            </form>
-          </div>
-        </div>
-        <div className='w-1/3 bg-pink-600'>
-          <img
-            src='/images/home/one.jpg'
-            alt=''
-            className='object-cover object-center h-screen w-full'
-          />
-        </div>
+    <div className='flex  flex-col items-center  justify-center w-full  '>
+      <div className='flex font-head text-purple-800 text-2xl '>
+        Enter Phone Number
       </div>
+      <form
+        onSubmit={(e) => getEvents(e)}
+        className='flex flex-col md:flex-row md:space-x-3 space-y-5 md:space-y-0 '
+      >
+        <div>
+          <PhoneInput country={'us'} onChange={(phone) => setPhone(phone)} />
+        </div>
+        <button
+          className='bg-pink-800 py-1 w-[300px] md:w-[100px]  px-5 font-bold text-white uppercase rounded-sm shadow-md'
+          type='submit'
+        >
+          Submit
+        </button>
+      </form>
     </div>
   );
 }

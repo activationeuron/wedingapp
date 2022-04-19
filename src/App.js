@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import ReactScrollWheelHandler from 'react-scroll-wheel-handler';
-import Slides from './component/Slides/Slide.js';
-import request from './utils/request.js';
-import Rsvp from './component/Rsvp';
 import weddingmain from './assets/videowedding.mp4';
+import Bride from './component/newdes/Bride.js';
+import Groom from './component/newdes/Groom.js';
+import Story from './component/newdes/Story.js';
+import Family from './component/newdes/TheFamily.js';
+import Slider from './component/newdes/Slider.js';
+import Login from './component/Login.js';
+import request from './utils/request';
+import PhoneInput from 'react-phone-input-2';
+import Event from './component/newdes/Events/Event';
+import Rsvp from './component/Rsvp';
+import main from './assets/main.jpg';
 function Two() {
   const slidesData = [
     {
@@ -119,124 +126,196 @@ function Two() {
     },
   ];
 
-  const [selectedSlide, setSelectedSlide] = useState(0);
-  const [event, setEvent] = useState([]);
-  const [data, setData] = useState(slidesData);
-  const handleUp = () => {
-    if (selectedSlide > 0) {
-      setSelectedSlide(selectedSlide - 1);
-    }
-    console.log('handle down' + selectedSlide);
-  };
-  const handleDown = () => {
-    if (selectedSlide < data.length - 1) {
-      setSelectedSlide(selectedSlide + 1);
-    }
-    console.log('handle Up' + selectedSlide);
-  };
+  const [events, setEvents] = useState([]);
 
-  const getData = async (phone) => {
-    const respone = await request.get(`/event/myevent/${phone}`);
+  const [phone, setPhone] = useState('');
+  const [show, setShow] = useState(false);
+  const getEvents = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await request.get(`/event/myevent/${phone}`);
 
-    setEvent(respone?.data?.data.events);
+      if (response.data && response.data.success) {
+        setEvents(response.data.data.events);
+        localStorage.setItem('phone_NO', phone);
+        localStorage.setItem('active', true);
+      }
+    } catch (error) {
+      alert('Invitation Not Found!');
+    }
   };
   useEffect(() => {
-    const active = JSON.parse(localStorage.getItem('active'));
-    if (!active) {
-      window.location.href = '/login';
-    } else {
-      // const phone
-      const phone = JSON.parse(localStorage.getItem('phone_NO'));
-      getData(phone);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (event.length) {
-      console.log(event, 'event');
-      const presentData = [...slidesData.slice(0, 5)];
-      slidesData.map((data) => {
-        if (event.includes(data.key)) {
-          presentData.push(data);
-        }
-        setData(presentData);
-      });
-    }
-  }, [event]);
+    localStorage.setItem('events', JSON.stringify(events));
+  }, [events]);
 
   return (
     <>
-      {event && (
-        <>
-          <ReactScrollWheelHandler
-          // upHandler={() => handleUp()}
-          // downHandler={() => handleDown()}
-          // wheelConfig={[100, 50, 0]}
-          >
-            {data.map((slide, index) => {
-              return (
-                <Slides
-                  sel={selectedSlide}
-                  index={index}
-                  title={slide.title}
-                  tagline={slide.tagline}
-                  text={slide.text}
-                  middleImage={slide.middleImage}
-                  sideImage={slide.sideImage}
-                  selectedSlide={selectedSlide}
-                  bgColor={slide.bgColor}
-                  last={data.length}
-                />
-              );
-            })}
-          </ReactScrollWheelHandler>
-          <div className='absolute  right-1 top-1/2 z-10 space-y-2'>
-            {data.map((data, index) => {
-              return (
-                <div
-                  key={index}
-                  className={
-                    [selectedSlide === index ? 'bg-gray-900 ' : 'bg-gray-400'] +
-                    ' w-7 h-2'
-                  }
-                  onClick={() => setSelectedSlide(index)}
-                ></div>
-              );
-            })}
-          </div>
-          <div className='absolute md:hidden bottom-10 z-10 flex   overflow-x-scroll justify-center'>
-            <div
-              id='scrollContainer'
-              class='flex flex-no-wrap overflow-x-scroll scrolling-touch items-start mb-8 w-screen space-x-6 '
-            >
-              {data.map((data, index) => {
-                return (
-                  <button
-                    key={index}
-                    // className={[
-                    //   selectedSlide === index ? 'bg-gray-900 ' : 'bg-gray-400',
-                    // ]}
-                    className={
-                      'flex-none text-white uppercase ' +
-                      [
-                        selectedSlide === index
-                          ? 'bg-pink-700 mx-2 px-2 rounded-full '
-                          : '',
-                      ] +
-                      ' '
-                    }
-                    onClick={() => setSelectedSlide(index)}
-                  >
-                    {data.key}
-                  </button>
-                );
-              })}
+      <div className='relative '>
+        <img
+          src={main}
+          className='brightness-50 object-cover object-center w-full'
+          alt='test'
+        />
+        <div className='absolute top-2 left-4 right-4   h-40 border-8 flex justify-center items-center'>
+          <div className='text-center'>
+            <div className='text-4xl font-head text-white'>
+              Afaan and Mariam
+            </div>
+            <div className='text-2xl font-head text-white'>
+              Are Getting Married
             </div>
           </div>
-        </>
-      )}
+        </div>
+      </div>
+
+      <div className='min-w-full min-h-screen bg-slate-100 pt-5'>
+        <div className='max-w-xl mx-auto  min-h-screen text-center'>
+          <div className='text-4xl font-head text-purple-800 '>
+            Happy Couple
+          </div>
+          <Bride image={slidesData[1].middleImage[1]} reveal={true} />
+          <Groom image={slidesData[2].middleImage[1]} reveal={false} />
+        </div>
+
+        <div className='text-center text-4xl font-head text-purple-800'>
+          The story
+        </div>
+        <div>
+          <Story
+            imageone={slidesData[1].middleImage[3]}
+            imagetwo={slidesData[0].middleImage[2]}
+          />
+        </div>
+
+        <Family
+          imageone={slidesData[4].middleImage[0]}
+          imagetwo={slidesData[4].middleImage[1]}
+        />
+        <div className='text-center text-4xl font-head text-purple-800 py-5'>
+          Out Photos
+        </div>
+
+        <div>
+          <Slider
+            imagesUrls={[
+              slidesData[2].middleImage[4],
+              slidesData[1].middleImage[3],
+              slidesData[1].middleImage[1],
+              slidesData[2].middleImage[1],
+              slidesData[1].middleImage[2],
+            ]}
+          />
+        </div>
+
+        <div>
+          <div className='flex  flex-col items-center  justify-center w-full pt-10 '>
+            <div className='flex font-head text-purple-800 text-2xl '>
+              Enter Phone Number
+            </div>
+            <form
+              onSubmit={(e) => getEvents(e)}
+              className='flex flex-col md:flex-row md:space-x-3 space-y-5 md:space-y-0 '
+            >
+              <div>
+                <PhoneInput
+                  country={'us'}
+                  onChange={(phone) => setPhone(phone)}
+                />
+              </div>
+              <button
+                className='bg-purple-800 py-1 w-[300px] md:w-[100px]  px-5 font-bold text-white uppercase rounded-sm shadow-md'
+                type='submit'
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+          {/* phone */}
+          <div className='text-center py-10 font-head text-2xl text-purple-900'>
+            Events
+          </div>
+
+          <div>
+            {events &&
+              events.map((event) => {
+                return <Event name={event} place='test' date='12 november' />;
+              })}
+          </div>
+          <div className='flex flex-col  items-center justify-center w-full item-center '></div>
+          <div>{events.length && <Rsvp />}</div>
+        </div>
+      </div>
     </>
   );
 }
 
 export default Two;
+// {event && (
+//   <>
+//     <ReactScrollWheelHandler
+//     // upHandler={() => handleUp()}
+//     // downHandler={() => handleDown()}
+//     // wheelConfig={[100, 50, 0]}
+//     >
+//       {data.map((slide, index) => {
+//         return (
+//           <Slides
+//             sel={selectedSlide}
+//             index={index}
+//             title={slide.title}
+//             tagline={slide.tagline}
+//             text={slide.text}
+//             middleImage={slide.middleImage}
+//             sideImage={slide.sideImage}
+//             selectedSlide={selectedSlide}
+//             bgColor={slide.bgColor}
+//             last={data.length}
+//           />
+//         );
+//       })}
+//     </ReactScrollWheelHandler>
+//     <div className='absolute  right-1 top-1/2 z-10 space-y-2'>
+//       {data.map((data, index) => {
+//         return (
+//           <div
+//             key={index}
+//             className={
+//               [selectedSlide === index ? 'bg-gray-900 ' : 'bg-gray-400'] +
+//               ' w-7 h-2'
+//             }
+//             onClick={() => setSelectedSlide(index)}
+//           ></div>
+//         );
+//       })}
+//     </div>
+//     <div className='absolute md:hidden bottom-10 z-10 flex   overflow-x-scroll justify-center'>
+//       <div
+//         id='scrollContainer'
+//         class='flex flex-no-wrap overflow-x-scroll scrolling-touch items-start mb-8 w-screen space-x-6 '
+//       >
+//         {data.map((data, index) => {
+//           return (
+//             <button
+//               key={index}
+//               // className={[
+//               //   selectedSlide === index ? 'bg-gray-900 ' : 'bg-gray-400',
+//               // ]}
+//               className={
+//                 'flex-none text-white uppercase ' +
+//                 [
+//                   selectedSlide === index
+//                     ? 'bg-pink-700 mx-2 px-2 rounded-full '
+//                     : '',
+//                 ] +
+//                 ' '
+//               }
+//               onClick={() => setSelectedSlide(index)}
+//             >
+//               {data.key}
+//             </button>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   </>
+// )}
