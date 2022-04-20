@@ -221,7 +221,7 @@ function Two() {
       </div>
 
       {!events.length && (
-        <div className='flex  bg-slate-100  py-96 md:py-2  flex-col items-center   justify-center w-full pt-10 '>
+        <div className='flex lg:h-96  bg-slate-100  py-96 md:py-2  flex-col items-center   w-full pt-10 '>
           <div className='flex font-head text-purple-800 text-2xl '>
             Enter Phone Number
           </div>
