@@ -221,7 +221,7 @@ function Two() {
       </div>
 
       {!events.length && (
-        <div className='flex  bg-slate-100 flex-col items-center  justify-center w-full pt-10 '>
+        <div className='flex  bg-slate-100  py-96 md:py-2  flex-col items-center   justify-center w-full pt-10 '>
           <div className='flex font-head text-purple-800 text-2xl '>
             Enter Phone Number
           </div>
@@ -245,68 +245,70 @@ function Two() {
         </div>
       )}
 
-      <div className='min-w-full min-h-screen bg-slate-100 pt-5'>
-        <div className='max-w-xl mx-auto  min-h-screen text-center '>
-          <div className='text-4xl font-head text-purple-800 '>
-            Happy Couple
+      {events.length && (
+        <div className='min-w-full min-h-screen bg-slate-100 pt-5'>
+          <div className='max-w-xl mx-auto  min-h-screen text-center '>
+            <div className='text-4xl font-head text-purple-800 '>
+              Happy Couple
+            </div>
+            <Bride image={slidesData[1].middleImage[1]} reveal={true} />
+            <Groom image={slidesData[2].middleImage[1]} reveal={false} />
           </div>
-          <Bride image={slidesData[1].middleImage[1]} reveal={true} />
-          <Groom image={slidesData[2].middleImage[1]} reveal={false} />
-        </div>
-        <div className='text-center text-4xl font-head text-purple-800 pt-10 pb-5'>
-          The story
-        </div>
-        <div>
-          <Story
-            imageone={slidesData[1].middleImage[3]}
-            imagetwo={slidesData[0].middleImage[2]}
-          />
-        </div>
-        <Family
-          imageone={slidesData[4].middleImage[0]}
-          imagetwo={slidesData[4].middleImage[1]}
-        />
-        <div className='text-center text-4xl font-head text-purple-800 py-5'>
-          Our Photos
-        </div>
-        <div>
-          <Slider
-            imagesUrls={[
-              slidesData[2].middleImage[4],
-              slidesData[1].middleImage[3],
-              slidesData[1].middleImage[1],
-              slidesData[2].middleImage[1],
-              slidesData[1].middleImage[2],
-            ]}
-          />
-        </div>
-        <div>
-          {/* phone */}
-          <div className='text-center py-10 font-head text-2xl text-purple-900'>
-            Events
+          <div className='text-center text-4xl font-head text-purple-800 pt-10 pb-5'>
+            The story
           </div>
-
           <div>
-            {events &&
-              events?.length &&
-              events?.map((event, i) => {
-                return (
-                  <>
-                    <div key={i}>
-                      {i % 2 === 0 ? (
-                        <Event data={dataT[event]} />
-                      ) : (
-                        <EventOdd data={dataT[event]} />
-                      )}
-                    </div>
-                  </>
-                );
-              })}
+            <Story
+              imageone={slidesData[1].middleImage[3]}
+              imagetwo={slidesData[0].middleImage[2]}
+            />
           </div>
-          <div className='flex flex-col  items-center justify-center w-full item-center '></div>
-          <div>{events.length && <Rsvp />}</div>
+          <Family
+            imageone={slidesData[4].middleImage[0]}
+            imagetwo={slidesData[4].middleImage[1]}
+          />
+          <div className='text-center text-4xl font-head text-purple-800 py-5'>
+            Our Photos
+          </div>
+          <div>
+            <Slider
+              imagesUrls={[
+                slidesData[2].middleImage[4],
+                slidesData[1].middleImage[3],
+                slidesData[1].middleImage[1],
+                slidesData[2].middleImage[1],
+                slidesData[1].middleImage[2],
+              ]}
+            />
+          </div>
+          <div>
+            {/* phone */}
+            <div className='text-center py-10 font-head text-2xl text-purple-900'>
+              Events
+            </div>
+
+            <div>
+              {events &&
+                events?.length &&
+                events?.map((event, i) => {
+                  return (
+                    <>
+                      <div key={i}>
+                        {i % 2 === 0 ? (
+                          <Event data={dataT[event]} />
+                        ) : (
+                          <EventOdd data={dataT[event]} />
+                        )}
+                      </div>
+                    </>
+                  );
+                })}
+            </div>
+            <div className='flex flex-col  items-center justify-center w-full item-center '></div>
+            <div>{events.length && <Rsvp />}</div>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
