@@ -188,6 +188,10 @@ function Two() {
     localStorage.setItem('events', JSON.stringify(events) || []);
   }, [events]);
 
+  useEffect(() => {
+    const evnt = localStorage.getItem('events');
+  }, []);
+
   return (
     <>
       <div className='relative  flex justify-center flex-col items-center bg-slate-100'>
@@ -215,6 +219,31 @@ function Two() {
           </div>
         </div>
       </div>
+
+      {!events.length && (
+        <div className='flex  bg-slate-100 flex-col items-center  justify-center w-full pt-10 '>
+          <div className='flex font-head text-purple-800 text-2xl '>
+            Enter Phone Number
+          </div>
+          <form
+            onSubmit={(e) => getEvents(e)}
+            className='flex flex-col md:flex-row md:space-x-3 space-y-5 md:space-y-0 '
+          >
+            <div>
+              <PhoneInput
+                country={'us'}
+                onChange={(phone) => setPhone(phone)}
+              />
+            </div>
+            <button
+              className='bg-purple-800 py-1 w-[300px] md:w-[100px]  px-5 font-bold text-white uppercase rounded-sm shadow-md'
+              type='submit'
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      )}
 
       <div className='min-w-full min-h-screen bg-slate-100 pt-5'>
         <div className='max-w-xl mx-auto  min-h-screen text-center '>
@@ -252,28 +281,6 @@ function Two() {
           />
         </div>
         <div>
-          <div className='flex  flex-col items-center  justify-center w-full pt-10 '>
-            <div className='flex font-head text-purple-800 text-2xl '>
-              Enter Phone Number
-            </div>
-            <form
-              onSubmit={(e) => getEvents(e)}
-              className='flex flex-col md:flex-row md:space-x-3 space-y-5 md:space-y-0 '
-            >
-              <div>
-                <PhoneInput
-                  country={'us'}
-                  onChange={(phone) => setPhone(phone)}
-                />
-              </div>
-              <button
-                className='bg-purple-800 py-1 w-[300px] md:w-[100px]  px-5 font-bold text-white uppercase rounded-sm shadow-md'
-                type='submit'
-              >
-                Submit
-              </button>
-            </form>
-          </div>
           {/* phone */}
           <div className='text-center py-10 font-head text-2xl text-purple-900'>
             Events
