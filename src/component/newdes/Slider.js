@@ -27,7 +27,7 @@ const Slider = ({ imagesUrls }) => {
 
   return (
     <div className={styles.slider + ' md:px-40 mx-auto'}>
-      <div className={styles.sideImageContainer + ' md:h-96 h-56'}>
+      <div className={styles.sideImageContainer + '  md:h-96 h-56'}>
         <img
           className={cx(styles.image, styles.prev)}
           src={prevImageUrl}

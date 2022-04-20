@@ -11,6 +11,9 @@ import PhoneInput from 'react-phone-input-2';
 import Event from './component/newdes/Events/Event';
 import Rsvp from './component/Rsvp';
 import main from './assets/main.jpg';
+import Timer from './component/newdes/Timer';
+import EventOdd from './component/newdes/Events/EventOdd';
+import one from './assets/logo.png';
 function Two() {
   const slidesData = [
     {
@@ -27,7 +30,7 @@ function Two() {
       ],
       bgColor: '#282e2a',
       video: weddingmain,
-      key: 'Afaan & mariam',
+      key: 'WEDDING',
     },
     {
       title: 'Afaan Mohammed ',
@@ -41,7 +44,7 @@ function Two() {
       ],
       sideImage: '/images/groom/two.jpg',
       bgColor: '#2c3f40',
-      key: 'The Groom',
+      key: 'RECEPTIONS',
     },
     {
       title: 'Mariam Hashmi',
@@ -56,7 +59,7 @@ function Two() {
       ],
       sideImage: '/images/bride/two.jpg',
       bgColor: '#b80653',
-      key: 'The Bride',
+      key: 'HALDI',
     },
     {
       title: 'Afaan & Mariam story',
@@ -74,7 +77,7 @@ function Two() {
       ],
       sideImage: '/images/story/two.webp',
       bgColor: '#6e06b8',
-      key: 'The Story',
+      key: 'SANGEET',
     },
     {
       title: 'Family',
@@ -84,7 +87,6 @@ function Two() {
       sideImage: '/images/m/two.png',
       bgColor: '#b88806',
       key: 'FAMILY',
-      key: 'Family',
     },
 
     {
@@ -95,7 +97,6 @@ function Two() {
       sideImage: '/images/m/two.png',
       bgColor: '#b88806',
       key: 'WEDDING',
-      key: 'The Wedding',
     },
     {
       title: 'Haldi',
@@ -126,10 +127,46 @@ function Two() {
     },
   ];
 
+  const dataT = {
+    WEDDING: {
+      name: 'Merrage Ceremony',
+      date: '9th september 2022',
+      place: 'Mount Prospect IL',
+      image:
+        'https://cdn0.weddingwire.in/article/9752/original/960/jpg/92579-these-wedding-trends-from-2020-are-here-to-stay-in-2021-stories-by-joseph-radhik-a-new-definition-of-destination-weddings.webp',
+    },
+    RECEPTIONS: {
+      name: 'Reception',
+      date: '16th september 2022',
+      place: 'Villa Contempo Estate',
+      image:
+        'https://cf.ltkcdn.net/weddings/images/orig/237407-3500x2337--wedding-tent.jpg',
+    },
+    SHALDI: {
+      name: 'Merrage Ceremony',
+      date: '9th september 2022',
+      place: 'Mount Prospect IL',
+      image:
+        'https://cdn0.weddingwire.in/article/9752/original/960/jpg/92579-these-wedding-trends-from-2020-are-here-to-stay-in-2021-stories-by-joseph-radhik-a-new-definition-of-destination-weddings.webp',
+    },
+    SANGEET: {
+      name: 'Sangeet Ceremony',
+      date: '4th september 2022',
+      place: 'TBD',
+      image:
+        'https://www.bookeventz.com/blog/wp-content/uploads/2017/05/Sangeet-ceremony-840x480.jpg',
+    },
+    HALDI: {
+      name: 'Haldi Ceremony',
+      date: '3rd september 2022',
+      place: '2259 Camino Rey Fullerton CA 92833',
+      image: 'https://imgk.timesnownews.com/story/Haldi_ceremony_1.jpg',
+    },
+  };
+
   const [events, setEvents] = useState([]);
 
   const [phone, setPhone] = useState('');
-  const [show, setShow] = useState(false);
   const getEvents = async (e) => {
     e.preventDefault();
     try {
@@ -141,43 +178,53 @@ function Two() {
         localStorage.setItem('active', true);
       }
     } catch (error) {
-      alert('Invitation Not Found!');
+      setEvents([]);
+      localStorage.setItem('events', []);
+      // alert('Invitation Not Found!');
     }
   };
+
   useEffect(() => {
-    localStorage.setItem('events', JSON.stringify(events));
+    localStorage.setItem('events', JSON.stringify(events) || []);
   }, [events]);
 
   return (
     <>
-      <div className='relative '>
+      <div className='relative  flex justify-center flex-col items-center bg-slate-100'>
         <img
           src={main}
-          className='brightness-50 object-cover object-center w-full'
+          className='brightness-50 object-cover object-center w-full max-h-[40rem]'
           alt='test'
         />
-        <div className='absolute top-2 left-4 right-4   h-40 border-8 flex justify-center items-center'>
-          <div className='text-center'>
-            <div className='text-4xl font-head text-white'>
-              Afaan and Mariam
-            </div>
+        <div className='absolute top-10 border-8 md:mt-20  lg:w-1/2 w-4/5 flex justify-center items-center '>
+          <div className='text-center py-5 md:py-20 lg:py-36 lg:px-24'>
+            <div className='text-4xl font-head text-white'>Afaan & Mariam</div>
             <div className='text-2xl font-head text-white'>
               Are Getting Married
+            </div>
+          </div>
+        </div>
+        <div className=' relative flex justify-center py-10 -top-10 lg:w-1/2 w-4/5 bg-indigo-100 shadow-md'>
+          <div>
+            <div className='font-head  text-purple-900 md:text-3xl md:py-3'>
+              Count Down To Wedding Ceremony
+            </div>
+            <div>
+              <Timer />
             </div>
           </div>
         </div>
       </div>
 
       <div className='min-w-full min-h-screen bg-slate-100 pt-5'>
-        <div className='max-w-xl mx-auto  min-h-screen text-center'>
+        <div className='max-w-xl mx-auto  min-h-screen text-center '>
           <div className='text-4xl font-head text-purple-800 '>
             Happy Couple
           </div>
           <Bride image={slidesData[1].middleImage[1]} reveal={true} />
           <Groom image={slidesData[2].middleImage[1]} reveal={false} />
         </div>
-
-        <div className='text-center text-4xl font-head text-purple-800'>
+        <div className='text-center text-4xl font-head text-purple-800 pt-10 pb-5'>
           The story
         </div>
         <div>
@@ -186,15 +233,13 @@ function Two() {
             imagetwo={slidesData[0].middleImage[2]}
           />
         </div>
-
         <Family
           imageone={slidesData[4].middleImage[0]}
           imagetwo={slidesData[4].middleImage[1]}
         />
         <div className='text-center text-4xl font-head text-purple-800 py-5'>
-          Out Photos
+          Our Photos
         </div>
-
         <div>
           <Slider
             imagesUrls={[
@@ -206,7 +251,6 @@ function Two() {
             ]}
           />
         </div>
-
         <div>
           <div className='flex  flex-col items-center  justify-center w-full pt-10 '>
             <div className='flex font-head text-purple-800 text-2xl '>
@@ -237,8 +281,19 @@ function Two() {
 
           <div>
             {events &&
-              events.map((event) => {
-                return <Event name={event} place='test' date='12 november' />;
+              events?.length &&
+              events?.map((event, i) => {
+                return (
+                  <>
+                    <div key={i}>
+                      {i % 2 === 0 ? (
+                        <Event data={dataT[event]} />
+                      ) : (
+                        <EventOdd data={dataT[event]} />
+                      )}
+                    </div>
+                  </>
+                );
               })}
           </div>
           <div className='flex flex-col  items-center justify-center w-full item-center '></div>
