@@ -251,7 +251,7 @@ function Two() {
             <div className='text-4xl font-head text-purple-800 '>
               Happy Couple
             </div>
-            <Bride image={slidesData[1].middleImage[1]} reveal={true} />
+            <Bride image={slidesData[1].middleImage[0]} reveal={true} />
             <Groom image={slidesData[2].middleImage[1]} reveal={false} />
           </div>
           <div className='text-center text-4xl font-head text-purple-800 pt-10 pb-5'>

@@ -8,7 +8,7 @@ import { Table } from './Table';
 function InviteOne() {
   const [phone, setPhone] = useState();
   const [name, setName] = useState();
-  const [events, setEvents] = useState();
+  const [events, setEvents] = useState([]);
   const [all, setAll] = useState([]);
   //   const handleChange = (e) => {
   //     let value = Array.from(e.target.selectedOptions, (option) => option.value);
@@ -20,6 +20,8 @@ function InviteOne() {
     //here
     let value = Array.from(target.selectedOptions, (option) => option.value);
     setEvents(value);
+    console.log(value);
+    // setEvents(value);
   };
 
   const createInvite = async (e) => {
@@ -163,10 +165,10 @@ function InviteOne() {
           </div>
 
           <select multiple={true} required onChange={handleChange}>
-            <option value='WEDDING'>WEDDING</option>
-            <option value='RECEPTIONS'>RECEPTIONS</option>
             <option value='HALDI'>HALDI</option>
             <option value='SANGEET'>SANGEET</option>
+            <option value='WEDDING'>WEDDING</option>
+            <option value='RECEPTIONS'>RECEPTIONS</option>
           </select>
           <button
             type='submit'
