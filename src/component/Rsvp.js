@@ -6,13 +6,13 @@ function Rsvp({ title, mainbg }) {
   const [phone, setPhone] = useState(localStorage.getItem('phone_NO') || '');
   const [adults, setAdults] = useState();
   const [kids, setKids] = useState();
-
+  const [email, setEmail] = useState('');
   const [data, setData] = useState({});
 
   const createRsvp = async (e) => {
     e.preventDefault();
     const response = await request.post('/event/rsvp', {
-      ...{ name, phone, adults, kids },
+      ...{ name, phone, adults, kids, email },
     });
     if (response.data.success) {
       alert('RSVP Successful  ');
@@ -61,6 +61,14 @@ function Rsvp({ title, mainbg }) {
                   required
                   disabled
                   onChange={(e) => setPhone(e.target.value)}
+                />
+                <input
+                  type='email'
+                  placeholder='Your Email '
+                  className=' py-2 px-5 text-purple-800 w-full'
+                  value={email}
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <div className='relative z-10 flex space-x-3'>
                   <input
