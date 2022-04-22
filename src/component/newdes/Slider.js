@@ -26,30 +26,28 @@ const Slider = ({ imagesUrls }) => {
   };
 
   return (
-    <div className={styles.slider + ' md:px-40 mx-auto'}>
-      <div className={styles.sideImageContainer + '  md:h-96 h-56'}>
+    <div className='flex justify-center max-w-7xl items-center space-x-2'>
+      <div className=' w-1/4   '>
         <img
-          className={cx(styles.image, styles.prev)}
           src={prevImageUrl}
           alt='Previous'
           onClick={prevImage}
+          className='object-cover object-center rounded-lg lg:h-[40rem]'
         />
       </div>
-      <div className={styles.centerImageContainer + ' md:h-96 h-56'}>
+      <div className=' w-1/2 flex justify-center  '>
         <img
-          className={
-            cx(styles.image, styles.current) + ' object-cover object-center '
-          }
           src={currentImageUrl}
           alt='Current'
-        />
+          className='object-cover object-center rounded-lg lg:h-[45rem]'
+        />{' '}
       </div>
-      <div className={styles.sideImageContainer + ' md:h-96 h-56'}>
+      <div className='w-1/4  '>
         <img
-          className={cx(styles.image, styles.next) + ' object-cover'}
           src={nextImageUrl}
           alt='Next'
           onClick={nextImage}
+          className='object-cover object-center rounded-lg lg:h-[40rem]'
         />
       </div>
     </div>

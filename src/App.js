@@ -14,6 +14,7 @@ import main from './assets/main.jpg';
 import Timer from './component/newdes/Timer';
 import EventOdd from './component/newdes/Events/EventOdd';
 import one from './assets/logo.png';
+
 function Two() {
   const slidesData = [
     {
@@ -208,15 +209,8 @@ function Two() {
             </div>
           </div>
         </div>
-        <div className=' relative flex justify-center py-10 -top-10 lg:w-1/2 w-4/5 bg-indigo-100 shadow-md'>
-          <div>
-            <div className='font-head  text-purple-900 md:text-3xl md:py-3'>
-              Count Down To Wedding Ceremony
-            </div>
-            <div>
-              <Timer />
-            </div>
-          </div>
+        <div className=' relative flex justify-center  -top-10 lg:w-1/2 w-4/5 bg-indigo-100 shadow-md'>
+          <Timer />
         </div>
       </div>
 
@@ -266,18 +260,22 @@ function Two() {
           <Family
             imageone={slidesData[4].middleImage[0]}
             imagetwo={slidesData[4].middleImage[1]}
+            imagethree={'images/f/eight.jpg'}
           />
           <div className='text-center text-4xl font-head text-purple-800 py-5'>
             Our Photos
           </div>
-          <div>
+          <div className='w-full flex justify-center'>
             <Slider
               imagesUrls={[
-                slidesData[2].middleImage[4],
-                slidesData[1].middleImage[3],
-                slidesData[1].middleImage[1],
-                slidesData[2].middleImage[1],
-                slidesData[1].middleImage[2],
+                'images/otherimages/one.jpg',
+                'images/otherimages/three.jpg',
+                'images/otherimages/two.jpg',
+                'images/otherimages/three.jpg',
+                'images/otherimages/five.jpg',
+                'images/otherimages/four.jpg',
+                'images/otherimages/six.jpg',
+                'images/otherimages/seven.jpg',
               ]}
             />
           </div>

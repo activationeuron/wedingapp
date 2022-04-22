@@ -4,15 +4,16 @@ import image from '../assets/one.jpg';
 function Rsvp({ title, mainbg }) {
   const [name, setName] = useState();
   const [phone, setPhone] = useState(localStorage.getItem('phone_NO') || '');
-  const [adults, setAdults] = useState();
-  const [kids, setKids] = useState();
+
+  const [plus, setPlus] = useState(false);
+  const [plusName, setPlusName] = useState('');
   const [email, setEmail] = useState('');
   const [data, setData] = useState({});
 
   const createRsvp = async (e) => {
     e.preventDefault();
     const response = await request.post('/event/rsvp', {
-      ...{ name, phone, adults, kids, email },
+      ...{ name, phone, plus, plusName, email },
     });
     if (response.data.success) {
       alert('RSVP Successful  ');
@@ -70,24 +71,53 @@ function Rsvp({ title, mainbg }) {
                   required
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <div className='relative z-10 flex space-x-3'>
-                  <input
-                    type='number'
-                    placeholder='Adults'
-                    value={adults}
-                    required
-                    className='py-2 px-5 text-purple-800 shadow-sm my-4  w-2/3'
-                    onChange={(e) => setAdults(e.target.value)}
-                  />
-                  <input
-                    type='number'
-                    placeholder='Kids'
-                    value={kids}
-                    required
-                    onChange={(e) => setKids(e.target.value)}
-                    className='py-2 px-5 text-purple-800 shadow-sm my-4  w-2/3'
-                  />
+                <div className='relative z-10 flex space-x-3 text-purple-900 py-2'>
+                  {plus && (
+                    <label>
+                      <input
+                        type='checkbox'
+                        value={plus}
+                        onChange={(e) => setPlus(!plus)}
+                      />
+                      Plus One
+                    </label>
+                  )}
+                  {!plus && (
+                    <div className='relative  w-full'>
+                      <input
+                        type='text'
+                        placeholder='Plus One Name'
+                        className=' py-2 px-5 text-purple-800  w-full'
+                        value={plusName}
+                        required
+                        onChange={(e) => setPlusName(e.target.value)}
+                      />
+                      <div
+                        className='absolute top-2 right-4    flex justify-center items-center border-purple-900 rounded-full'
+                        onClick={(e) => {
+                          setPlusName('');
+                          setPlus(!plus);
+                        }}
+                      >
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          class='h-6 w-6'
+                          fill='none'
+                          viewBox='0 0 24 24'
+                          stroke='currentColor'
+                          stroke-width='2'
+                        >
+                          <path
+                            stroke-linecap='round'
+                            stroke-linejoin='round'
+                            d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
                 </div>
+
                 <button
                   className='py-2 font-bold bg-purple-800 rounded-sm shadow-md uppercase w-full'
                   type='submit'
@@ -97,7 +127,7 @@ function Rsvp({ title, mainbg }) {
               </form>
             ) : (
               <div>
-                <div className='text-2xl font-prim'>
+                <div className='text-2xl font-prim bg-purple-800'>
                   {data?.name}, RSVP Done. Thank You!
                 </div>
               </div>

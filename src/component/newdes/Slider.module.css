@@ -11,7 +11,7 @@
   padding: 32px 2px;
 }
 .centerImageContainer {
-  /* flex: 3; */
+  flex: 3;
 }
 
 .image {
