@@ -15,6 +15,11 @@ import Timer from './component/newdes/Timer';
 import EventOdd from './component/newdes/Events/EventOdd';
 import one from './assets/logo.png';
 
+import mainvideo from './assets/main.mp4';
+import sangeet from './assets/sangeet.mp4';
+import haldi from './assets/haldi.mp4';
+import recp from './assets/reciptions.mp4';
+import merrage from './assets/marriage.mp4';
 function Two() {
   const slidesData = [
     {
@@ -133,6 +138,7 @@ function Two() {
       name: 'Merrage Ceremony',
       date: '9th september 2022',
       place: 'Mount Prospect IL',
+      video: merrage,
       image:
         'https://cdn0.weddingwire.in/article/9752/original/960/jpg/92579-these-wedding-trends-from-2020-are-here-to-stay-in-2021-stories-by-joseph-radhik-a-new-definition-of-destination-weddings.webp',
     },
@@ -140,13 +146,17 @@ function Two() {
       name: 'Reception',
       date: '16th september 2022',
       place: 'Villa Contempo Estate',
+      video: recp,
+
       image:
         'https://cf.ltkcdn.net/weddings/images/orig/237407-3500x2337--wedding-tent.jpg',
     },
     SHALDI: {
-      name: 'Merrage Ceremony',
+      name: 'Marriage Ceremony',
       date: '9th september 2022',
       place: 'Mount Prospect IL',
+      video: merrage,
+
       image:
         'https://cdn0.weddingwire.in/article/9752/original/960/jpg/92579-these-wedding-trends-from-2020-are-here-to-stay-in-2021-stories-by-joseph-radhik-a-new-definition-of-destination-weddings.webp',
     },
@@ -154,6 +164,8 @@ function Two() {
       name: 'Sangeet Ceremony',
       date: '4th september 2022',
       place: 'TBD',
+      video: sangeet,
+
       image:
         'https://www.bookeventz.com/blog/wp-content/uploads/2017/05/Sangeet-ceremony-840x480.jpg',
     },
@@ -162,6 +174,7 @@ function Two() {
       date: '3rd september 2022',
       place: '2259 Camino Rey Fullerton CA 92833',
       image: 'https://imgk.timesnownews.com/story/Haldi_ceremony_1.jpg',
+      video: haldi,
     },
   };
 
@@ -195,12 +208,15 @@ function Two() {
 
   return (
     <>
-      <div className='relative  flex justify-center flex-col items-center bg-slate-100'>
-        <img
-          src={main}
-          className='brightness-50 object-cover object-center w-full max-h-[40rem]'
-          alt='test'
-        />
+      <div className='relative   flex justify-center flex-col items-center bg-slate-100'>
+        <video
+          className='brightness-50  object-cover object-center w-full max-h-[40rem]'
+          autoPlay
+          loop
+        >
+          <source src={mainvideo} type='video/mp4' />
+        </video>
+
         <div className='absolute top-10 border-8 md:mt-20  lg:w-1/2 w-4/5 flex justify-center items-center '>
           <div className='text-center py-5 md:py-20 lg:py-36 lg:px-24'>
             <div className='text-4xl font-head text-white'>Afaan & Mariam</div>
@@ -209,7 +225,7 @@ function Two() {
             </div>
           </div>
         </div>
-        <div className=' relative flex justify-center  -top-10 lg:w-1/2 w-4/5 bg-indigo-100 shadow-md'>
+        <div className=' relative flex justify-center   w-full g-white   bg-opacity-60 backdrop-filter backdrop-blur-lg '>
           <Timer />
         </div>
       </div>

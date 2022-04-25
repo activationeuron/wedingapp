@@ -127,7 +127,7 @@ function Rsvp({ title, mainbg }) {
               </form>
             ) : (
               <div>
-                <div className='text-2xl font-prim bg-purple-800'>
+                <div className='text-2xl font-prim text-purple-800'>
                   {data?.name}, RSVP Done. Thank You!
                 </div>
               </div>
