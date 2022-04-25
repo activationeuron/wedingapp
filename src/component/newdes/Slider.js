@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import styles from './Slider.module.css';
@@ -24,6 +24,18 @@ const Slider = ({ imagesUrls }) => {
   const prevImage = () => {
     setCurrentImageIndex(getPrevIndex);
   };
+
+  useEffect(() => {
+    // const interval = setInterval(() => {
+    //   console.log(currentImageIndex, imagesUrls.length - 1);
+    //   if (currentImageIndex === imagesUrls.length - 1) {
+    //     setCurrentImageIndex(0);
+    //   }
+    //   setCurrentImageIndex((curr) => curr + 1);
+    //   console.log(currentImageIndex);
+    // }, 3000);
+    // return { interval };
+  }, []);
 
   return (
     <div className='flex justify-center max-w-7xl items-center space-x-2'>
