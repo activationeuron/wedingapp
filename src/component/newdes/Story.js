@@ -4,7 +4,7 @@ export default function Story({ imageone, imagetwo }) {
   return (
     <div className='max-w-4xl mx-auto flex md:flex-row flex-col justify-around'>
       <div className='w-full md:w-1/2 relative h-[40rem] '>
-        <div className='md:absolute z-10 -left-10 top-10 h-96  border-t-8 border-l-8 border-purple-800 p-3'>
+        <div className='md:absolute z-10 -left-10 top-10   border-l-8 border-t-8  border-purple-800 p-1 shadow-2xl'>
           <motion.img
             initial='hidden'
             whileInView='visible'
@@ -19,10 +19,10 @@ export default function Story({ imageone, imagetwo }) {
             }}
             src={imageone}
             alt=''
-            className='h-72 w-60 object-cover'
+            className='h-72  object-cover'
           />
         </div>
-        <div className='absolute top-52 right-10 border-r-8 border-b-8 border-purple-800 p-3'>
+        <div className='absolute top-52 right-10 border-r-8 border-b-8 border-purple-800  shadow-2xl p-1 '>
           <motion.img
             initial='hidden'
             whileInView='visible'
@@ -43,10 +43,10 @@ export default function Story({ imageone, imagetwo }) {
       </div>
 
       <div className='w-full md:w-1/2'>
-        <div className='text-purple-700 font-prim text-2xl   text-center lg:text-left'>
+        <div className='text-purple-700 font-prim text-2xl py-4  text-center lg:text-left'>
           How We Meet
         </div>
-        <div className='text-purple-900 text-center font-head px-3'>
+        <div className='text-purple-900 text-center md:text-left font-head px-3'>
           <motion.p
             initial='hidden'
             whileInView='visible'
