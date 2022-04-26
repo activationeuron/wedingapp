@@ -281,7 +281,7 @@ function Two() {
           <div className='text-center text-4xl font-head text-purple-800 py-5'>
             Our Photos
           </div>
-          <div className='w-full flex justify-center'>
+          <div className='w-full flex  justify-center items-center overflow-x-scroll '>
             <Slider
               imagesUrls={[
                 'images/otherimages/one.jpg',
@@ -297,7 +297,7 @@ function Two() {
           </div>
           <div>
             {/* phone */}
-            <div className='text-center py-10 font-head text-2xl text-purple-900'>
+            <div className='text-center lg:py-20 py-10 font-head text-2xl text-purple-900'>
               Events
             </div>
 
