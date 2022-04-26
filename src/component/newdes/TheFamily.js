@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 export default function Family({ imageone, imagetwo, imagethree }) {
   return (
-    <div className='max-w-4xl mx-auto flex md:flex-row flex-col justify-around'>
+    <div className='max-w-5xl mx-auto flex md:flex-row flex-col justify-around'>
       <div className='w-full md:w-1/2 relative h-[50rem] hidden lg:block '>
         <div className='md:absolute z-10 -left-28 top-2 h-52  border-t-8 border-l-8 border-purple-800 p-3'>
           <motion.img
@@ -87,7 +87,7 @@ export default function Family({ imageone, imagetwo, imagethree }) {
           </div>
         </div>
         <div className='text-purple-900 font-head px-5 mx-auto text-center flex flex-col justify-center h-full'>
-          <div className='text-purple-700 font-prim text-2xl text-center py-10 lg:py-0'>
+          <div className='text-purple-700 font-prim text-2xl text-center py-10 lg:py-3'>
             The Family
           </div>
           <div>

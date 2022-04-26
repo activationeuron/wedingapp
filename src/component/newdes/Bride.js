@@ -83,9 +83,7 @@ function Bride({ image }) {
               atque vel! At, earum deleniti quas fuga aliquid blanditiis animi
               sed, possimus molestias, voluptatem laboriosam voluptate excepturi
               tempora optio adipisci accusamus. Officia ab labore laudantium
-              molestias. Reprehenderit consequatur eligendi repudiandae. Quas
-              quisquam molestias nisi quasi in, voluptatem, hic ea atque dicta
-              minima molestiae harum.
+              molestias. 
             </motion.p>
           </motion.div>
         </div>

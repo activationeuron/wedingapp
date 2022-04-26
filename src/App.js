@@ -211,8 +211,7 @@ function Two() {
       <div className='relative   flex justify-center flex-col items-center bg-slate-100'>
         <video
           className='brightness-50  object-cover object-center w-full max-h-[40rem]'
-          autoPlay
-          loop
+          loop={true} muted={true} autoPlay={true} playsinline={true} controls
         >
           <source src={mainvideo} type='video/mp4' />
         </video>
