@@ -4,7 +4,7 @@ export default function Story({ imageone, imagetwo }) {
   return (
     <div className='max-w-4xl mx-auto flex md:flex-row flex-col justify-around'>
       <div className='w-full md:w-1/2 relative h-[40rem] '>
-        <div className='md:absolute z-10 -left-10 top-10   border-l-8 border-t-8  border-purple-800 p-1 shadow-2xl'>
+        <div className='md:absolute z-10 -left-10 top-10   border-l-8 border-t-8  border-purple-800 p-1 '>
           <motion.img
             initial='hidden'
             whileInView='visible'
@@ -22,7 +22,7 @@ export default function Story({ imageone, imagetwo }) {
             className='h-72  object-cover'
           />
         </div>
-        <div className='absolute top-52 right-10 border-r-8 border-b-8 border-purple-800  shadow-2xl p-1 '>
+        <div className='absolute top-52 right-10 border-r-8 border-b-8 border-purple-800   p-1 '>
           <motion.img
             initial='hidden'
             whileInView='visible'
