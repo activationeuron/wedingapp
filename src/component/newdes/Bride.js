@@ -5,7 +5,7 @@ function Bride({ image }) {
     <div>
       <div className='w-full flex flex-col md:flex-row  justify-between h-98 pt-10 md:space-x-10 '>
         <div className='w-1/2 relative '>
-          <div className=' hidden md:block border-8 border-purple-800 absolute w-full h-96 right-10 top-10'></div>
+          {/* <div className=' hidden md:block border-8 border-purple-800 absolute w-full h-96 right-10 top-10'></div> */}
           <div className='hidden md:block border-purple-500 absolute w-full h-96'>
             <motion.img
               initial='hidden'
@@ -83,9 +83,7 @@ function Bride({ image }) {
               atque vel! At, earum deleniti quas fuga aliquid blanditiis animi
               sed, possimus molestias, voluptatem laboriosam voluptate excepturi
               tempora optio adipisci accusamus. Officia ab labore laudantium
-              molestias. Reprehenderit consequatur eligendi repudiandae. Quas
-              quisquam molestias nisi quasi in, voluptatem, hic ea atque dicta
-              minima molestiae harum.
+              molestias.
             </motion.p>
           </motion.div>
         </div>

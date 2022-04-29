@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import request from '../utils/request';
 import image from '../assets/one.jpg';
+
+import mainvideo from '../assets/main.mp4';
+import sangeet from '../assets/sangeet.mp4';
+import haldi from '../assets/haldi.mp4';
+import recp from '../assets/reciptions.mp4';
+import merrage from '../assets/marriage.mp4';
+import Event from './newdes/Events/Event';
+
+import EventOdd from './newdes/Events/EventOdd';
+import PhoneInput from 'react-phone-input-2';
+
 function Rsvp({ title, mainbg }) {
   const [name, setName] = useState();
   const [phone, setPhone] = useState(localStorage.getItem('phone_NO') || '');
@@ -9,6 +20,53 @@ function Rsvp({ title, mainbg }) {
   const [plusName, setPlusName] = useState('');
   const [email, setEmail] = useState('');
   const [data, setData] = useState({});
+
+  const [events, setEvents] = useState([]);
+
+  const dataT = {
+    WEDDING: {
+      name: 'Merrage Ceremony',
+      date: '9th september 2022',
+      place: 'Mount Prospect IL',
+      video: merrage,
+      image:
+        'https://cdn0.weddingwire.in/article/9752/original/960/jpg/92579-these-wedding-trends-from-2020-are-here-to-stay-in-2021-stories-by-joseph-radhik-a-new-definition-of-destination-weddings.webp',
+    },
+    RECEPTIONS: {
+      name: 'Reception',
+      date: '16th september 2022',
+      place: 'Villa Contempo Estate',
+      video: recp,
+
+      image:
+        'https://cf.ltkcdn.net/weddings/images/orig/237407-3500x2337--wedding-tent.jpg',
+    },
+    SHALDI: {
+      name: 'Marriage Ceremony',
+      date: '9th september 2022',
+      place: 'Mount Prospect IL',
+      video: merrage,
+
+      image:
+        'https://cdn0.weddingwire.in/article/9752/original/960/jpg/92579-these-wedding-trends-from-2020-are-here-to-stay-in-2021-stories-by-joseph-radhik-a-new-definition-of-destination-weddings.webp',
+    },
+    SANGEET: {
+      name: 'Sangeet Ceremony',
+      date: '4th september 2022',
+      place: 'TBD',
+      video: sangeet,
+
+      image:
+        'https://www.bookeventz.com/blog/wp-content/uploads/2017/05/Sangeet-ceremony-840x480.jpg',
+    },
+    HALDI: {
+      name: 'Haldi Ceremony',
+      date: '3rd september 2022',
+      place: '2259 Camino Rey Fullerton CA 92833',
+      image: 'https://imgk.timesnownews.com/story/Haldi_ceremony_1.jpg',
+      video: haldi,
+    },
+  };
 
   const createRsvp = async (e) => {
     e.preventDefault();
@@ -34,14 +92,79 @@ function Rsvp({ title, mainbg }) {
     const phone = localStorage.getItem('phone_NO');
     if (phone) {
       getEventDetails();
+      getEvents();
     }
   }, []);
+
+  const getEvents = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await request.get(`/event/myevent/${phone}`);
+
+      if (response.data && response.data.success) {
+        setEvents(response.data.data.events);
+        localStorage.setItem('phone_NO', phone);
+        localStorage.setItem('active', true);
+      }
+    } catch (error) {
+      setEvents([]);
+      localStorage.setItem('events', []);
+      // alert('Invitation Not Found!');
+    }
+  };
 
   return (
     <div className=' flex--active relative z-10  '>
       <div className='flex__item flex__item--left '>
         <div className=' px-5 px-auto lg:px-10 mx-auto'>
           {/* <p className='font-prim text-2xl'>We Are Getting Married</p> */}
+          <div className='text-center lg:py-10 py-10 font-head text-2xl text-purple-900'>
+            Events
+          </div>
+          {!events.length && (
+            <div className='flex lg:h-96   py-96 md:py-2  flex-col items-center   w-full pt-10 '>
+              <div className='flex font-head text-purple-800 text-2xl '>
+                Enter Phone Number
+              </div>
+              <form
+                onSubmit={(e) => getEvents(e)}
+                className='flex flex-col md:flex-row md:space-x-3 space-y-5 md:space-y-0 '
+              >
+                <div>
+                  <PhoneInput
+                    className='text-black'
+                    country={'us'}
+                    onChange={(phone) => setPhone(phone)}
+                  />
+                </div>
+                <button
+                  className='bg-purple-800 py-1 w-[300px] md:w-[100px]  px-5 font-bold text-white uppercase rounded-sm shadow-md'
+                  type='submit'
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          )}
+
+          <div className=' w-screen'>
+            {events &&
+              events?.length &&
+              events?.map((event, i) => {
+                return (
+                  <>
+                    <div key={i}>
+                      {i % 2 === 0 ? (
+                        <Event data={dataT[event]} />
+                      ) : (
+                        <EventOdd data={dataT[event]} />
+                      )}
+                    </div>
+                  </>
+                );
+              })}
+          </div>
+
           <h1 className='font-head text-6xl text-purple-800'>Rsvp</h1>
           <div className='relative z-10 flex flex-col w-80 lg:w-[35rem] my-10'>
             {!data ? (
