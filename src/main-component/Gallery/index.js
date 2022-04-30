@@ -23,6 +23,7 @@ import ReactFancyBox from "react-fancybox";
 import "react-fancybox/lib/fancybox.css";
 import Scrollbar from "../../components/scrollbar";
 import Footer from "../../components/footer";
+import Modal from '../ModalPopUp/Modal';
 
 const Portfolios = [
   {
@@ -97,7 +98,7 @@ const Gallery = (props) => {
                 <div className="col-lg-12">
                   <div className="portfolio-grids gallery-container clearfix">
                     {Portfolios.map((portfolio, pitem) => (
-                      <div className="grid" key={pitem}>
+                      <div className="grid"  key={pitem}>
                         <div className="img-holder">
                           <ReactFancyBox
                             thumbnail={portfolio.Pimg}
@@ -107,6 +108,9 @@ const Gallery = (props) => {
                       </div>
                     ))}
                   </div>
+                </div>
+                <div className='col-lg-12'>
+<Modal/>
                 </div>
               </div>
             </div>
