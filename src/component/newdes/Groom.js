@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
 function Groom({ image }) {
   return (
     <div>
@@ -65,7 +64,7 @@ function Groom({ image }) {
           </div>
         </div>
         <div className='w-1/2 relative '>
-          <div className=' hidden md:block border-8 border-purple-800 absolute w-full h-96 -right-10 top-10'></div>
+          {/* <div className=' hidden md:block border-8 border-purple-800 absolute w-full h-96 -right-10 top-10'></div> */}
           <div className='hidden md:block border-purple-500 absolute w-full h-96'>
             <motion.img
               initial='hidden'

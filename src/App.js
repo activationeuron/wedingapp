@@ -20,6 +20,10 @@ import sangeet from './assets/sangeet.mp4';
 import haldi from './assets/haldi.mp4';
 import recp from './assets/reciptions.mp4';
 import merrage from './assets/marriage.mp4';
+
+import mainBanner from './assets/mainban.png';
+import { Galler } from './component/newdes/Gallries';
+
 function Two() {
   const slidesData = [
     {
@@ -181,22 +185,6 @@ function Two() {
   const [events, setEvents] = useState([]);
 
   const [phone, setPhone] = useState('');
-  const getEvents = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await request.get(`/event/myevent/${phone}`);
-
-      if (response.data && response.data.success) {
-        setEvents(response.data.data.events);
-        localStorage.setItem('phone_NO', phone);
-        localStorage.setItem('active', true);
-      }
-    } catch (error) {
-      setEvents([]);
-      localStorage.setItem('events', []);
-      // alert('Invitation Not Found!');
-    }
-  };
 
   useEffect(() => {
     localStorage.setItem('events', JSON.stringify(events) || []);
@@ -209,119 +197,111 @@ function Two() {
   return (
     <>
       <div className='relative   flex justify-center flex-col items-center bg-slate-100'>
+        <img src={mainBanner} alt='' className='absolute top-0 z-10' />
+        <div className='absolute z-20 top-10 md:top-32 md:text-3xl lg:top-40 lg:text-6xl  font-prim text-purple-800'>
+          Afaan & Mariam
+        </div>
+        <div className='  z-20 flex md:mx-10 text-xs lg:text-2xl space-x-3 font-head py-10 text-purple-700 pt-20 md:pt-40 lg:pt-60 xl:pt-80'>
+          <a href='#home'>
+            <div>HOME</div>
+          </a>
+          <a href='#groom'>
+            <div>GROOM</div>
+          </a>
+          <a href='#bride'>
+            <div>BRIDE</div>
+          </a>
+          <a href='#story'>
+            <div>THE STORY</div>
+          </a>
+          <a href='#family'>
+            <div>THE FAMILY</div>
+          </a>
+          <a href='/rsvp'>
+            <div>RSVP</div>
+          </a>
+        </div>
         <video
           className='brightness-50  object-cover object-center w-full max-h-[40rem]'
-          loop={true} muted={true} autoPlay={true} playsinline={true} controls
+          autoPlay
+          loop
+          id='home'
         >
           <source src={mainvideo} type='video/mp4' />
         </video>
 
-        <div className='absolute top-10 border-8 md:mt-20  lg:w-1/2 w-4/5 flex justify-center items-center '>
+        {/* <div className='absolute top-[10rem] border-8 md:mt-20  lg:w-1/2 w-4/5 flex justify-center items-center '>
           <div className='text-center py-5 md:py-20 lg:py-36 lg:px-24'>
             <div className='text-4xl font-head text-white'>Afaan & Mariam</div>
             <div className='text-2xl font-head text-white'>
               Are Getting Married
             </div>
           </div>
-        </div>
+        </div> */}
         <div className=' relative flex justify-center   w-full g-white   bg-opacity-60 backdrop-filter backdrop-blur-lg '>
           <Timer />
         </div>
       </div>
 
-      {!events.length && (
-        <div className='flex lg:h-96  bg-slate-100  py-96 md:py-2  flex-col items-center   w-full pt-10 '>
-          <div className='flex font-head text-purple-800 text-2xl '>
-            Enter Phone Number
+      <div className='min-w-full min-h-screen bg-slate-100 pt-5'>
+        <div className='max-w-xl mx-auto  min-h-screen text-center '>
+          <div className='text-4xl font-head text-purple-800 '>
+            Happy Couple
           </div>
-          <form
-            onSubmit={(e) => getEvents(e)}
-            className='flex flex-col md:flex-row md:space-x-3 space-y-5 md:space-y-0 '
-          >
-            <div>
-              <PhoneInput
-                country={'us'}
-                onChange={(phone) => setPhone(phone)}
-              />
-            </div>
-            <button
-              className='bg-purple-800 py-1 w-[300px] md:w-[100px]  px-5 font-bold text-white uppercase rounded-sm shadow-md'
-              type='submit'
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      )}
-
-      {events.length && (
-        <div className='min-w-full min-h-screen bg-slate-100 pt-5'>
-          <div className='max-w-xl mx-auto  min-h-screen text-center '>
-            <div className='text-4xl font-head text-purple-800 '>
-              Happy Couple
-            </div>
+          <div id='groom'>
             <Bride image={slidesData[1].middleImage[0]} reveal={true} />
+          </div>
+          <div id='bride'>
             <Groom image={slidesData[2].middleImage[1]} reveal={false} />
           </div>
-          <div className='text-center text-4xl font-head text-purple-800 pt-10 pb-5'>
-            The story
-          </div>
-          <div>
-            <Story
-              imageone={slidesData[1].middleImage[3]}
-              imagetwo={slidesData[0].middleImage[2]}
-            />
-          </div>
-          <Family
-            imageone={slidesData[4].middleImage[0]}
-            imagetwo={slidesData[4].middleImage[1]}
-            imagethree={'images/f/eight.jpg'}
+        </div>
+        <div
+          id='story'
+          className='text-center text-4xl font-head text-purple-800 pt-10 pb-5'
+        >
+          The story
+        </div>
+        <div>
+          <Story
+            imageone={slidesData[1].middleImage[3]}
+            imagetwo={slidesData[0].middleImage[2]}
           />
-          <div className='text-center text-4xl font-head text-purple-800 py-5'>
-            Our Photos
-          </div>
-          <div className='w-full flex  justify-center items-center overflow-x-scroll '>
-            <Slider
-              imagesUrls={[
-                'images/otherimages/one.jpg',
-                'images/otherimages/three.jpg',
-                'images/otherimages/two.jpg',
-                'images/otherimages/three.jpg',
-                'images/otherimages/five.jpg',
-                'images/otherimages/four.jpg',
-                'images/otherimages/six.jpg',
-                'images/otherimages/seven.jpg',
-              ]}
-            />
-          </div>
-          <div>
-            {/* phone */}
-            <div className='text-center lg:py-20 py-10 font-head text-2xl text-purple-900'>
-              Events
+        </div>
+        <div id='family'></div>
+        <Family
+          imageone={slidesData[4].middleImage[0]}
+          imagetwo={slidesData[4].middleImage[1]}
+          imagethree={'images/f/eight.jpg'}
+        />
+        <div className='text-center text-4xl font-head text-purple-800 py-5'>
+          Our Photos
+        </div>
+        <div className='w-full flex  justify-center items-center overflow-x-scroll '>
+          {/* <Slider
+            imagesUrls={[
+              'images/otherimages/one.jpg',
+              'images/otherimages/three.jpg',
+              'images/otherimages/two.jpg',
+              'images/otherimages/three.jpg',
+              'images/otherimages/five.jpg',
+              'images/otherimages/four.jpg',
+              'images/otherimages/six.jpg',
+              'images/otherimages/seven.jpg',
+            ]}
+          /> */}
+          <div className=' mx-auto relative '>
+            <div className='max-w-6xl'>
+              <Galler />
             </div>
-
-            <div>
-              {events &&
-                events?.length &&
-                events?.map((event, i) => {
-                  return (
-                    <>
-                      <div key={i}>
-                        {i % 2 === 0 ? (
-                          <Event data={dataT[event]} />
-                        ) : (
-                          <EventOdd data={dataT[event]} />
-                        )}
-                      </div>
-                    </>
-                  );
-                })}
-            </div>
-            <div className='flex flex-col  items-center justify-center w-full item-center '></div>
-            <div>{events.length && <Rsvp />}</div>
           </div>
         </div>
-      )}
+        <div>
+          {/* phone */}
+          {/* <div className='text-center lg:py-20 py-10 font-head text-2xl text-purple-900'>
+            Events
+          </div> */}
+        </div>
+      </div>
     </>
   );
 }
