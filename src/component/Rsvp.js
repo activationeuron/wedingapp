@@ -303,7 +303,7 @@ function Rsvp({ title, mainbg }) {
                     </div>
 
                     <button
-                      className='py-2 font-bold bg-purple-800 rounded-sm shadow-md uppercase w-full'
+                      className='py-2 font-bold text-white bg-purple-800 rounded-sm shadow-md uppercase w-full'
                       type='submit'
                     >
                       Submit
