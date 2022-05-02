@@ -180,7 +180,10 @@ function Rsvp({ title, mainbg }) {
                   <>
                     <div key={i}>
                       {i % 2 === 0 ? (
-                        <div className='relative'>
+                        <div
+                          className='relative'
+                          onClick={() => handleNumberClick(event)}
+                        >
                           <div className='absolute  bottom-20 right-20  lg:left-1/3 lg:px-4 z-30'>
                             <Icon
                               stroke={
@@ -196,7 +199,10 @@ function Rsvp({ title, mainbg }) {
                           </div>
                         </div>
                       ) : (
-                        <div className='relative  '>
+                        <div
+                          className='relative  '
+                          onClick={() => handleNumberClick(event)}
+                        >
                           <div className='absolute bottom-20 right-20  lg:left-1/3 lg:px-4 z-30'>
                             <Icon
                               stroke={
