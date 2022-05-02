@@ -11,6 +11,8 @@ import Event from './newdes/Events/Event';
 
 import EventOdd from './newdes/Events/EventOdd';
 import PhoneInput from 'react-phone-input-2';
+import Icon from './Icon';
+import mainBanner from '../assets/mainban.png';
 
 function Rsvp({ title, mainbg }) {
   const [name, setName] = useState();
@@ -22,6 +24,8 @@ function Rsvp({ title, mainbg }) {
   const [data, setData] = useState({});
 
   const [events, setEvents] = useState([]);
+
+  const [rsvpList, setRsvpList] = useState([]);
 
   const dataT = {
     WEDDING: {
@@ -70,12 +74,16 @@ function Rsvp({ title, mainbg }) {
 
   const createRsvp = async (e) => {
     e.preventDefault();
-    const response = await request.post('/event/rsvp', {
-      ...{ name, phone, plus, plusName, email },
-    });
-    if (response.data.success) {
-      alert('RSVP Successful  ');
-      getEventDetails();
+    if (!rsvpList.length) {
+      alert('Please Select An Event!');
+    } else {
+      const response = await request.post('/event/rsvp', {
+        ...{ name, phone, plus, plusName, email, events: rsvpList },
+      });
+      if (response.data.success) {
+        alert('RSVP Successful  ');
+        getEventDetails();
+      }
     }
   };
 
@@ -84,6 +92,8 @@ function Rsvp({ title, mainbg }) {
     console.log(eventDetails.data);
     if (eventDetails.data.success) {
       setData(eventDetails.data.data);
+    } else {
+      setData({});
     }
     console.log(eventDetails);
   };
@@ -92,7 +102,6 @@ function Rsvp({ title, mainbg }) {
     const phone = localStorage.getItem('phone_NO');
     if (phone) {
       getEventDetails();
-      getEvents();
     }
   }, []);
 
@@ -111,15 +120,31 @@ function Rsvp({ title, mainbg }) {
       localStorage.setItem('events', []);
       // alert('Invitation Not Found!');
     }
+    getEventDetails();
+  };
+
+  const handleNumberClick = (number) => {
+    setRsvpList((rsvpList) =>
+      rsvpList.includes(number)
+        ? rsvpList.filter((n) => n !== number)
+        : [number, ...rsvpList]
+    );
   };
 
   return (
-    <div className=' flex--active relative z-10  '>
-      <div className='flex__item flex__item--left '>
+    <div className=' flex--active relative z-10  pt-10 '>
+      <img
+        src={mainBanner}
+        alt=''
+        className='absolute top-0 z-10 flex justify-center '
+      />
+
+      <div className='flex__item flex__item--left relative z-40'>
         <div className=' px-5 px-auto lg:px-10 mx-auto'>
           {/* <p className='font-prim text-2xl'>We Are Getting Married</p> */}
           <div className='text-center lg:py-10 py-10 font-head text-2xl text-purple-900'>
             Events
+            <p className='text-sm'>Tap To Select Event You Wish To Attend </p>
           </div>
           {!events.length && (
             <div className='flex lg:h-96   py-96 md:py-2  flex-col items-center   w-full pt-10 '>
@@ -155,9 +180,37 @@ function Rsvp({ title, mainbg }) {
                   <>
                     <div key={i}>
                       {i % 2 === 0 ? (
-                        <Event data={dataT[event]} />
+                        <div className='relative'>
+                          <div className='absolute  bottom-20 right-20  lg:left-1/3 lg:px-4 z-30'>
+                            <Icon
+                              stroke={
+                                rsvpList.includes(event) ? '#eb00f7' : '#000'
+                              }
+                            />
+                          </div>{' '}
+                          <div
+                            onClick={() => handleNumberClick(event)}
+                            className=' relative z-20'
+                          >
+                            <Event data={dataT[event]} />
+                          </div>
+                        </div>
                       ) : (
-                        <EventOdd data={dataT[event]} />
+                        <div className='relative  '>
+                          <div className='absolute bottom-20 right-20  lg:left-1/3 lg:px-4 z-30'>
+                            <Icon
+                              stroke={
+                                rsvpList.includes(event) ? '#eb00f7' : '#000'
+                              }
+                            />
+                          </div>
+                          <div
+                            onClick={() => handleNumberClick(event)}
+                            className=' relative z-20'
+                          >
+                            <EventOdd data={dataT[event]} />
+                          </div>
+                        </div>
                       )}
                     </div>
                   </>
@@ -165,131 +218,137 @@ function Rsvp({ title, mainbg }) {
               })}
           </div>
 
-          <h1 className='font-head text-6xl text-purple-800'>Rsvp</h1>
-          <div className='relative z-10 flex flex-col w-80 lg:w-[35rem] my-10'>
-            {!data ? (
-              <form onSubmit={createRsvp} className='space-y-3'>
-                <input
-                  type='text'
-                  placeholder='Enter Name'
-                  className=' py-2 px-5 text-purple-800 w-full'
-                  value={name}
-                  required
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <input
-                  type='text'
-                  placeholder='Phone Number'
-                  className=' py-2 px-5 text-purple-800 w-full'
-                  value={phone}
-                  required
-                  disabled
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-                <input
-                  type='email'
-                  placeholder='Your Email '
-                  className=' py-2 px-5 text-purple-800 w-full'
-                  value={email}
-                  required
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <div className='relative z-10 flex space-x-3 text-purple-900 py-2'>
-                  {!plus && (
-                    <label>
-                      <input
-                        type='checkbox'
-                        value={plus}
-                        onChange={(e) => setPlus(!plus)}
-                      />
-                      Plus One
-                    </label>
-                  )}
-                  {plus && (
-                    <div className='relative  w-full'>
-                      <input
-                        type='text'
-                        placeholder='Plus One Name'
-                        className=' py-2 px-5 text-purple-800  w-full'
-                        value={plusName}
-                        required
-                        onChange={(e) => setPlusName(e.target.value)}
-                      />
-                      <div
-                        className='absolute top-2 right-4    flex justify-center items-center border-purple-900 rounded-full'
-                        onClick={(e) => {
-                          setPlusName('');
-                          setPlus(!plus);
-                        }}
-                      >
-                        <svg
-                          xmlns='http://www.w3.org/2000/svg'
-                          class='h-6 w-6'
-                          fill='none'
-                          viewBox='0 0 24 24'
-                          stroke='currentColor'
-                          stroke-width='2'
-                        >
-                          <path
-                            stroke-linecap='round'
-                            stroke-linejoin='round'
-                            d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
+          {events.length ? (
+            <div className='flex flex-col  items-center '>
+              <h1 className='font-head text-6xl text-purple-800'>Rsvp</h1>
+              <div className='relative z-10 flex flex-col w-80 lg:w-[35rem] my-10'>
+                {!data ? (
+                  <form onSubmit={createRsvp} className='space-y-3'>
+                    <input
+                      type='text'
+                      placeholder='Enter Name'
+                      className=' py-2 px-5 text-purple-800 w-full'
+                      value={name}
+                      required
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                    <input
+                      type='text'
+                      placeholder='Phone Number'
+                      className=' py-2 px-5 text-purple-800 w-full'
+                      value={phone}
+                      required
+                      disabled
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                    <input
+                      type='email'
+                      placeholder='Your Email '
+                      className=' py-2 px-5 text-purple-800 w-full'
+                      value={email}
+                      required
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <div className='relative z-10 flex space-x-3 text-purple-900 py-2'>
+                      {plus && (
+                        <label>
+                          <input
+                            type='checkbox'
+                            value={plus}
+                            onChange={(e) => setPlus(!plus)}
                           />
-                        </svg>
+                          Plus One
+                        </label>
+                      )}
+                      {!plus && (
+                        <div className='relative  w-full'>
+                          <input
+                            type='text'
+                            placeholder='Plus One Name'
+                            className=' py-2 px-5 text-purple-800  w-full'
+                            value={plusName}
+                            required
+                            onChange={(e) => setPlusName(e.target.value)}
+                          />
+                          <div
+                            className='absolute top-2 right-4    flex justify-center items-center border-purple-900 rounded-full'
+                            onClick={(e) => {
+                              setPlusName('');
+                              setPlus(!plus);
+                            }}
+                          >
+                            <svg
+                              xmlns='http://www.w3.org/2000/svg'
+                              class='h-6 w-6'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                              stroke='currentColor'
+                              stroke-width='2'
+                            >
+                              <path
+                                stroke-linecap='round'
+                                stroke-linejoin='round'
+                                d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <button
+                      className='py-2 font-bold bg-purple-800 rounded-sm shadow-md uppercase w-full'
+                      type='submit'
+                    >
+                      Submit
+                    </button>
+                  </form>
+                ) : (
+                  <div>
+                    <div className='text-2xl font-prim text-purple-800'>
+                      {data?.name}, RSVP Done. Thank You!
+                    </div>
+                  </div>
+                )}
+
+                <div className=' w-80 lg:w-full space-y-6 pt-10 '>
+                  <div>
+                    <div className='font-prim space-y-1'>
+                      <div className='text-base lg:text-lg  text-gray-800'>
+                        Host Info:
+                      </div>
+                      <div className='flex justify-between text-base text-purple-800 lg:text-lg  '>
+                        <div> Reema Khan:</div> <div> 281-743-5161</div>
+                      </div>
+                      <div className='flex justify-between text-base text-purple-800 lg:text-lg'>
+                        <div> Mohsi Mohammed:</div> <div> 818-825-3595</div>
+                      </div>
+                      <div className='flex justify-between text-base text-purple-800 lg:text-lg'>
+                        <div> Danyal Mohammed</div> <div> 714-614-8086</div>
+                      </div>
+                      <div className='flex justify-between text-base text-purple-800 lg:text-lg'>
+                        <div> Email</div> <div> info@afaanwedsmariyam.com</div>
                       </div>
                     </div>
-                  )}
-                </div>
+                  </div>
 
-                <button
-                  className='py-2 font-bold bg-purple-800 rounded-sm shadow-md uppercase w-full'
-                  type='submit'
-                >
-                  Submit
-                </button>
-              </form>
-            ) : (
-              <div>
-                <div className='text-2xl font-prim text-purple-800'>
-                  {data?.name}, RSVP Done. Thank You!
-                </div>
-              </div>
-            )}
-
-            <div className=' w-80 lg:w-full space-y-6 pt-10 '>
-              <div>
-                <div className='font-prim space-y-1'>
-                  <div className='text-base lg:text-lg  text-gray-800'>
-                    Host Info:
+                  <div className='font-prim'>
+                    <div className='text-base lg:text-lg  text-gray-800'>
+                      Event Panner Details:
+                    </div>
+                    <div className='flex justify-between space-x-2 text-purple-800 '>
+                      <div> Vimal Patel</div> <div> 424-409-9020</div>
+                    </div>
+                    <div className='flex justify-between space-x-2 text-purple-800 '>
+                      <div> Email</div> <div> info@afaanwedsmariyam.com</div>
+                    </div>
                   </div>
-                  <div className='flex justify-between text-base text-purple-800 lg:text-lg  '>
-                    <div> Reema Khan:</div> <div> 281-743-5161</div>
-                  </div>
-                  <div className='flex justify-between text-base text-purple-800 lg:text-lg'>
-                    <div> Mohsi Mohammed:</div> <div> 818-825-3595</div>
-                  </div>
-                  <div className='flex justify-between text-base text-purple-800 lg:text-lg'>
-                    <div> Danyal Mohammed</div> <div> 714-614-8086</div>
-                  </div>
-                  <div className='flex justify-between text-base text-purple-800 lg:text-lg'>
-                    <div> Email</div> <div> info@afaanwedsmariyam.com</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className='font-prim'>
-                <div className='text-base lg:text-lg  text-gray-800'>
-                  Event Panner Details:
-                </div>
-                <div className='flex justify-between space-x-2 text-purple-800 '>
-                  <div> Vimal Patel</div> <div> 424-409-9020</div>
-                </div>
-                <div className='flex justify-between space-x-2 text-purple-800 '>
-                  <div> Email</div> <div> info@afaanwedsmariyam.com</div>
                 </div>
               </div>
             </div>
-          </div>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     </div>
