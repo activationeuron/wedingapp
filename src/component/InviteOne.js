@@ -85,7 +85,7 @@ function InviteOne() {
 
   return (
     <div>
-      <div className='flex flex-col items-center w-1/2 mx-auto space-y-10 relative h-screen'>
+      <div className='flex flex-col items-center px-10 md:w-1/2 mx-auto space-y-10 relative h-screen'>
         <div className='text-center text-2xl uppercase'>Create Invitations</div>
         <div
           className='px-2 py-2 bg-slate-800 text-white cursor-pointer '
