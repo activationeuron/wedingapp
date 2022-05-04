@@ -145,7 +145,7 @@ function InviteOne() {
             </form>
           </div>
         ) : (
-          <div className='w-full flex flex-col my-2 mx-2 '>
+          <div className='w-full flex flex-col my-2 mx-2  '>
             {all &&
               all.map((guest) => {
                 return (
