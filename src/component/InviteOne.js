@@ -19,7 +19,8 @@ function InviteOne() {
     { slug: 'WEDDING', name: 'WEDDING', checked: false },
     { slug: 'RECEPTIONS', name: 'RECEPTIONS', checked: false },
   ]);
-
+  const [filter, setFilter] = useState('');
+  const [filterList, setFilterList] = useState([]);
   const handleChangeCheck = (slug) => {
     const copyProducts = [...products];
     const modifiedProducts = copyProducts.map((product) => {
@@ -38,14 +39,14 @@ function InviteOne() {
   //     console.log(value);
   //   };
 
-  const handleChange = (e) => {
-    let target = e.target;
-    //here
-    let value = Array.from(target.selectedOptions, (option) => option.value);
-    setEvents(value);
-    console.log(value);
-    // setEvents(value);
-  };
+  // const handleChange = (e) => {
+  //   let target = e.target;
+  //   //here
+  //   let value = Array.from(target.selectedOptions, (option) => option.value);
+  //   setEvents(value);
+  //   console.log(value);
+  //   // setEvents(value);
+  // };
 
   const createInvite = async (e) => {
     e.preventDefault();
@@ -53,12 +54,13 @@ function InviteOne() {
       const response = await request.post('/event/create', {
         name,
         phone,
+        party,
         events: products.map((product) => product.slug),
         limit: 12,
       });
       if (response.data.success) {
         alert('INVITATION SUCCESS');
-        setShow(false)
+        setShow(false);
         getAllIncitations();
       }
     } catch (error) {
@@ -84,9 +86,41 @@ function InviteOne() {
     getAllIncitations();
   };
 
+  const [tab, setTab] = useState(0);
+  const tabIndex = (p) => {
+    setTab(p);
+  };
+
+  const [rsvpList, setRsvpList] = useState([]);
+
+  const getRsvp = async () => {
+    const response = await request.get('/event/rsvp');
+    console.log(response.data.data);
+    if (response.data.success) {
+      setRsvpList(response.data.data);
+      setFilterList(response.data.data);
+    }
+  };
+  useEffect(() => {
+    getRsvp();
+  }, []);
+
+  useEffect(() => {
+    if (filter !== 'ALL') {
+      const aa = rsvpList.filter((rsvp) => {
+        if (rsvp.events) {
+          return rsvp.events.includes(filter);
+        }
+      });
+      setFilterList(aa);
+    } else {
+      getRsvp();
+    }
+  }, [filter]);
+
   return (
     <div>
-      <div className='flex flex-col items-center px-10 md:w-1/2 mx-auto space-y-10 relative h-screen'>
+      <div className='flex flex-col items-center px-10 md:w-1/2 mx-auto space-y-5 relative h-screen'>
         <div className='text-center text-2xl uppercase'>Create Invitations</div>
         <div
           className='px-2 py-2 bg-slate-800 text-white cursor-pointer '
@@ -94,9 +128,29 @@ function InviteOne() {
         >
           Add Guest
         </div>
+        <div className='flex self-start space-x-4'>
+          <div
+            className={
+              'self-start text-lg cursor-pointer  ' +
+              [tab === 1 ? 'text-gray-900' : 'text-gray-400']
+            }
+            onClick={() => tabIndex(1)}
+          >
+            Guest List
+          </div>
+          <div
+            className={
+              'self-start text-lg cursor-pointer ' +
+              [tab === 2 ? 'text-gray-900' : 'text-gray-400']
+            }
+            onClick={() => tabIndex(2)}
+          >
+            RSVPs
+          </div>
+        </div>
 
         {show ? (
-          <div className='border absolute  top-1/4 p-5 max-w-6xl flex justify-center'>
+          <div className='border absolute  top-1/4 px-5 max-w-6xl flex justify-center'>
             <form onSubmit={createInvite}>
               <div>
                 <div className='my-2'>Guest Name</div>
@@ -146,43 +200,110 @@ function InviteOne() {
             </form>
           </div>
         ) : (
-          <div className='w-full flex flex-col my-2 mx-2  '>
-            {all &&
-              all.map((guest) => {
-                return (
-                  <div className='border-2 h-40  my-2 py-2 px-2 relative'>
-                    <div className='flex justify-between'>
-                      <div>
-                        <div className='text-sm  text-gray-800'>
-                          NAME ON INVITATION
-                        </div>
-                        <div className='flex flex-col justify-center '>
-                          <div className='text-xl text-gray-800 uppercase pt-4'>
-                            {guest?.name}
+          <>
+            {tab === 1 ? (
+              <div className='w-full flex flex-col my-2 mx-2  '>
+                {all &&
+                  all.map((guest) => {
+                    return (
+                      <div className='border-2 h-40  my-2 py-2 px-2 relative'>
+                        <div className='flex justify-between'>
+                          <div>
+                            <div className='text-sm  text-gray-800'>
+                              NAME ON INVITATION
+                            </div>
+                            <div className='flex flex-col justify-center '>
+                              <div className='text-xl text-gray-800 uppercase pt-4'>
+                                {guest?.name}
+                              </div>
+                              <div className='text-xs'>{guest?.phone}</div>
+                            </div>
                           </div>
-                          <div className='text-xs'>{guest?.phone}</div>
+                          <div className='text-sm  text-gray-800 uppercase'>
+                            Party Size
+                          </div>
+                          <div className='text-sm  text-gray-800 uppercase'>
+                            <div>Invited to</div>
+                            <div className='text-xs text-gray py-2'>
+                              {guest.events.map((event) => {
+                                return <div>{event}</div>;
+                              })}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className='text-sm  text-gray-800 uppercase'>
-                        Party Size
-                      </div>
-                      <div className='text-sm  text-gray-800 uppercase'>
-                        <div>Invited to</div>
-                        <div className='text-xs text-gray py-2'>
-                          {guest.events.map((event) => {
-                            return <div>{event}</div>;
-                          })}
-                        </div>
-                      </div>
-                    </div>
 
-                    <div className='absolute bottom-1' onClick={()=>deleteEntry(guest._id)}><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-  <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-</svg></div>
-                  </div>
-                );
-              })}
-          </div>
+                        <div
+                          className='absolute bottom-1'
+                          onClick={() => deleteEntry(guest._id)}
+                        >
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='h-6 w-6'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            stroke='currentColor'
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16'
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            ) : (
+              <div className='w-full flex flex-col my-2 mx-2  '>
+                <div className='self-start'>
+                  <select
+                    value={filter}
+                    onChange={(e) => setFilter(e.target.value)}
+                  >
+                    <option value='ALL'>ALL</option>
+
+                    <option value='HALDI'>HALDI</option>
+                    <option value='SANGEET'>SANGEET</option>
+                    <option value='WEDDING'>WEDDING</option>
+                    <option value='RECEPTIONS'>RECEPTIONS</option>
+                  </select>
+                </div>
+                <div className='w-full flex space-x-3 py-2 justify-center'></div>
+
+                {filterList &&
+                  filterList?.map((rsvp) => {
+                    return (
+                      <div className='border-2 h-40  my-2 py-2 px-2 relative'>
+                        <div className='flex justify-between'>
+                          <div>
+                            <div className='flex flex-col justify-center '>
+                              <div className='uppercase'>Name</div>
+                              <div className='text-xl text-gray-800 uppercase '>
+                                {rsvp?.name}
+                              </div>
+                              <div className='text-xs'>{rsvp?.phone}</div>
+                            </div>
+                          </div>
+                          <div className='text-sm  text-gray-800 uppercase'>
+                            Party Size
+                          </div>
+                          <div className='text-sm  text-gray-800 uppercase'>
+                            <div>Invited to</div>
+                            <div className='text-xs text-gray py-2'>
+                              {rsvp.events?.map((event) => {
+                                return <div>{event}</div>;
+                              })}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
