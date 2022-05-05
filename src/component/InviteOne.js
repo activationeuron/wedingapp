@@ -86,7 +86,7 @@ function InviteOne() {
     getAllIncitations();
   };
 
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState(1);
   const tabIndex = (p) => {
     setTab(p);
   };
@@ -219,8 +219,9 @@ function InviteOne() {
                               <div className='text-xs'>{guest?.phone}</div>
                             </div>
                           </div>
-                          <div className='text-sm  text-gray-800 uppercase'>
-                            Party Size
+                          <div className='text-sm  text-gray-800 uppercase text-center'>
+                            <div>Party Size</div>
+                            <div className='py-5'>{guest?.party}</div>
                           </div>
                           <div className='text-sm  text-gray-800 uppercase'>
                             <div>Invited to</div>
@@ -287,7 +288,8 @@ function InviteOne() {
                             </div>
                           </div>
                           <div className='text-sm  text-gray-800 uppercase'>
-                            Party Size
+                            <div>Party Size</div>
+                            <div className='py-5'>{rsvp?.party}</div>
                           </div>
                           <div className='text-sm  text-gray-800 uppercase'>
                             <div>Invited to</div>
