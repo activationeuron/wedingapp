@@ -1,6 +1,6 @@
 .wpo-section-title,
 .wpo-section-title-s2 {
-	margin-bottom: 60px;
+	margin-bottom: 40px;
 	text-align: center;
 	
 	@include media-query(767px) {
@@ -9,9 +9,10 @@
 
 	span{
 		text-transform: capitalize;
-		font-size: 20px;
+		font-size: 25px;
 		color: $theme-primary-color-s2;
 		font-family: $base-font;
+		font-style: italic;
 
 		@include media-query(575px) {
 			font-size: 16px;

@@ -25,18 +25,12 @@
                 margin: 0 auto;
                 position: relative;
                 overflow: hidden;
-
-                img{
-                    transform: scale(1);
-                    transition: all .3s;
-
-                }
             }
 
             &:hover{
                 .wpo-team-img{
                     img{
-                        transform: scale(1.2);
+                        transform: scale(1);
                     }
                 }
             }

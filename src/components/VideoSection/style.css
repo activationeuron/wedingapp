@@ -1,0 +1,9 @@
+#home-banner {
+    margin-top: -150px;
+}
+
+@media(max-width: 767px) {
+    #home-banner {
+        margin-top: -700px;
+    }
+}

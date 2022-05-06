@@ -1,0 +1,38 @@
+.wpo-static-hero-inner {
+    text-align: center;
+    padding-left: 0px !important;
+}
+
+.wpo-static-hero-inner .slide-text p{
+    max-width: 100% !important;
+}
+
+.banner-video {
+    width: 1000px;
+    height: 565px;
+    overflow-y: hidden;
+}
+
+.banner-video video {
+    width: 1000px;
+    height: 565px;
+}
+
+@media(max-width: 767px) {
+    .banner-video video {
+        width: 400px;
+        height: auto;
+    }
+
+    .banner-video {
+        width: 450px;
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+}
+
+.shape-1 {
+    margin-top: -150px !important;
+    padding-bottom: 0px !important;
+}

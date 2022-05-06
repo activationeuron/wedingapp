@@ -1,162 +1,266 @@
 import React, { Fragment } from 'react';
 import Navbar2 from "../../components/Navbar2";
-import SectionTitle from "../../components/SectionTitle";
-import LocationMap from "../../components/Modal";
+import Simg from "../../images/section-title.png";
 import Scrollbar from "../../components/scrollbar";
 import Footer from "../../components/footer";
+import './style.css';
+import RSVPForm from "../RSVP/rsvp-form";
+import HaldiMap from './haldi-map';
+import SangeetMap from './sangeet-map';
+import MarriageMap from './marriage-map';
+import ReceptionMap from './reception-map';
 
-const EventsPage = (props) => {
+const EventsPage = () => {
     return (
       <Fragment>
         <Navbar2 />
-        <section
-          className={`wpo-event-section section-padding ${props.eClass}`}
-          id="events"
-        >
-          <div className="container">
-            <SectionTitle MainTitle={"TIME AND PLACE"} />
+        <section className={`wpo-event-section section-padding`} id="events">
+          <div className="video-container">
+            <video autoPlay loop muted>
+              <source
+                src={require("../../images/banner.mp4")}
+                type="video/mp4"
+              />
+            </video>
+          </div>
+          <div className="container" id="events-container">
+            <div className="wpo-section-title">
+              <div className="section-title-img">
+                <img src={Simg} alt="" />
+              </div>
+              <h2 style={{ fontWeight: "700", color: "#A3888C" }}>
+                Time and Place
+              </h2>
+              {/* <div>
+                <Link to="/rsvp" className='rsvp-link'>
+                  <h5>Click here to RSVP</h5>
+                </Link>
+              </div> */}
+            </div>
             <div className="wpo-event-wrap">
               <div className="row">
-                <div className="col col-lg-6 col-md-6 col-12">
+                <div className="wpo-about-section-wrapper">
                   <div className="wpo-event-item">
-                    <div className="wpo-event-img">
-                      <video
-                        width="400"
-                        autoPlay
-                        loop
-                        style={{ objectFit: "cover", width: "100%" }}
-                      >
-                        <source
-                          src={require("../../images/haldi-ceremony.mp4")}
-                          type="video/mp4"
-                        />
-                      </video>
-                    </div>
-                    <div className="wpo-event-text">
-                      <h2 style={{ fontWeight: "700" }}>Haldi Ceremony</h2>
-                      <ul>
-                        <li style={{ fontFamily: "Lato, sans-serif" }}>
-                          Saturday, 03 Sep, 2022
-                        </li>
-                        <li
-                          style={{
-                            fontFamily: "Lato, sans-serif",
-                            marginBottom: "0px",
-                          }}
-                        >
-                          Rey Fullerton CA 92833, USA
-                        </li>
-                        <li style={{ fontFamily: "Lato, sans-serif" }}>
-                          <LocationMap />
-                        </li>
-                      </ul>
+                    <div className="row align-items-center">
+                      <div className="col-lg-6 col-md-12 col-12">
+                        <div className="wpo-about-img">
+                          <video
+                            width="400"
+                            autoPlay
+                            loop
+                            style={{ objectFit: "cover", width: "100%" }}
+                          >
+                            <source
+                              src={require("../../images/haldi-ceremony.mp4")}
+                              type="video/mp4"
+                            />
+                          </video>
+                        </div>
+                      </div>
+                      <div className="col-lg-6 col-md-12 col-12">
+                        <div className="wpo-event-text">
+                          <h2
+                            id="event-name-heading"
+                            style={{ fontWeight: "700" }}
+                          >
+                            HALDI CEREMONY
+                          </h2>
+                          <ul>
+                            <li style={{ fontFamily: "Lato, sans-serif" }}>
+                              Friday, 03 Sep, 2022
+                            </li>
+                            <li
+                              style={{
+                                fontFamily: "Lato, sans-serif",
+                                marginBottom: "0px",
+                              }}
+                            >
+                              At Residence
+                            </li>
+                            <li
+                              style={{
+                                fontFamily: "Lato, sans-serif",
+                                fontStyle: "italic",
+                              }}
+                            >
+                              <HaldiMap />
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="col col-lg-6 col-md-6 col-12">
+                <div className="wpo-about-section-wrapper">
                   <div className="wpo-event-item">
-                    <div className="wpo-event-img">
-                      <video
-                        autoPlay
-                        loop
-                        style={{ objectFit: "cover", width: "100%" }}
-                      >
-                        <source
-                          src={require("../../images/sangeet-ceremony.mp4")}
-                          type="video/mp4"
-                        />
-                      </video>
-                    </div>
-                    <div className="wpo-event-text">
-                      <h2 style={{ fontWeight: "900" }}>Sangeet Ceremony</h2>
-                      <ul>
-                        <li style={{ fontFamily: "Lato, sans-serif" }}>
-                          Sunday, 04 Sep, 2022
-                        </li>
-                        <li
-                          style={{
-                            fontFamily: "Lato, sans-serif",
-                            marginBottom: "0px",
-                          }}
-                        >
-                          To Be Declared
-                        </li>
-                        <li style={{ fontFamily: "Lato, sans-serif" }}>
-                          <LocationMap />
-                        </li>
-                      </ul>
+                    <div className="row align-items-center">
+                      <div className="col-lg-6 col-md-12 col-12">
+                        <div className="wpo-event-text">
+                          <h2
+                            id="event-name-heading"
+                            style={{ fontWeight: "700" }}
+                          >
+                            MEHNDI/SANGEET CEREMONY
+                          </h2>
+                          <ul>
+                            <li style={{ fontFamily: "Lato, sans-serif" }}>
+                              Saturday, 04 Sep, 2022
+                            </li>
+                            <li
+                              style={{
+                                fontFamily: "Lato, sans-serif",
+                                marginBottom: "0px",
+                              }}
+                            >
+                              12021 Harbor Blvd, Garden Grove, CA, 9280
+                            </li>
+                            <li
+                              style={{
+                                fontFamily: "Lato, sans-serif",
+                                fontStyle: "italic",
+                              }}
+                            >
+                              <SangeetMap />
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="col-lg-6 col-md-12 col-12">
+                        <div className="wpo-about-img">
+                          <video
+                            width="400"
+                            autoPlay
+                            loop
+                            style={{ objectFit: "cover", width: "100%" }}
+                          >
+                            <source
+                              src={require("../../images/sangeet-ceremony.mp4")}
+                              type="video/mp4"
+                            />
+                          </video>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="col col-lg-6 col-md-6 col-12">
+                <div className="wpo-about-section-wrapper">
                   <div className="wpo-event-item">
-                    <div className="wpo-event-img">
-                      <video
-                        width="400"
-                        autoPlay
-                        loop
-                        style={{ objectFit: "cover", width: "100%" }}
-                      >
-                        <source
-                          src={require("../../images/marriage-ceremony.mp4")}
-                          type="video/mp4"
-                        />
-                      </video>
-                    </div>
-                    <div className="wpo-event-text">
-                      <h2 style={{ fontWeight: "700" }}>Marriage Ceremony</h2>
-                      <ul>
-                        <li style={{ fontFamily: "Lato, sans-serif" }}>
-                          Friday, 09 Sep, 2022
-                        </li>
-                        <li
-                          style={{
-                            fontFamily: "Lato, sans-serif",
-                            marginBottom: "0px",
-                          }}
-                        >
-                          Mount Prospect IL, USA
-                        </li>
-                        <li style={{ fontFamily: "Lato, sans-serif" }}>
-                          <LocationMap />
-                        </li>
-                      </ul>
+                    <div className="row align-items-center">
+                      <div className="col-lg-6 col-md-12 col-12">
+                        <div className="wpo-about-img">
+                          <video
+                            width="400"
+                            autoPlay
+                            loop
+                            style={{ objectFit: "cover", width: "100%" }}
+                          >
+                            <source
+                              src={require("../../images/marriage-ceremony.mp4")}
+                              type="video/mp4"
+                            />
+                          </video>
+                        </div>
+                      </div>
+                      <div className="col-lg-6 col-md-12 col-12">
+                        <div className="wpo-event-text">
+                          <h2
+                            id="event-name-heading"
+                            style={{ fontWeight: "700" }}
+                          >
+                            MARRIAGE CEREMONY
+                          </h2>
+                          <ul>
+                            <li style={{ fontFamily: "Lato, sans-serif" }}>
+                              Friday, 09 Sep, 2022
+                            </li>
+                            <li
+                              style={{
+                                fontFamily: "Lato, sans-serif",
+                                marginBottom: "0px",
+                              }}
+                            >
+                              1290 Bluff City Blvd, Elgin, IL 60120
+                            </li>
+                            <li
+                              style={{
+                                fontFamily: "Lato, sans-serif",
+                                fontStyle: "italic",
+                              }}
+                            >
+                              <MarriageMap />
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="col col-lg-6 col-md-6 col-12">
+                <div className="wpo-about-section-wrapper">
                   <div className="wpo-event-item">
-                    <div className="wpo-event-img">
-                      <video
-                        width="400"
-                        autoPlay
-                        loop
-                        style={{ objectFit: "cover", width: "100%" }}
-                      >
-                        <source
-                          src={require("../../images/reception.mp4")}
-                          type="video/mp4"
-                        />
-                      </video>
+                    <div className="row align-items-center">
+                      <div className="col-lg-6 col-md-12 col-12">
+                        <div className="wpo-event-text">
+                          <h2
+                            id="event-name-heading"
+                            style={{ fontWeight: "700" }}
+                          >
+                            RECEPTION
+                          </h2>
+                          <ul>
+                            <li style={{ fontFamily: "Lato, sans-serif" }}>
+                              Friday, 16 Sep, 2022
+                            </li>
+                            <li
+                              style={{
+                                fontFamily: "Lato, sans-serif",
+                                marginBottom: "0px",
+                              }}
+                            >
+                              1201 North, Vine St, Los Angeles, CA 90038
+                            </li>
+                            <li
+                              style={{
+                                fontFamily: "Lato, sans-serif",
+                                fontStyle: "italic",
+                              }}
+                            >
+                              <ReceptionMap />
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="col-lg-6 col-md-12 col-12">
+                        <div className="wpo-about-img">
+                          <video
+                            width="400"
+                            autoPlay
+                            loop
+                            style={{ objectFit: "cover", width: "100%" }}
+                          >
+                            <source
+                              src={require("../../images/reception.mp4")}
+                              type="video/mp4"
+                            />
+                          </video>
+                        </div>
+                      </div>
                     </div>
-                    <div className="wpo-event-text">
-                      <h2 style={{ fontWeight: "700" }}>Reception</h2>
-                      <ul>
-                        <li style={{ fontFamily: "Lato, sans-serif" }}>
-                          Friday, 16 Sep, 2022
-                        </li>
-                        <li
-                          style={{
-                            fontFamily: "Lato, sans-serif",
-                            marginBottom: "0px",
-                          }}
-                        >
-                          Villa Contempo Estate
-                        </li>
-                        <li style={{ fontFamily: "Lato, sans-serif" }}>
-                          <LocationMap />
-                        </li>
-                      </ul>
+                  </div>
+                  <div className="rsvp-container">
+                    <div className="form-rsvp">
+                      <h3>PLEASE RSVP</h3>
+                      <div className="underline"></div>
+                      <form className="fill-form">
+                        <h5 style={{ fontStyle: "italic" }}>
+                          Enter your mobile number
+                        </h5>
+                        <input
+                          type="tel"
+                          className="form-control"
+                          placeholder="Enter Mobile Number"
+                        />
+                        <RSVPForm />
+                      </form>
                     </div>
                   </div>
                 </div>

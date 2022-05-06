@@ -63,7 +63,7 @@ class Header2 extends Component {
                     <button className="menu-close">
                       <i className="ti-close"></i>
                     </button>
-                    <ul className="nav navbar-nav mb-2 mb-lg-0">
+                    <ul className="nav navbar-nav mb-2 mb-lg-0" style={{ fontStyle: 'italic' }}>
                       <li>
                         <Link
                           to="/home"

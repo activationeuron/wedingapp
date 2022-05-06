@@ -68,6 +68,7 @@
 				width: 100%;
 				height: 100%;
 				border-radius: 235px;
+				animation: kenburn 25s 2s alternate infinite;
 				-webkit-animation: kenburn 25s 2s alternate infinite;
 				-animation: kenburn 25s 2s alternate infinite;
 			}
@@ -208,7 +209,6 @@
 		}
 
 		.wpo-story-item{
-			display: flex;
 			align-items: center;
 			box-shadow: 0px 0px 6.1px 3.9px rgba(28, 31, 86, 0.06);
 
@@ -233,6 +233,7 @@
 				}
 
 				img{
+					animation: kenburn 25s 2s alternate infinite;
 					-webkit-animation: kenburn 25s 2s alternate infinite;
 					-animation: kenburn 25s 2s alternate infinite;
 
@@ -313,7 +314,7 @@
 	position: relative;
 	z-index: 99;
 	background: url(../../images/parallax-image.png) no-repeat center center;
-	height: 400px;
+	height: 600px;
 	background-attachment: fixed;
 
 	&:before{
@@ -657,7 +658,6 @@
 		width: 100%;
 		height: 500px;
 		content: "";
-		background: url('../../images/events-banner.jpg') no-repeat center center;
 		z-index: -1;
 	}
 	&:after{
@@ -667,7 +667,7 @@
 		width: 100%;
 		height: 500px;
 		content: "";
-		background: rgba(94,86,86,.6);
+		background: white;
 		z-index: -1;
 	}
 	.wpo-section-title{
@@ -679,7 +679,7 @@
   .wpo-event-wrap{
 	  .wpo-event-item{
 		  position: relative;
-		  margin-bottom: 40px;
+		  margin-bottom: 80px;
 		  box-shadow: 0px 0px 6.1px 3.9px rgba(28, 31, 86, 0.06);
 		  background: $white;
 		  padding: 30px;
@@ -697,7 +697,7 @@
 			}
 
 			h2{
-				font-size: 25px;
+				font-size: 30px;
 				text-transform: uppercase;
 				margin-bottom: 25px;
 				color: $theme-primary-color;
@@ -709,7 +709,7 @@
 
 				li{
 					margin-bottom: 15px;
-					font-size: 18px;
+					font-size: 20px;
 					line-height: 30px;
 
 					&:first-child{
@@ -757,7 +757,7 @@
   }
 }
 .MuiDialog-paperWidthSm{
-	max-width: 900px!important;
+	max-width: 900px;
   }
   .quickview-dialog{
 	  z-index: 999999!important;
