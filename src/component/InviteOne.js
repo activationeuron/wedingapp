@@ -14,17 +14,17 @@ function InviteOne() {
   const [show, setShow] = useState(false);
   const [party, setParty] = useState(0);
   const [products, setProducts] = useState([
-    { slug: 'HALDI', name: 'HALDI', checked: false },
-    { slug: 'SANGEET', name: 'SANGEET', checked: false },
-    { slug: 'WEDDING', name: 'WEDDING', checked: false },
-    { slug: 'RECEPTIONS', name: 'RECEPTIONS', checked: false },
+    { name: 'HALDI', checked: false, count: 0 },
+    { name: 'SANGEET', checked: false, count: 0 },
+    { name: 'WEDDING', checked: false, count: 0 },
+    { name: 'RECEPTIONS', checked: false, count: 0 },
   ]);
   const [filter, setFilter] = useState('');
   const [filterList, setFilterList] = useState([]);
-  const handleChangeCheck = (slug) => {
+  const handleChangeCheck = (name) => {
     const copyProducts = [...products];
     const modifiedProducts = copyProducts.map((product) => {
-      if (slug === product.slug) {
+      if (name === product.name) {
         product.checked = !product.checked;
       }
 
@@ -50,12 +50,31 @@ function InviteOne() {
 
   const createInvite = async (e) => {
     e.preventDefault();
+
+    const sumOfCounts = products.reduce((acc, obj) => {
+      return acc + parseInt(obj.count);
+    }, 0);
+    if (!party) {
+      alert('Set Party Size');
+      return;
+    } else {
+      if (sumOfCounts > party) {
+        alert('Allowed Guest more then  Party size');
+        return;
+      }
+    }
     try {
       const response = await request.post('/event/create', {
         name,
         phone,
         party,
-        events: products.map((product) => product.slug),
+        events: products.map((product) => {
+          return {
+            name: product.name,
+            count: product.count,
+            checked: product.checked,
+          };
+        }),
         limit: 12,
       });
       if (response.data.success) {
@@ -67,6 +86,13 @@ function InviteOne() {
       console.log(error.message);
       alert('INVITATION FAILED');
     }
+
+    setProducts([
+      { name: 'HALDI', checked: false, count: 0 },
+      { name: 'SANGEET', checked: false, count: 0 },
+      { name: 'WEDDING', checked: false, count: 0 },
+      { name: 'RECEPTIONS', checked: false, count: 0 },
+    ]);
   };
 
   const getAllIncitations = async () => {
@@ -117,6 +143,15 @@ function InviteOne() {
       getRsvp();
     }
   }, [filter]);
+
+  const handleCount = (count) => {
+    console.log(count);
+    const newp = products.map((el) =>
+      el.name === count.name ? Object.assign({}, count) : el
+    );
+    setProducts(newp);
+    console.log(newp);
+  };
 
   return (
     <div>
@@ -190,6 +225,7 @@ function InviteOne() {
                       key={idx}
                       product={product}
                       handleChange={handleChangeCheck}
+                      handleCount={handleCount}
                     />
                   ))}
               </div>
@@ -226,8 +262,13 @@ function InviteOne() {
                           <div className='text-sm  text-gray-800 uppercase'>
                             <div>Invited to</div>
                             <div className='text-xs text-gray py-2'>
-                              {guest.events.map((event) => {
-                                return <div>{event}</div>;
+                              {guest?.events.map((event) => {
+                                return (
+                                  <div className='flex space-x-4  justify-between'>
+                                    <div>{event?.name}</div>
+                                    <div>{event?.count}</div>
+                                  </div>
+                                );
                               })}
                             </div>
                           </div>
@@ -294,9 +335,9 @@ function InviteOne() {
                           <div className='text-sm  text-gray-800 uppercase'>
                             <div>Invited to</div>
                             <div className='text-xs text-gray py-2'>
-                              {rsvp.events?.map((event) => {
+                              {/* {rsvp.events?.map((event) => {
                                 return <div>{event}</div>;
-                              })}
+                              })} */}
                             </div>
                           </div>
                         </div>
