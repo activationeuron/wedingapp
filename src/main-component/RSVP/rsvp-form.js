@@ -49,6 +49,59 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
           ) : null}
         </DialogTitle>
         <div className="rsvp-modal">
+          <div className="d-flex">
+            <Grid
+              className="loginWrapper"
+              style={{
+                paddingTop: "0px",
+                paddingBottom: "0px",
+                minHeight: "max-content",
+              }}
+            >
+              <Grid className="loginForm form-1" style={{ maxWidth: "100%", paddingTop: '30px' }}>
+                <div
+                  className="wpo-section-title"
+                  style={{ paddingBottom: "0px" }}
+                >
+                  <h2
+                    id="form-heading"
+                    style={{ fontWeight: "700", color: "#A3888C" }}
+                  >
+                    Is this you?
+                  </h2>
+                </div>
+                <form>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} style={{ paddingBottom: "0px" }}>
+                      <label for="guests" style={{ fontStyle: "italic" }}>
+                        Your Name
+                      </label>
+                      <div>
+                        <input
+                          type="text"
+                          placeholder="Guest Name"
+                          className="form-control"
+                        />
+                      </div>
+                      <Button
+                        className="MuiButtonBase-root MuiButton-root MuiButton-text btn undefined rsvp-submit-2"
+                        style={{
+                          fontFamily: "Lato, sans-serif",
+                          fontWeight: "700",
+                        }}
+                      >
+                        {button}
+                        RSVP
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </form>
+                <div className="shape-img">
+                  <i className="fi flaticon-honeycomb"></i>
+                </div>
+              </Grid>
+            </Grid>
+          </div>
           <div className="d-flex form-row-1">
             <Grid
               className="loginWrapper"
