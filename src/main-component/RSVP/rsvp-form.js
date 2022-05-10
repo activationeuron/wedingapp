@@ -158,106 +158,130 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
           </div>
           {invitations &&
             invitations.map((invitation) => {
+              console.log(invitation);
               return (
-                <div className='d-flex form-row-1'>
-                  <Grid
-                    className='loginWrapper'
-                    style={{
-                      paddingTop: '0px',
-                      paddingBottom: '0px',
-                      minHeight: 'max-content',
-                    }}
-                  >
-                    <Grid
-                      className='loginForm form-1'
-                      style={{ maxWidth: '100%' }}
-                    >
-                      <div
-                        className='wpo-section-title'
-                        style={{ paddingBottom: '0px' }}
+                <>
+                  {parseInt(invitation.count) > 0 ? (
+                    <div className='d-flex form-row-1'>
+                      <Grid
+                        className='loginWrapper'
+                        style={{
+                          paddingTop: '0px',
+                          paddingBottom: '0px',
+                          minHeight: 'max-content',
+                        }}
                       >
-                        <h2
-                          id='form-heading'
-                          style={{ fontWeight: '700', color: '#A3888C' }}
+                        <Grid
+                          className='loginForm form-1'
+                          style={{ maxWidth: '100%' }}
                         >
-                          {invitation?.name.toLowerCase()} Ceremony
-                        </h2>
-                      </div>
-                      <form>
-                        <Grid container spacing={3}>
-                          <Grid item xs={12} style={{ paddingBottom: '0px' }}>
-                            <label for='guests' style={{ fontStyle: 'italic' }}>
-                              Select No. of Guests
-                            </label>
-
-                            <select
-                              value={
-                                rsvp[invitation.name]
-                                  ? parseInt(rsvp[invitation.name])
-                                  : 0
-                              }
-                              className='form-control custom-class'
-                              onChange={(e) =>
-                                guestCount({
-                                  count: e.target.value,
-                                  event: invitation.name,
-                                })
-                              }
+                          <div
+                            className='wpo-section-title'
+                            style={{ paddingBottom: '0px' }}
+                          >
+                            <h2
+                              id='form-heading'
+                              style={{ fontWeight: '700', color: '#A3888C' }}
                             >
-                              <option value={0}>Select No. of Guests</option>
-                              {Array.from(
-                                Array(parseInt(invitation.count) + 1).keys()
-                              ).map((val) => (
-                                <option key={val} value={val}>
-                                  {val}
-                                </option>
-                              ))}
-                            </select>
-                            <label
-                              for='name'
-                              style={{
-                                fontFamily: 'Lato, sans-serif',
-                                fontStyle: 'italic',
-                                marginTop: '15px',
-                              }}
-                            >
-                              Are you going to attend the event?
-                            </label>
-                            <div className='select-option'>
-                              <div
-                                className='d-flex yes-option align-items-center'
-                                style={{ marginTop: '10px' }}
+                              {invitation?.name.toLowerCase()} Ceremony
+                            </h2>
+                          </div>
+                          <form>
+                            <Grid container spacing={3}>
+                              <Grid
+                                item
+                                xs={12}
+                                style={{ paddingBottom: '0px' }}
                               >
-                                <input
-                                  type='radio'
-                                  name='a'
-                                  checked={rsvp[invitation.name] ? true : false}
-                                />
+                                <label
+                                  for='guests'
+                                  style={{ fontStyle: 'italic' }}
+                                >
+                                  Select No. of Guests
+                                </label>
 
-                                <label for='Yes' style={{ marginLeft: '10px' }}>
-                                  Yes
+                                <select
+                                  value={
+                                    rsvp[invitation.name]
+                                      ? parseInt(rsvp[invitation.name])
+                                      : 0
+                                  }
+                                  className='form-control custom-class'
+                                  onChange={(e) =>
+                                    guestCount({
+                                      count: e.target.value,
+                                      event: invitation.name,
+                                    })
+                                  }
+                                >
+                                  <option value={0}>
+                                    Select No. of Guests
+                                  </option>
+                                  {Array.from(
+                                    Array(parseInt(invitation.count) + 1).keys()
+                                  ).map((val) => (
+                                    <option key={val} value={val}>
+                                      {val}
+                                    </option>
+                                  ))}
+                                </select>
+                                <label
+                                  for='name'
+                                  style={{
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontStyle: 'italic',
+                                    marginTop: '15px',
+                                  }}
+                                >
+                                  Are you going to attend the event?
                                 </label>
-                              </div>
-                              <div
-                                className='d-flex no-option align-items-center'
-                                style={{ marginTop: '10px' }}
-                                onClick={() => handleNo(invitation.name)}
-                              >
-                                <input type='radio' name='a' />
-                                <label for='No' style={{ marginLeft: '10px' }}>
-                                  No
-                                </label>
-                              </div>
-                            </div>
-                          </Grid>
+                                <div className='select-option'>
+                                  <div
+                                    className='d-flex yes-option align-items-center'
+                                    style={{ marginTop: '10px' }}
+                                  >
+                                    <input
+                                      type='radio'
+                                      name='a'
+                                      checked={
+                                        rsvp[invitation.name] ? true : false
+                                      }
+                                    />
+
+                                    <label
+                                      for='Yes'
+                                      style={{ marginLeft: '10px' }}
+                                    >
+                                      Yes
+                                    </label>
+                                  </div>
+                                  <div
+                                    className='d-flex no-option align-items-center'
+                                    style={{ marginTop: '10px' }}
+                                    onClick={() => handleNo(invitation.name)}
+                                  >
+                                    <input type='radio' name='a' />
+                                    <label
+                                      for='No'
+                                      style={{ marginLeft: '10px' }}
+                                    >
+                                      No
+                                    </label>
+                                  </div>
+                                </div>
+                              </Grid>
+                            </Grid>
+                          </form>
+                          <div className='shape-img'>
+                            <i className='fi flaticon-honeycomb'></i>
+                          </div>
                         </Grid>
-                      </form>
-                      <div className='shape-img'>
-                        <i className='fi flaticon-honeycomb'></i>
-                      </div>
-                    </Grid>
-                  </Grid>
-                </div>
+                      </Grid>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                </>
               );
             })}
 
