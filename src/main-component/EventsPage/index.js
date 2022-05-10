@@ -251,14 +251,6 @@ const EventsPage = () => {
                       <h3>PLEASE RSVP</h3>
                       <div className="underline"></div>
                       <form className="fill-form">
-                        <h5 style={{ fontStyle: "italic" }}>
-                          Enter your mobile number
-                        </h5>
-                        <input
-                          type="tel"
-                          className="form-control"
-                          placeholder="Enter Mobile Number"
-                        />
                         <RSVPForm />
                       </form>
                     </div>

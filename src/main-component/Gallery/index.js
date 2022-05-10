@@ -56,10 +56,13 @@ import Footer from "../../components/footer";
 
 const Portfolios = [
   {
-    Pimg: pImg1,
+    Pimg: pImg47,
   },
   {
     Pimg: pImg2,
+  },
+  {
+    Pimg: pImg1,
   },
   {
     Pimg: pImg3,
@@ -69,9 +72,6 @@ const Portfolios = [
   },
   {
     Pimg: pImg5,
-  },
-  {
-    Pimg: pImg47
   },
   {
     Pimg: pImg6,
@@ -96,7 +96,7 @@ const Portfolios = [
     Pimg: pImg13,
   },
   {
-    Pimg: pImg44
+    Pimg: pImg44,
   },
   {
     Pimg: pImg43,
@@ -153,7 +153,7 @@ const Portfolios = [
     Pimg: pImg42,
   },
   {
-    Pimg: pImg45
+    Pimg: pImg45,
   },
   {
     Pimg: pImg28,
