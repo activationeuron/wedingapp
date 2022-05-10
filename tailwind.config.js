@@ -6,9 +6,8 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: [...defaultTheme.fontFamily.sans],
-        head: ['Pacifico'],
-        tan: ['Sacramento'],
-        prim: ['Philosopher'],
+        prim: ['Pacifico'],
+        head: ['El Messiri'],
       },
     },
   },

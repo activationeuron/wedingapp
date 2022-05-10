@@ -1,184 +1,378 @@
 import React, { useEffect, useState } from 'react';
-import { Stickyroll } from '@stickyroll/stickyroll';
-import Slide from './component/Slide';
-import Slideone from './component/Slides/SlideOne';
-import Slidetwo from './component/Slides/SlideTwo';
-import SlideThree from './component/Slides/SlideThree';
-import SlideFour from './component/Slides/SlideFour';
-import SlideFive from './component/Slides/SlideFive';
-import SlideSix from './component/Slides/SlideSix';
-import SlideSeven from './component/Slides/SlideSeven';
+import weddingmain from './assets/videowedding.mp4';
+import Bride from './component/newdes/Bride.js';
+import Groom from './component/newdes/Groom.js';
+import Story from './component/newdes/Story.js';
+import Family from './component/newdes/TheFamily.js';
+import Slider from './component/newdes/Slider.js';
+import Login from './component/Login.js';
 import request from './utils/request';
-import { useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import Rsvp from './component/Rsvp';
-import main from './assets/sangeet/main.jpg';
 import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import Event from './component/newdes/Events/Event';
+import Rsvp from './component/Rsvp';
+import main from './assets/main.jpg';
+import Timer from './component/newdes/Timer';
+import EventOdd from './component/newdes/Events/EventOdd';
+import one from './assets/logo.png';
 
-// images
-import affanMain from './assets/haldi/affan.jpg';
-import mainbg from './assets/haldi/main.jpeg';
+import mainvideo from './assets/main.mp4';
+import sangeet from './assets/sangeet.mp4';
+import haldi from './assets/haldi.mp4';
+import recp from './assets/reciptions.mp4';
+import merrage from './assets/marriage.mp4';
 
-// bride primary
+import mainBanner from './assets/mainban.png';
+import { Galler } from './component/newdes/Gallries';
 
-import brideMain from './assets/haldi/bridemain.jpg';
-import brideSec from './assets/haldi/bridesecodary.jpg';
+function Two() {
+  const slidesData = [
+    {
+      title: 'Afaan & mariam',
+      tagline: 'We are getting married ',
+      text: 'Afaan & Mariam were fun, energetic and great teachers. They made difficult topics easier with interactive games and',
+      sideImage: '/images/home/one.jpg',
+      middleImage: [
+        '/images/home/one.jpg',
+        '/images/home/two.jpg',
+        '/images/home/three.jpg',
+        '/images/home/four.jpg',
+        '/images/home/five.jpg',
+      ],
+      bgColor: '#282e2a',
+      video: weddingmain,
+      key: 'WEDDING',
+    },
+    {
+      title: 'Afaan Mohammed ',
+      tagline: 'The Groom',
+      text: "rem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. ",
+      middleImage: [
+        '/images/groom/three.jpg',
+        '/images/groom/four.jpg',
+        '/images/groom/five.jpg',
+        '/images/groom/one.jpg',
+      ],
+      sideImage: '/images/groom/two.jpg',
+      bgColor: '#2c3f40',
+      key: 'RECEPTIONS',
+    },
+    {
+      title: 'Mariam Hashmi',
+      tagline: 'The Bride',
+      text: 'Mariam Hashmi was born and raised in Chicago. She completed her bachelors in neuropsychology from Southern Illinois University and received her Master of Science at Palo Alto University. Mariam currently works at Northwestern University, and is a published scientific author.',
+      middleImage: [
+        '/images/bride/one.jpg',
+        '/images/bride/two.jpg',
+        '/images/bride/three.jpg',
+        '/images/bride/five.jpg',
+        '/images/bride/six.jpg',
+      ],
+      sideImage: '/images/bride/two.jpg',
+      bgColor: '#b80653',
+      key: 'HALDI',
+    },
+    {
+      title: 'Afaan & Mariam story',
+      tagline: 'Their sweet love story 💕❤️',
+      text: 'It was a crisp autumn morning; the leaves were just beginning to turn a burnt orange while the breeze still carried warm sun rays. Afaan could feel the adrenaline in the air as he boarded his flight for skydiving. Before he knew it, the plane was 14,000 feet in the air, the mere ground beneath them a dazzling map of ruby treetops and silver streams cutting through the land. The anticipation before the jump was electrifying. Afaan began to secure his parachute while scanning the passengers when a beautiful desi girl caught his eye. Before he could say hello, his name was called for the jump. \nChecking his straps one last time, he made his way to doors open to nothing but blue skies and chilled air. The rush of thrill raced through his veins as he jumped into nothingness flew through the sky with grace. He swirled and flipped a few thousand feet through the refreshing air… when all of a sudden he noticed that girl again. Yet she didn’t look thrilled, her eyes were in a state of panic, and that’s when he realized her parachute was stuck. Afaan flew through the sky and locked onto her backpack. She looked up at him with knowing eyes and relief. “Nice to meet you. I’m Afaan,” he yelled through the booming sound of rushing air. And well, the rest is history.',
+      middleImage: [
+        '/images/groom/five.jpg',
+        '/images/groom/one.jpg',
+        '/images/bride/one.jpg',
+        '/images/bride/two.jpg',
+        '/images/bride/five.jpg',
+        '/images/bride/six.jpg',
+        '/images/groom/five.jpg',
+        '/images/groom/one.jpg',
+      ],
+      sideImage: '/images/story/two.webp',
+      bgColor: '#6e06b8',
+      key: 'SANGEET',
+    },
+    {
+      title: 'Family',
+      // tagline: 'The ',
+      text: "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      middleImage: ['/images/f/seven.jpg', '/images/f/six.jpg'],
+      sideImage: '/images/m/two.png',
+      bgColor: '#b88806',
+      key: 'FAMILY',
+    },
 
-const App = () => {
-  const [events, setEvents] = useState([]);
-  const [phone, setPhone] = useState('');
-  const [show, setShow] = useState(false);
+    {
+      title: 'Affan & Mariam Marriage',
+      tagline: 'The Marriage',
+      text: 'GWishing you joy, love and happiness on your wedding day and as you begin your new life together.Wishing you joy, love and happiness on your wedding day and as you begin your new life together.',
+      middleImage: ['/images/m/one.png', '/images/m/two.jpg'],
+      sideImage: '/images/m/two.png',
+      bgColor: '#b88806',
+      key: 'WEDDING',
+    },
+    {
+      title: 'Haldi',
+      tagline: 'Haldi',
+      text: 'The haldi ceremony marks the beginning of the wedding rituals and is one of the most important pre wedding rituals after Tilak. The ceremony is held on the morning of the wedding day at the residence of both groom and bride respectively.',
+      middleImage: ['/images/haldi/three.webp', '/images/haldi/two.webp'],
+      sideImage: '/images/haldi/one.webp',
+      bgColor: '#56b806',
+      key: 'HALDI',
+    },
+    {
+      title: 'Sangeet',
+      tagline: 'Sangeet',
+      text: 'Sangeet, which literally translates to “music”, is an event held a few days before the wedding and is filled with dance, music, and vibrant colors. In the olden days, women of all ages gathered around and took turns singing songs and dancing.',
+      middleImage: ['/images/s/one.jpg'],
+      sideImage: '/images/s/two.jpg',
+      bgColor: '#0653b8',
+      key: 'SANGEET',
+    },
+    {
+      title: 'Reception',
+      tagline: 'The Reception',
+      text: 'The Reception details ',
+      middleImage: ['/images/r/one.jpg'],
+      sideImage: '/images/r/two.jpg',
+      bgColor: '#06b891',
+      key: 'RECEPTIONS',
+    },
+  ];
 
-  const getEvents = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await request.get(`/event/myevent/${phone}`);
+  const dataT = {
+    WEDDING: {
+      name: 'Merrage Ceremony',
+      date: '9th september 2022',
+      place: 'Mount Prospect IL',
+      video: merrage,
+      image:
+        'https://cdn0.weddingwire.in/article/9752/original/960/jpg/92579-these-wedding-trends-from-2020-are-here-to-stay-in-2021-stories-by-joseph-radhik-a-new-definition-of-destination-weddings.webp',
+    },
+    RECEPTIONS: {
+      name: 'Reception',
+      date: '16th september 2022',
+      place: 'Villa Contempo Estate',
+      video: recp,
 
-      if (response.data && response.data.success) {
-        setEvents(response.data.data.events);
-        setShow(true);
-        localStorage.setItem('phone_NO', phone);
-      }
-    } catch (error) {
-      alert('Invitation Not Found!');
-    }
+      image:
+        'https://cf.ltkcdn.net/weddings/images/orig/237407-3500x2337--wedding-tent.jpg',
+    },
+    SHALDI: {
+      name: 'Marriage Ceremony',
+      date: '9th september 2022',
+      place: 'Mount Prospect IL',
+      video: merrage,
+
+      image:
+        'https://cdn0.weddingwire.in/article/9752/original/960/jpg/92579-these-wedding-trends-from-2020-are-here-to-stay-in-2021-stories-by-joseph-radhik-a-new-definition-of-destination-weddings.webp',
+    },
+    SANGEET: {
+      name: 'Sangeet Ceremony',
+      date: '4th september 2022',
+      place: 'TBD',
+      video: sangeet,
+
+      image:
+        'https://www.bookeventz.com/blog/wp-content/uploads/2017/05/Sangeet-ceremony-840x480.jpg',
+    },
+    HALDI: {
+      name: 'Haldi Ceremony',
+      date: '3rd september 2022',
+      place: '2259 Camino Rey Fullerton CA 92833',
+      image: 'https://imgk.timesnownews.com/story/Haldi_ceremony_1.jpg',
+      video: haldi,
+    },
   };
-  useEffect(() => {}, [events]);
+
+  const [events, setEvents] = useState([]);
+
+  const [phone, setPhone] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('events', JSON.stringify(events) || []);
+  }, [events]);
+
+  useEffect(() => {
+    const evnt = localStorage.getItem('events');
+  }, []);
 
   return (
     <>
-      {show ? (
-        <div className=''>
-          <Slideone
-            title='Afaan & Mariam'
-            mainbg='#8b1173'
-            secondarybg='#000'
-            image={mainbg}
-            secImage={mainbg}
-            text='Afaan & Mariam were fun, energetic and great teachers. They made difficult topics easier with interactive games and work sheets. '
-          />
-          <Slidetwo
-            title='Afaan Mohammed'
-            mainbg='#614344'
-            secondarybg='#000'
-            image={affanMain}
-            secImage='https://scontent.fbom16-1.fna.fbcdn.net/v/t31.18172-8/1277524_10151676167758339_1597313588_o.jpg?_nc_cat=108&ccb=1-5&_nc_sid=de6eea&_nc_ohc=iAFxtS1eVosAX-h6zm0&tn=Pkbe7edGV4Dw2HzC&_nc_ht=scontent.fbom16-1.fna&oh=00_AT8Xy8Z9_iZ2uK-Tkg0WxsrRrVO4EA3rTxDqKYQpmadOgA&oe=62701952'
-            text='Afaan were fun, energetic and great teachers. They made difficult topics easier with interactive games and work sheets. '
-          />
-          <SlideThree
-            title='Mariam Hashmi'
-            mainbg='#023436'
-            secondarybg='#000'
-            image={brideMain}
-            secImage={brideSec}
-            text='Mariam Hashmi was born and raised in Chicago. She completed her bachelors in neuropsychology from Southern Illinois University and received her Master of Science at Palo Alto University. Mariam currently works at Northwestern University, and is a published scientific author. '
-          />
-          <SlideFour
-            title='The Story'
-            text='Mariam were fun, energetic and great teachers. They made difficult topics easier with interactive games and work sheets. '
-            secImage='https://keepinitfrugal.com/wp-content/uploads/2019/08/25-frugal-no-tech-date-night-ideas-for-couples-1.jpg'
-            image='https://images.pexels.com/photos/2055236/pexels-photo-2055236.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260'
-            mainbg='#162521'
-          />
-          {events.includes('HALDI') ? (
-            <SlideFive
-              title='Haldi'
-              mainbg='#503D3F'
-              image='https://www.brides.com/thmb/4S5aFa-lX0zK9mNUWY1hiAyvHy4=/750x0/filters:no_upscale():max_bytes(200000):strip_icc():format(webp)/234-d3d2dbc2c1bd4083a811448b4e966681.png'
-              date='09-03-2022'
-              address='2259 Camino Rey Fullerton CA 92833'
-              secImage='https://www.stonedsanta.in/wp-content/uploads/2018/07/1.jpg'
-              text='The Haldi ceremony is a ritual holy bath also known as pithi ceremony, which is one of the pre-wedding ceremonies in India.'
-            />
-          ) : (
-            ''
-          )}
-          {events.includes('SANGEET') ? (
-            <SlideSix
-              title='Sangeet'
-              text='In sangeet, family members on either side organise and song and dance party, and in the mehndi ceremony, they wear intricate designs made from henna paste on their hands and feet'
-              date='09-04-2022'
-              image='https://assets.vogue.in/photos/61935447f4644c073f462a41/master/w_1600,c_limit/257616096_642474753725288_3568332279694208332_n.jpg'
-              secImage='https://www.k4fashion.com/wp-content/uploads/2021/11/marathi-couple-portrait-photography-15.jpg'
-              address='Villa Contempo Estate'
-              mainbg='#B1CC74'
-            />
-          ) : (
-            ''
-          )}
-          {events.includes('RECEPTIONS') ? (
-            <SlideSeven
-              title='Receptions'
-              date='09-16-2022'
-              image='https://www.elegantweddinginvites.com/wedding-blog/wp-content/uploads/2015/08/rustic-barn-wedding-reception-ideas-with-floral-chandelier.jpg'
-              secImage='https://www.k4fashion.com/wp-content/uploads/2021/11/marathi-couple-portrait-photography-15.jpg'
-              address='Mount Prospect IL'
-              mainbg='#5FAD41'
-            />
-          ) : (
-            ''
-          )}
-
-          {events.includes('WEDDING') ? (
-            <SlideSeven
-              title='Wedding'
-              date='09-16-2022'
-              image='https://www.elegantweddinginvites.com/wedding-blog/wp-content/uploads/2015/08/rustic-barn-wedding-reception-ideas-with-floral-chandelier.jpg'
-              secImage='https://www.k4fashion.com/wp-content/uploads/2021/11/marathi-couple-portrait-photography-15.jpg'
-              address='Mount Prospect IL'
-              mainbg='#36ad78'
-            />
-          ) : (
-            ''
-          )}
-
-          <Rsvp title='RSVP' mainbg='#251F47' />
+      <div className='relative   flex justify-center flex-col items-center bg-slate-100'>
+        <img src={mainBanner} alt='' className='absolute top-0 z-10' />
+        <div className='absolute z-20 top-10 md:top-32 md:text-3xl lg:top-40 lg:text-6xl  font-prim text-purple-800'>
+          Afaan & Mariam
         </div>
-      ) : (
-        <>{phoneBox(setPhone, getEvents)}</>
-      )}
+        <div className='  z-20 flex md:mx-10 text-xs lg:text-2xl space-x-3 font-head py-10 text-purple-700 pt-20 md:pt-40 lg:pt-60 xl:pt-80'>
+          <a href='#home'>
+            <div>HOME</div>
+          </a>
+          <a href='#groom'>
+            <div>GROOM</div>
+          </a>
+          <a href='#bride'>
+            <div>BRIDE</div>
+          </a>
+          <a href='#story'>
+            <div>THE STORY</div>
+          </a>
+          <a href='#family'>
+            <div>THE FAMILY</div>
+          </a>
+          <a href='/rsvp'>
+            <div>RSVP</div>
+          </a>
+        </div>
+        <video
+          className='brightness-50  object-cover object-center w-full max-h-[40rem]'
+          autoPlay
+          loop
+          id='home'
+        >
+          <source src={mainvideo} type='video/mp4' />
+        </video>
+
+        {/* <div className='absolute top-[10rem] border-8 md:mt-20  lg:w-1/2 w-4/5 flex justify-center items-center '>
+          <div className='text-center py-5 md:py-20 lg:py-36 lg:px-24'>
+            <div className='text-4xl font-head text-white'>Afaan & Mariam</div>
+            <div className='text-2xl font-head text-white'>
+              Are Getting Married
+            </div>
+          </div>
+        </div> */}
+        <div className=' relative flex justify-center   w-full g-white   bg-opacity-60 backdrop-filter backdrop-blur-lg '>
+          <Timer />
+        </div>
+      </div>
+
+      <div className='min-w-full min-h-screen bg-slate-100 pt-5'>
+        <div className='max-w-xl mx-auto  min-h-screen text-center '>
+          <div className='text-4xl font-head text-purple-800 '>
+            Happy Couple
+          </div>
+          <div id='groom'>
+            <Bride image={slidesData[1].middleImage[0]} reveal={true} />
+          </div>
+          <div id='bride'>
+            <Groom image={slidesData[2].middleImage[1]} reveal={false} />
+          </div>
+        </div>
+        <div
+          id='story'
+          className='text-center text-4xl font-head text-purple-800 pt-10 pb-5'
+        >
+          The story
+        </div>
+        <div>
+          <Story
+            imageone={slidesData[1].middleImage[3]}
+            imagetwo={slidesData[0].middleImage[2]}
+          />
+        </div>
+        <div id='family'></div>
+        <Family
+          imageone={slidesData[4].middleImage[0]}
+          imagetwo={slidesData[4].middleImage[1]}
+          imagethree={'images/f/eight.jpg'}
+        />
+        <div className='text-center text-4xl font-head text-purple-800 py-5'>
+          Our Photos
+        </div>
+        <div className='w-full flex  justify-center items-center overflow-x-scroll '>
+          {/* <Slider
+            imagesUrls={[
+              'images/otherimages/one.jpg',
+              'images/otherimages/three.jpg',
+              'images/otherimages/two.jpg',
+              'images/otherimages/three.jpg',
+              'images/otherimages/five.jpg',
+              'images/otherimages/four.jpg',
+              'images/otherimages/six.jpg',
+              'images/otherimages/seven.jpg',
+            ]}
+          /> */}
+          <div className=' mx-auto relative '>
+            <div className='max-w-6xl'>
+              <Galler />
+            </div>
+          </div>
+        </div>
+        <div>
+          {/* phone */}
+          {/* <div className='text-center lg:py-20 py-10 font-head text-2xl text-purple-900'>
+            Events
+          </div> */}
+        </div>
+      </div>
     </>
   );
-};
-const phoneBox = (setPhone, getEvents) => {
-  return (
-    <div className='h-screen w-screen bg-slate-700 flex  justify-between items-center '>
-      <div>
-        <div className='flex flex-col  w-10/12 mx-10 space-y-5'>
-          <p className='font-prim text-2xl text-white'>You Are Invited to </p>
-          <h1 className='font-head text-6xl text-white leading-tight'>
-            Affan & mariam Wedding
-          </h1>
-          <p className='text-2xl font-prim   text-white'>Enter Phone Number </p>
-          <form
-            onSubmit={(e) => getEvents(e)}
-            className='flex flex-col md:flex-row md:space-x-3 space-y-5 md:space-y-0 '
-          >
-            <div>
-              <PhoneInput
-                country={'us'}
-                onChange={(phone) => setPhone(phone)}
-              />
-            </div>
-            <button
-              className='bg-pink-800 py-1 w-[300px] md:w-[100px]  px-5 font-bold text-white uppercase rounded-sm shadow-md'
-              type='submit'
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
-      <div className='w-1/3 bg-pink-600'>
-        <img
-          src={main}
-          alt=''
-          className='object-cover object-center h-screen w-full'
-        />
-      </div>
-    </div>
-  );
-};
+}
 
-export default App;
+export default Two;
+// {event && (
+//   <>
+//     <ReactScrollWheelHandler
+//     // upHandler={() => handleUp()}
+//     // downHandler={() => handleDown()}
+//     // wheelConfig={[100, 50, 0]}
+//     >
+//       {data.map((slide, index) => {
+//         return (
+//           <Slides
+//             sel={selectedSlide}
+//             index={index}
+//             title={slide.title}
+//             tagline={slide.tagline}
+//             text={slide.text}
+//             middleImage={slide.middleImage}
+//             sideImage={slide.sideImage}
+//             selectedSlide={selectedSlide}
+//             bgColor={slide.bgColor}
+//             last={data.length}
+//           />
+//         );
+//       })}
+//     </ReactScrollWheelHandler>
+//     <div className='absolute  right-1 top-1/2 z-10 space-y-2'>
+//       {data.map((data, index) => {
+//         return (
+//           <div
+//             key={index}
+//             className={
+//               [selectedSlide === index ? 'bg-gray-900 ' : 'bg-gray-400'] +
+//               ' w-7 h-2'
+//             }
+//             onClick={() => setSelectedSlide(index)}
+//           ></div>
+//         );
+//       })}
+//     </div>
+//     <div className='absolute md:hidden bottom-10 z-10 flex   overflow-x-scroll justify-center'>
+//       <div
+//         id='scrollContainer'
+//         class='flex flex-no-wrap overflow-x-scroll scrolling-touch items-start mb-8 w-screen space-x-6 '
+//       >
+//         {data.map((data, index) => {
+//           return (
+//             <button
+//               key={index}
+//               // className={[
+//               //   selectedSlide === index ? 'bg-gray-900 ' : 'bg-gray-400',
+//               // ]}
+//               className={
+//                 'flex-none text-white uppercase ' +
+//                 [
+//                   selectedSlide === index
+//                     ? 'bg-pink-700 mx-2 px-2 rounded-full '
+//                     : '',
+//                 ] +
+//                 ' '
+//               }
+//               onClick={() => setSelectedSlide(index)}
+//             >
+//               {data.key}
+//             </button>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   </>
+// )}

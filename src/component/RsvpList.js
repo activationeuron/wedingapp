@@ -35,21 +35,21 @@ function RsvpList() {
           },
         ],
       },
-      {
-        // Second group - Details
-        Header: 'Guests  Count',
-        // Second group columns
-        columns: [
-          {
-            Header: 'Adults',
-            accessor: 'adults',
-          },
-          {
-            Header: 'Kids',
-            accessor: 'kids',
-          },
-        ],
-      },
+      // {
+      //   // Second group - Details
+      //   Header: 'Guests  Count',
+      //   // Second group columns
+      //   columns: [
+      //     {
+      //       Header: 'Adults',
+      //       accessor: 'adults',
+      //     },
+      //     {
+      //       Header: 'Kids',
+      //       accessor: 'kids',
+      //     },
+      //   ],
+      // },
       {
         // Second group - Details
         Header: 'event',
@@ -58,7 +58,17 @@ function RsvpList() {
           {
             Header: 'Events',
 
-            accessor: 'data[0].events',
+            accessor: 'events',
+          },
+        ],
+      },
+      {
+        // Second group - Details
+        Header: 'Plus One',
+        // Second group columns
+        columns: [
+          {
+            accessor: 'plusName',
           },
         ],
       },
