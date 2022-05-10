@@ -19,7 +19,7 @@ const CheckItem = ({ product, handleChange, handleCount }) => (
     </div>
     <div>
       <input
-        className='w-20 py-2 text-center'
+        className='w-20 py-2 text-center border-2 flex justify-center'
         type='number'
         placeholder='0'
         onChange={(e) =>

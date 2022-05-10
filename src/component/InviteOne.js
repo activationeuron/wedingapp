@@ -51,23 +51,12 @@ function InviteOne() {
   const createInvite = async (e) => {
     e.preventDefault();
 
-    const sumOfCounts = products.reduce((acc, obj) => {
-      return acc + parseInt(obj.count);
-    }, 0);
-    if (!party) {
-      alert('Set Party Size');
-      return;
-    } else {
-      if (sumOfCounts > party) {
-        alert('Allowed Guest more then  Party size');
-        return;
-      }
-    }
+
+  
     try {
       const response = await request.post('/event/create', {
         name,
         phone,
-        party,
         events: products.map((product) => {
           return {
             name: product.name,
@@ -158,10 +147,10 @@ function InviteOne() {
       <div className='flex flex-col items-center px-10 md:w-1/2 mx-auto space-y-5 relative h-screen'>
         <div className='text-center text-2xl uppercase'>Create Invitations</div>
         <div
-          className='px-2 py-2 bg-slate-800 text-white cursor-pointer '
+          className='px-2 py-2 bg-slate-800 text-white cursor-pointer w-22'
           onClick={() => setShow(!show)}
         >
-          Add Guest
+         {!show? "Add Guest":"Close"}
         </div>
         <div className='flex self-start space-x-4'>
           <div
@@ -208,17 +197,9 @@ function InviteOne() {
               </div>
               {/* party size  */}
 
-              <div className='w-full flex flex-col '>
-                <div className='my-2'>Party Size</div>
-                <input
-                  onChange={(e) => setParty(e.target.value)}
-                  type='number'
-                  placeholder='0'
-                  className='py-2 bg-slate-100 px-5 w-full outline-none'
-                />
-              </div>
+              
               {/* ckeck box */}
-              <div className='w-full flex space-x-3 py-2 justify-center'>
+              <div className='w-full flex space-x-3 py-2 justify-center '>
                 {products &&
                   products.map((product, idx) => (
                     <CheckItem
@@ -255,10 +236,7 @@ function InviteOne() {
                               <div className='text-xs'>{guest?.phone}</div>
                             </div>
                           </div>
-                          <div className='text-sm  text-gray-800 uppercase text-center'>
-                            <div>Party Size</div>
-                            <div className='py-5'>{guest?.party}</div>
-                          </div>
+                         
                           <div className='text-sm  text-gray-800 uppercase'>
                             <div>Invited to</div>
                             <div className='text-xs text-gray py-2'>
@@ -328,16 +306,33 @@ function InviteOne() {
                               <div className='text-xs'>{rsvp?.phone}</div>
                             </div>
                           </div>
-                          <div className='text-sm  text-gray-800 uppercase'>
-                            <div>Party Size</div>
-                            <div className='py-5'>{rsvp?.party}</div>
-                          </div>
-                          <div className='text-sm  text-gray-800 uppercase'>
-                            <div>Invited to</div>
-                            <div className='text-xs text-gray py-2'>
-                              {/* {rsvp.events?.map((event) => {
-                                return <div>{event}</div>;
-                              })} */}
+                          
+                          <div className='text-sm   text-center text-gray-800 uppercase'>
+                            <div>Guest Count</div>
+                            <div className='text-xs text-gray '>
+                    <div className='grid grid-cols-2	border-2 p-2 text-center   '>
+                      <div >
+                    <div>HALDI</div> <div>{rsvp?.events?.HALDI}</div>
+                      </div>
+
+
+                      <div>
+                    <div>SANGEET</div> <div>{rsvp?.events?.SANGEET}</div>
+                      </div>
+
+
+                      <div>
+
+                    <div>WEDDING</div> <div>{rsvp?.events?.WEDDING}</div>
+                      </div>
+                      <div>
+
+                    <div>RECEPTIONS</div> <div>{rsvp?.events?.RECEPTIONS}</div>
+                      </div>
+
+                    </div>
+                     
+
                             </div>
                           </div>
                         </div>

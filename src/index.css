@@ -29,7 +29,10 @@
 
   justify-content: center;
 }
-
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
 img {
 }
 /* 
@@ -39,3 +42,16 @@ img {
   width: 100vw !important;
   justify-content: center ! !important;
 } */
+input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .custom-number-input input:focus {
+    outline: none !important;
+  }
+
+  .custom-number-input button:focus {
+    outline: none !important;
+  }
