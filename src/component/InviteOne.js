@@ -51,8 +51,6 @@ function InviteOne() {
   const createInvite = async (e) => {
     e.preventDefault();
 
-
-  
     try {
       const response = await request.post('/event/create', {
         name,
@@ -142,6 +140,14 @@ function InviteOne() {
     console.log(newp);
   };
 
+  const [count, setCount] = useState({
+    HALDI: 0,
+    SANGEET: 0,
+    WEDDING: 0,
+
+    RECEPTIONS: 0,
+  });
+
   return (
     <div>
       <div className='flex flex-col items-center px-10 md:w-1/2 mx-auto space-y-5 relative h-screen'>
@@ -150,7 +156,7 @@ function InviteOne() {
           className='px-2 py-2 bg-slate-800 text-white cursor-pointer w-22'
           onClick={() => setShow(!show)}
         >
-         {!show? "Add Guest":"Close"}
+          {!show ? 'Add Guest' : 'Close'}
         </div>
         <div className='flex self-start space-x-4'>
           <div
@@ -175,7 +181,7 @@ function InviteOne() {
 
         {show ? (
           <div className='border absolute  top-1/4 px-5 max-w-6xl flex justify-center'>
-            <form onSubmit={createInvite}>
+            <form onSubmit={createInvite} className='py-2'>
               <div>
                 <div className='my-2'>Guest Name</div>
                 <input
@@ -197,21 +203,27 @@ function InviteOne() {
               </div>
               {/* party size  */}
 
-              
               {/* ckeck box */}
-              <div className='w-full flex space-x-3 py-2 justify-center '>
-                {products &&
-                  products.map((product, idx) => (
-                    <CheckItem
-                      key={idx}
-                      product={product}
-                      handleChange={handleChangeCheck}
-                      handleCount={handleCount}
-                    />
-                  ))}
+              <div className='w-full flex flex-col  py-2 justify-center  '>
+                <div>
+                  <div className='text-xs uppercase text-gra-700'>
+                    Select Events to invite and guest count
+                  </div>
+                </div>
+                <div>
+                  {products &&
+                    products.map((product, idx) => (
+                      <CheckItem
+                        key={idx}
+                        product={product}
+                        handleChange={handleChangeCheck}
+                        handleCount={handleCount}
+                      />
+                    ))}
+                </div>
               </div>
 
-              <button className='bg-gray-800 w-full py-2 text-white uppercase'>
+              <button className='bg-gray-800 w-full py-2 text-white uppercase '>
                 Submit
               </button>
             </form>
@@ -223,12 +235,10 @@ function InviteOne() {
                 {all &&
                   all.map((guest) => {
                     return (
-                      <div className='border-2 h-40  my-2 py-2 px-2 relative'>
+                      <div className='border-2 h-36  my-2 py-2 px-2 relative'>
                         <div className='flex justify-between'>
                           <div>
-                            <div className='text-sm  text-gray-800'>
-                              NAME ON INVITATION
-                            </div>
+                            <div className='text-sm  text-gray-800'>NAME</div>
                             <div className='flex flex-col justify-center '>
                               <div className='text-xl text-gray-800 uppercase pt-4'>
                                 {guest?.name}
@@ -236,7 +246,7 @@ function InviteOne() {
                               <div className='text-xs'>{guest?.phone}</div>
                             </div>
                           </div>
-                         
+
                           <div className='text-sm  text-gray-800 uppercase'>
                             <div>Invited to</div>
                             <div className='text-xs text-gray py-2'>
@@ -291,7 +301,9 @@ function InviteOne() {
                   </select>
                 </div>
                 <div className='w-full flex space-x-3 py-2 justify-center'></div>
-
+                {/* {filterList?.map((rsvp) => {
+                  // return JSON.stringify(count.e);
+                })} */}
                 {filterList &&
                   filterList?.map((rsvp) => {
                     return (
@@ -306,33 +318,40 @@ function InviteOne() {
                               <div className='text-xs'>{rsvp?.phone}</div>
                             </div>
                           </div>
-                          
-                          <div className='text-sm   text-center text-gray-800 uppercase'>
+
+                          <div className='text-sm space-y-5  text-center text-gray-800 uppercase'>
                             <div>Guest Count</div>
+
                             <div className='text-xs text-gray '>
-                    <div className='grid grid-cols-2	border-2 p-2 text-center   '>
-                      <div >
-                    <div>HALDI</div> <div>{rsvp?.events?.HALDI}</div>
-                      </div>
+                              <div className='grid grid-cols-1	 text-center   '>
+                                <div className='flex justify-between'>
+                                  <div>HALDI</div>{' '}
+                                  <div>{rsvp?.events?.HALDI}</div>
+                                </div>
 
+                                <div className='flex justify-between'>
+                                  <div>SANGEET</div>{' '}
+                                  <div>{rsvp?.events?.SANGEET}</div>
+                                </div>
 
-                      <div>
-                    <div>SANGEET</div> <div>{rsvp?.events?.SANGEET}</div>
-                      </div>
-
-
-                      <div>
-
-                    <div>WEDDING</div> <div>{rsvp?.events?.WEDDING}</div>
-                      </div>
-                      <div>
-
-                    <div>RECEPTIONS</div> <div>{rsvp?.events?.RECEPTIONS}</div>
-                      </div>
-
-                    </div>
-                     
-
+                                <div className='flex justify-between'>
+                                  <div>WEDDING</div>{' '}
+                                  <div>{rsvp?.events?.WEDDING}</div>
+                                </div>
+                                <div className='flex justify-between'>
+                                  <div>RECEPTIONS</div>{' '}
+                                  <div>{rsvp?.events?.RECEPTIONS}</div>
+                                </div>
+                                <div className='flex justify-between py-4 font-semibold'>
+                                  <div>Total Guest</div>{' '}
+                                  <div>
+                                    {parseInt(rsvp?.events?.RECEPTIONS || 0) +
+                                      parseInt(rsvp?.events?.WEDDING || 0) +
+                                      parseInt(rsvp?.events?.SANGEET || 0) +
+                                      parseInt(rsvp?.events?.HALDI || 0)}
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
