@@ -214,16 +214,27 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
                                     })
                                   }
                                 >
+                                  {JSON.stringify(
+                                    Array.from(
+                                      Array(
+                                        parseInt(invitation.count) + 1
+                                      ).keys()
+                                    )
+                                  )}
                                   <option value={0}>
                                     Select No. of Guests
                                   </option>
                                   {Array.from(
                                     Array(parseInt(invitation.count) + 1).keys()
-                                  ).map((val) => (
-                                    <option key={val} value={val}>
-                                      {val}
-                                    </option>
-                                  ))}
+                                  ).map((val) =>
+                                    val !== 0 ? (
+                                      <option key={val} value={val}>
+                                        {val}
+                                      </option>
+                                    ) : (
+                                      ''
+                                    )
+                                  )}
                                 </select>
                                 <label
                                   for='name'
