@@ -39,6 +39,11 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
     setOpen(false);
   }
 
+  function handleYes(event) {
+    const rsvpCopi = {};
+    rsvpCopi[event] = 0;
+    setRsvp({ ...rsvp, ...rsvpCopi });
+  }
   function handleNo(event) {
     const rsvpCopi = rsvp;
     delete rsvpCopi[event];
@@ -214,13 +219,6 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
                                     })
                                   }
                                 >
-                                  {JSON.stringify(
-                                    Array.from(
-                                      Array(
-                                        parseInt(invitation.count) + 1
-                                      ).keys()
-                                    )
-                                  )}
                                   <option value={0}>
                                     Select No. of Guests
                                   </option>
@@ -250,12 +248,15 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
                                   <div
                                     className='d-flex yes-option align-items-center'
                                     style={{ marginTop: '10px' }}
+                                    onClick={() => handleYes(invitation.name)}
                                   >
                                     <input
                                       type='radio'
                                       name='a'
                                       checked={
-                                        rsvp[invitation.name] ? true : false
+                                        rsvp[invitation.name] >= 0
+                                          ? true
+                                          : false
                                       }
                                     />
 
