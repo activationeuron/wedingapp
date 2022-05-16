@@ -9,6 +9,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import { list } from '../event';
 
 const RSVPForm = ({ maxWidth, button, buttonClass }) => {
   const [open, setOpen] = React.useState(false);
@@ -186,9 +187,14 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
                           >
                             <h2
                               id='form-heading'
-                              style={{ fontWeight: '700', color: '#A3888C' }}
+                              style={{
+                                fontWeight: '700',
+                                color: '#A3888C',
+                                textTransform: 'capitalize',
+                              }}
                             >
                               {invitation?.name.toLowerCase()} Ceremony
+                              <h4>{list[invitation?.name]?.name}</h4>
                             </h2>
                           </div>
                           <form>
@@ -198,42 +204,7 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
                                 xs={12}
                                 style={{ paddingBottom: '0px' }}
                               >
-                                <label
-                                  for='guests'
-                                  style={{ fontStyle: 'italic' }}
-                                >
-                                  Select No. of Guests
-                                </label>
-
-                                <select
-                                  value={
-                                    rsvp[invitation.name]
-                                      ? parseInt(rsvp[invitation.name])
-                                      : 0
-                                  }
-                                  className='form-control custom-class'
-                                  onChange={(e) =>
-                                    guestCount({
-                                      count: e.target.value,
-                                      event: invitation.name,
-                                    })
-                                  }
-                                >
-                                  <option value={0}>
-                                    Select No. of Guests
-                                  </option>
-                                  {Array.from(
-                                    Array(parseInt(invitation.count) + 1).keys()
-                                  ).map((val) =>
-                                    val !== 0 ? (
-                                      <option key={val} value={val}>
-                                        {val}
-                                      </option>
-                                    ) : (
-                                      ''
-                                    )
-                                  )}
-                                </select>
+                                {/* Add selects box if rsvp is selected! */}
                                 <label
                                   for='name'
                                   style={{
@@ -281,6 +252,51 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
                                     </label>
                                   </div>
                                 </div>
+                                {rsvp[invitation.name] >= 0 ? (
+                                  <div style={{ marginTop: '10px' }}>
+                                    <label
+                                      for='guests'
+                                      style={{ fontStyle: 'italic' }}
+                                    >
+                                      Select No. of Guests
+                                    </label>
+
+                                    <select
+                                      value={
+                                        rsvp[invitation.name]
+                                          ? parseInt(rsvp[invitation.name])
+                                          : 0
+                                      }
+                                      className='form-control custom-class'
+                                      onChange={(e) =>
+                                        guestCount({
+                                          count: e.target.value,
+                                          event: invitation.name,
+                                        })
+                                      }
+                                    >
+                                      <option value={0}>
+                                        Select No. of Guests
+                                      </option>
+                                      {Array.from(
+                                        Array(
+                                          parseInt(invitation.count) + 1
+                                        ).keys()
+                                      ).map((val) =>
+                                        val !== 0 ? (
+                                          <option key={val} value={val}>
+                                            {val}
+                                          </option>
+                                        ) : (
+                                          ''
+                                        )
+                                      )}
+                                    </select>
+                                  </div>
+                                ) : (
+                                  ''
+                                )}
+                                {/* select */}
                               </Grid>
                             </Grid>
                           </form>
