@@ -10,6 +10,7 @@ import axios from 'axios';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { list } from '../event';
+import Support from './Support';
 
 const RSVPForm = ({ maxWidth, button, buttonClass }) => {
   const [open, setOpen] = React.useState(false);
@@ -17,6 +18,7 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
   const [phone, setPhone] = React.useState('');
   const [name, setName] = React.useState('');
   const [rsvp, setRsvp] = React.useState({});
+  const [support, setSupport] = React.useState(false);
   async function handleClickOpen(e) {
     e.preventDefault();
     try {
@@ -40,6 +42,9 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
     setOpen(false);
   }
 
+  function closeSupport() {
+    setSupport(false);
+  }
   function handleYes(event) {
     const rsvpCopi = {};
     rsvpCopi[event] = 0;
@@ -138,12 +143,27 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
                     Is this you?
                   </h2>
                 </div>
+                <Support support={support} handleClose={closeSupport} />
                 <form>
                   <Grid container spacing={3}>
                     <Grid item xs={12} style={{ paddingBottom: '0px' }}>
-                      <label for='guests' style={{ fontStyle: 'italic' }}>
-                        Your Name
-                      </label>
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                        }}
+                      >
+                        <label for='guests' style={{ fontStyle: 'italic' }}>
+                          Your Name
+                        </label>
+                        <label
+                          for='guests'
+                          style={{ fontStyle: 'italic' }}
+                          onClick={() => setSupport(true)}
+                        >
+                          <h6>Not You?</h6>
+                        </label>
+                      </div>
                       <div>
                         <input
                           type='text'
