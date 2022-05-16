@@ -27,7 +27,7 @@ function Support({ support, handleClose }) {
     }
   };
   return (
-    <div>
+    <div style={{"paddingBottom":"20px"}}>
       <Dialog
         open={support}
         onClose={handleClose}
