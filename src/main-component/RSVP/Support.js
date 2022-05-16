@@ -22,7 +22,7 @@ function Support({ support, handleClose }) {
       { name, phone, text }
     );
     if (response.data.status) {
-      alert('Support Ticket Created!');
+      alert('Message Sent!');
       handleClose(false);
     }
   };
@@ -70,7 +70,7 @@ function Support({ support, handleClose }) {
                     id='form-heading'
                     style={{ fontWeight: '700', color: '#A3888C' }}
                   >
-                    Support
+                    Contact Host
                   </h4>
                 </div>
                 <form onSubmit={handleSubmit}>

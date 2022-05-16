@@ -214,7 +214,9 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
                               }}
                             >
                               {invitation?.name.toLowerCase()} Ceremony
-                              <h4>{list[invitation?.name]?.name}</h4>
+                              <h4 style={{ color: '#A3888C' }}>
+                                {list[invitation?.name]?.name}
+                              </h4>
                             </h2>
                           </div>
                           <form>
