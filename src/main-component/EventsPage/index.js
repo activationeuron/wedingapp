@@ -62,7 +62,7 @@ const EventsPage = () => {
                         >
                           HALDI CEREMONY
                         </h2>
-                        <h4>Manjha</h4>
+                        <h4 style={{ color: '#a3888cd9' }}>Manjha</h4>
 
                         <ul>
                           <li style={{ fontFamily: 'Lato, sans-serif' }}>
@@ -101,7 +101,7 @@ const EventsPage = () => {
                         >
                           MEHNDI/SANGEET CEREMONY
                         </h2>
-                        <h4>Rsam-e-Henna</h4>
+                        <h4 style={{ color: '#a3888cd9' }}>Rsam-e-Henna</h4>
                         <ul>
                           <li style={{ fontFamily: 'Lato, sans-serif' }}>
                             Saturday, 04 Sep, 2022
@@ -169,7 +169,7 @@ const EventsPage = () => {
                         >
                           MARRIAGE CEREMONY
                         </h2>
-                        <h4>Nikah Ceremony</h4>
+                        <h4 style={{ color: '#a3888cd9' }}>Nikah Ceremony</h4>
 
                         <ul>
                           <li style={{ fontFamily: 'Lato, sans-serif' }}>
@@ -208,7 +208,7 @@ const EventsPage = () => {
                         >
                           RECEPTION
                         </h2>
-                        <h4>Dawate-e-Walima</h4>
+                        <h4 style={{ color: '#a3888cd9' }}>Dawate-e-Walima</h4>
 
                         <ul>
                           <li style={{ fontFamily: 'Lato, sans-serif' }}>

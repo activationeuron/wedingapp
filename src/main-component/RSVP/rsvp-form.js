@@ -19,6 +19,7 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
   const [name, setName] = React.useState('');
   const [rsvp, setRsvp] = React.useState({});
   const [support, setSupport] = React.useState(false);
+  const [veg, setVeg] = React.useState('');
   async function handleClickOpen(e) {
     e.preventDefault();
     try {
@@ -69,7 +70,7 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
     const response = await axios.post(
       'http://172.105.156.217:8000/api/event/rsvp',
       {
-        ...{ name: name, phone: phone, events: rsvp },
+        ...{ name: name, phone: phone, events: rsvp, meal: veg },
       }
     );
     if (response.data.success) {
@@ -172,6 +173,43 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
                           disabled
                           value={name}
                         />
+                      </div>
+                    </Grid>
+                    <Grid item xs={12} style={{ paddingBottom: '0px' }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                        }}
+                      >
+                        <label for='guests' style={{ fontStyle: 'italic' }}>
+                          Meal Preference
+                        </label>
+                      </div>
+                      <div>
+                        <div className='select-option'>
+                          <div
+                            className='d-flex yes-option align-items-center'
+                            style={{ marginTop: '10px' }}
+                            onClick={() => setVeg(false)}
+                          >
+                            <input type='radio' name='meal' value={veg} />
+
+                            <label for='Yes' style={{ marginLeft: '10px' }}>
+                              Non Veg
+                            </label>
+                          </div>
+                          <div
+                            className='d-flex no-option align-items-center'
+                            style={{ marginTop: '10px' }}
+                            onClick={() => setVeg(true)}
+                          >
+                            <input type='radio' name='meal' value={veg} />
+                            <label for='No' style={{ marginLeft: '10px' }}>
+                              Veg
+                            </label>
+                          </div>
+                        </div>
                       </div>
                     </Grid>
                   </Grid>
