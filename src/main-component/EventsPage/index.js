@@ -66,7 +66,7 @@ const EventsPage = () => {
 
                         <ul>
                           <li style={{ fontFamily: 'Lato, sans-serif' }}>
-                            Friday, 03 Sep, 2022
+                            Friday, 02 Sep, 2022
                           </li>
                           <li
                             style={{
@@ -104,7 +104,7 @@ const EventsPage = () => {
                         <h4 style={{ color: '#a3888cd9' }}>Rsam-e-Henna</h4>
                         <ul>
                           <li style={{ fontFamily: 'Lato, sans-serif' }}>
-                            Saturday, 04 Sep, 2022
+                            Saturday, 03 Sep, 2022
                           </li>
                           <li
                             style={{

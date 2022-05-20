@@ -212,6 +212,14 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
                         </div>
                       </div>
                     </Grid>
+                    <Grid item xs={12} style={{ paddingBottom: '0px' }}>
+                      <p style={{fontSize:"14px",margin:0}}>
+                      *No Boxed Gifts
+                      </p>
+                      <p style={{fontSize:"16px"}}>
+                      *RSVP no later than <bold style={{fontWeight:"800"}}> 15 June, 2022.</bold>
+                      </p>
+</Grid>
                   </Grid>
                 </form>
                 <div className='shape-img'>
@@ -225,7 +233,7 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
               console.log(invitation);
               return (
                 <>
-                  {parseInt(invitation.count) > 0 ? (
+                  {parseInt(invitation.count) > 0 || invitation?.checked ? (
                     <div className='d-flex form-row-1'>
                       <Grid
                         className='loginWrapper'
@@ -255,6 +263,12 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
                               <h4 style={{ color: '#A3888C' }}>
                                 {list[invitation?.name]?.name}
                               </h4>
+                              <h6 style={{ color: '#002642' ,fontSize: "14px"}}>
+                                {list[invitation?.name]?.add}
+                              </h6>
+                            <h6 style={{ color: '#002642',fontSize: "12px" }}>
+                                {list[invitation?.name]?.date}
+                              </h6>
                             </h2>
                           </div>
                           <form>
