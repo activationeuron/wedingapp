@@ -217,7 +217,7 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
                       *No Boxed Gifts
                       </p>
                       <p style={{fontSize:"16px"}}>
-                      *RSVP no later than <bold style={{fontWeight:"800"}}> 15 June, 2022.</bold>
+                      *RSVP no later than <bold style={{fontWeight:"800"}}> 15 August, 2022.</bold>
                       </p>
 </Grid>
                   </Grid>
@@ -389,7 +389,7 @@ const RSVPForm = ({ maxWidth, button, buttonClass }) => {
 
           <Button
             className='MuiButtonBase-root MuiButton-root MuiButton-text btn undefined rsvp-submit'
-            style={{ fontFamily: 'Lato, sans-serif', fontWeight: '700' }}
+            style={{ fontFamily: 'Lato, sans-serif', fontWeight: '700', marginTop: '10px' }}
             onClick={(e) => handleRsvp(e)}
           >
             {button}
